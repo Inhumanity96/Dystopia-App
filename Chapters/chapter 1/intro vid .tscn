@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Codes/intro vid .gd" type="Script" id=1]
+[ext_resource path="res://Chapters/chapter 1/intro.ogv" type="VideoStream" id=2]
+[ext_resource path="res://Chapters/chapter 1/VideoPlayer.gd" type="Script" id=3]
+[ext_resource path="res://Resources/Buttons/bck.png" type="Texture" id=4]
+[ext_resource path="res://Chapters/chapter 1/chapter 1.tscn" type="PackedScene" id=5]
+
+[node name="intro vid 1" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+margin_right = 1285.0
+margin_bottom = 723.0
+stream = ExtResource( 2 )
+autoplay = true
+expand = false
+script = ExtResource( 3 )
+
+[node name="skip" type="Button" parent="."]
+self_modulate = Color( 1, 1, 1, 0.533333 )
+light_mask = 15
+margin_left = 1045.06
+margin_top = 517.0
+margin_right = 1445.06
+margin_bottom = 835.0
+rect_scale = Vector2( 0.5, 0.5 )
+icon = ExtResource( 4 )
+flat = true
+
+[node name="chapter 1" parent="." instance=ExtResource( 5 )]
+show_behind_parent = true
+[connection signal="finished" from="VideoPlayer" to="." method="_on_VideoPlayer_finished"]
+[connection signal="pressed" from="skip" to="." method="_on_skip_pressed"]
