@@ -17,7 +17,8 @@ _global_script_class_icons={
 
 config/name="Dystopia App"
 run/main_scene="res://Chapters/cover page.tscn"
-boot_splash/image="res://Resources/title animation/logo.png"
+boot_splash/image="res://Resources/title animation/Animated Titles static 2.png"
+boot_splash/fullsize=false
 boot_splash/bg_color=Color( 0.0156863, 0.0156863, 0.0156863, 1 )
 config/icon="res://icon.png"
 
@@ -54,6 +55,10 @@ enabled=PoolStringArray(  )
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[memory]
+
+limits/message_queue/max_size_kb=1025
 
 [rendering]
 

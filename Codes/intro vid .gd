@@ -19,6 +19,7 @@ func _on_VideoPlayer_finished():
 func _on_skip_pressed():
 	$VideoPlayer.stop()
 	$skip.hide()
+	get_node("VideoPlayer").free()
 	
 ###this code is to change to another scene calle next_scene
 #get_tree().change_scene_to(next_scene)
