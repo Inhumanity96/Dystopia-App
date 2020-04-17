@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hymn.ogg-3bf8650dd2304073db8787a69195c481.oggstr"
+
+[deps]
+
+source_file="res://music/hymn.ogg"
+dest_files=[ "res://.import/hymn.ogg-3bf8650dd2304073db8787a69195c481.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

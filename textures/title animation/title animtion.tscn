@@ -1,0 +1,105 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://Resources/title animation/title animtion.gd" type="Script" id=1]
+[ext_resource path="res://Resources/title animation/AnimationPlayer.gd" type="Script" id=2]
+[ext_resource path="res://Resources/title animation/water colour0000.png" type="Texture" id=3]
+[ext_resource path="res://Resources/title animation/water colour0002.png" type="Texture" id=4]
+[ext_resource path="res://Resources/title animation/water colour0004.png" type="Texture" id=5]
+[ext_resource path="res://Resources/title animation/water colour0006.png" type="Texture" id=6]
+[ext_resource path="res://Resources/title animation/water colour0008.png" type="Texture" id=7]
+[ext_resource path="res://Resources/title animation/water colour0010.png" type="Texture" id=8]
+[ext_resource path="res://Resources/title animation/water colour0012.png" type="Texture" id=9]
+[ext_resource path="res://Resources/title animation/water colour0014.png" type="Texture" id=10]
+[ext_resource path="res://Resources/title animation/water colour0016.png" type="Texture" id=11]
+[ext_resource path="res://Resources/title animation/water colour0018.png" type="Texture" id=12]
+[ext_resource path="res://Resources/title animation/water colour0020.png" type="Texture" id=13]
+[ext_resource path="res://Resources/title animation/water colour0022.png" type="Texture" id=14]
+[ext_resource path="res://Resources/title animation/water colour0024.png" type="Texture" id=15]
+[ext_resource path="res://Resources/title animation/water colour0026.png" type="Texture" id=16]
+[ext_resource path="res://Resources/title animation/water colour0028.png" type="Texture" id=17]
+[ext_resource path="res://Resources/title animation/water colour0030.png" type="Texture" id=18]
+[ext_resource path="res://Resources/title animation/water colour0032.png" type="Texture" id=19]
+[ext_resource path="res://Resources/title animation/dots.png" type="Texture" id=20]
+
+[sub_resource type="Animation" id=3]
+resource_name = "New Anim"
+length = 2.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("TouchScreenButton/AnimationPlayer/dots:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ Vector2( 607.5, 425.25 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TouchScreenButton/AnimationPlayer/dots:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TouchScreenButton/AnimationPlayer/dots:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=5]
+
+[node name="animated title" type="Node2D"]
+position = Vector2( 119.25, 20.25 )
+script = ExtResource( 1 )
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 555.751, 450 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+autoplay = "New Anim"
+playback_speed = 0.9
+"anims/New Anim" = SubResource( 3 )
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Node2D/AnimationPlayer"]
+self_modulate = Color( 1, 1, 1, 0.654902 )
+material = SubResource( 4 )
+position = Vector2( 684.281, 500.907 )
+scale = Vector2( 1.25239, 1.28846 )
+frames = SubResource( 1 )
+frame = 3
+playing = true
+
+[node name="dots" type="Sprite" parent="Node2D/AnimationPlayer"]
+self_modulate = Color( 1, 1, 1, 0.741176 )
+material = SubResource( 5 )
+position = Vector2( 969.751, 569.25 )
+scale = Vector2( 1.17506, 1 )
+texture = ExtResource( 20 )
+[connection signal="animation_finished" from="Node2D/AnimationPlayer" to="Node2D/AnimationPlayer" method="_on_AnimationPlayer_animation_finished"]

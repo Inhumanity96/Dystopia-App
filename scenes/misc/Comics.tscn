@@ -1,0 +1,167 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Resources/Buttons/menu.png" type="Texture" id=1]
+[ext_resource path="res://Resources/Buttons/bck.png" type="Texture" id=2]
+[ext_resource path="res://Chapters/chapter 1/pg 5e.png" type="Texture" id=3]
+[ext_resource path="res://Chapters/chapter 1/pg 5b.png" type="Texture" id=4]
+[ext_resource path="res://Chapters/chapter 1/pg 5d.png" type="Texture" id=7]
+[ext_resource path="res://Chapters/game  menu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Codes/AnimatedSprite.gd" type="Script" id=9]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+signal comics_showing 
+signal comics_not_showing
+var comics_visible = false
+onready var comics = self
+onready var slide_in_animation = $AnimationPlayer
+# Declare member variables here. Examples:
+# var a = 2
+# var b = \"text\"
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	comics.hide()
+
+
+
+
+
+
+
+func _on_comics_button_pressed():
+	if true and comics_visible == false:
+		comics.show()
+		slide_in_animation.play(\"slide_in\")
+		comics_visible = true
+		emit_signal(\"comics_showing\")
+		pass
+	else:
+		comics.hide()
+		slide_in_animation.play(\"slide_out\")
+		comics_visible = false
+		emit_signal(\"comics_not_showing\")
+	pass
+# this code closes the comics placeholder when touched or clicked
+
+
+
+
+
+
+
+
+
+"
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 7 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=3]
+resource_name = "slide_in"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, 40 ), Vector2( 0, 40 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.156863 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "slide_out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.517647 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 40 ) ]
+}
+
+[node name="Comics" type="Control"]
+modulate = Color( 1, 1, 1, 0.517647 )
+margin_top = 40.0
+margin_bottom = 40.0
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="placeholder" type="AnimatedSprite" parent="."]
+position = Vector2( 691.981, 369.732 )
+scale = Vector2( 0.398815, 0.393204 )
+frames = SubResource( 2 )
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="forward" type="TouchScreenButton" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 1014.18, 490.219 )
+scale = Vector2( 0.7, 0.7 )
+normal = ExtResource( 2 )
+
+[node name="backwards" type="TouchScreenButton" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 281.813, 703.934 )
+rotation = 3.14159
+scale = Vector2( 0.7, 0.7 )
+normal = ExtResource( 2 )
+
+[node name="menu" parent="." instance=ExtResource( 8 )]
+margin_left = 695.981
+margin_top = 373.732
+margin_right = 707.981
+margin_bottom = 385.732
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+normal = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/slide_in = SubResource( 3 )
+anims/slide_out = SubResource( 4 )
+[connection signal="pressed" from="forward" to="placeholder" method="_on_forward_pressed"]
+[connection signal="pressed" from="backwards" to="placeholder" method="_on_backwards_pressed"]
+[connection signal="pressed" from="TouchScreenButton" to="menu" method="_on_TouchScreenButton_pressed"]

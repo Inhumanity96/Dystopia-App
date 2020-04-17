@@ -18,9 +18,12 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[node name="chapter 1" type="Node2D"]
+[node name="chapter 1" type="Control"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="placeholder" type="AnimatedSprite" parent="."]
 position = Vector2( 691.981, 369.732 )
 scale = Vector2( 0.398815, 0.393204 )
 frames = SubResource( 1 )
@@ -40,10 +43,9 @@ scale = Vector2( 0.53828, 0.537559 )
 normal = ExtResource( 7 )
 
 [node name="menu" parent="." instance=ExtResource( 8 )]
-scale = Vector2( 0.390564, 0.275945 )
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]
 normal = ExtResource( 10 )
-[connection signal="pressed" from="forward" to="AnimatedSprite" method="_on_forward_pressed"]
-[connection signal="pressed" from="backwards" to="AnimatedSprite" method="_on_backwards_pressed"]
+[connection signal="pressed" from="forward" to="placeholder" method="_on_forward_pressed"]
+[connection signal="pressed" from="backwards" to="placeholder" method="_on_backwards_pressed"]
 [connection signal="pressed" from="TouchScreenButton" to="menu" method="_on_TouchScreenButton_pressed"]

@@ -1,7 +1,7 @@
 extends AnimatedSprite
 
-var current_frame = get_frame()
-var next_scene = preload ("res://Chapters/cover page.tscn")
+var current_frame = self.get_frame()
+var next_scene = load ("res://scenes/levels/Menu.tscn")
 var max_frame = 4
 func _ready():
 	pass
@@ -21,6 +21,7 @@ func _on_forward_pressed():
 	if current_frame == max_frame :
 		get_tree().change_scene_to(next_scene)
 		queue_free() ; next_scene = null
+	
 
 
 

@@ -1,0 +1,64 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Resources/title animation/water colour0000.png" type="Texture" id=1]
+[ext_resource path="res://Resources/title animation/water colour0004.png" type="Texture" id=2]
+[ext_resource path="res://Resources/title animation/water colour0010.png" type="Texture" id=3]
+[ext_resource path="res://Resources/title animation/Animated Titles static 2.png" type="Texture" id=4]
+[ext_resource path="res://Resources/title animation/water colour0012.png" type="Texture" id=5]
+[ext_resource path="res://Resources/title animation/water colour0016.png" type="Texture" id=6]
+[ext_resource path="res://Resources/title animation/water colour0008.png" type="Texture" id=7]
+[ext_resource path="res://Resources/title animation/dots.png" type="Texture" id=8]
+[ext_resource path="res://Resources/title animation/water colour0002.png" type="Texture" id=9]
+[ext_resource path="res://Resources/title animation/water colour0006.png" type="Texture" id=10]
+[ext_resource path="res://music/wind_2.wav" type="AudioStream" id=11]
+[ext_resource path="res://singletons/Title animation.tres" type="Animation" id=12]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=3]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 9 ), ExtResource( 2 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="animated title" type="Control"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2( 479.384, 325.549 )
+
+[node name="Intro animation" type="AnimationPlayer" parent="Node2D"]
+autoplay = "intro_animation"
+playback_speed = 0.9
+anims/intro_animation = ExtResource( 12 )
+
+[node name="Dystopia" type="Sprite" parent="Node2D/Intro animation"]
+position = Vector2( 631.754, 468.841 )
+scale = Vector2( 1.05506, 1 )
+texture = ExtResource( 4 )
+
+[node name="dots" type="Sprite" parent="Node2D/Intro animation"]
+material = SubResource( 2 )
+position = Vector2( 657.21, 457.527 )
+scale = Vector2( 1.02639, 0.919942 )
+texture = ExtResource( 8 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Node2D/Intro animation"]
+modulate = Color( 1, 1, 1, 0.803922 )
+self_modulate = Color( 1, 1, 1, 0.654902 )
+material = SubResource( 3 )
+position = Vector2( 757.82, 498.079 )
+scale = Vector2( 1.6795, 1.45147 )
+frames = SubResource( 4 )
+frame = 2
+playing = true
+
+[node name="wind" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 11 )
+volume_db = 10.0

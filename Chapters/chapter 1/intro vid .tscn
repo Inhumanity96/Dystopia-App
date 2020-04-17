@@ -15,12 +15,15 @@ __meta__ = {
 }
 
 [node name="VideoPlayer" type="VideoPlayer" parent="."]
-margin_right = 1285.0
-margin_bottom = 723.0
+margin_right = 1280.0
+margin_bottom = 720.0
 stream = ExtResource( 2 )
 autoplay = true
 expand = false
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="skip" type="Button" parent="."]
 self_modulate = Color( 1, 1, 1, 0.533333 )

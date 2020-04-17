@@ -1,6 +1,4 @@
-extends Node2D
-var chap_1  = load ('res://Chapters/chapter 1/intro vid .tscn')
-var chap_2 = load ('res://Chapters/chapter 2/chapter 2.tscn')
+extends Control
 
 
 var is_popup_menu_showing = null
@@ -58,14 +56,21 @@ func _on_TouchScreenButton_pressed():
 
 
 func _on_chap_1_button_pressed():
-	get_tree().change_scene_to(chap_1)
+	get_tree().change_scene_to(Globals.chap_1)
 	queue_free()
 
 
 func _on_chap_2__pressed():
-	get_tree().change_scene_to(chap_2)
+	get_tree().change_scene_to(Globals.chap_2)
 	queue_free()
 
 
 func _on_music_on__off_pressed():
-	get_node("hymn").stop ()
+	Music.free()
+	pass
+
+
+func _on_mini_game_pressed():
+	get_tree().change_scene_to(Globals.game_title)
+	queue_free()
+
