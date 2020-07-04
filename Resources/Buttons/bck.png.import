@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bck.png-b142b3f2b0394022452e70fdea91f8f9.stex"
+path="res://.import/bck.png-0e62d00a895f532bdfa6ca026a3c5a29.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Buttons/bck.png"
-dest_files=[ "res://.import/bck.png-b142b3f2b0394022452e70fdea91f8f9.stex" ]
+source_file="res://resources/Buttons/bck.png"
+dest_files=[ "res://.import/bck.png-0e62d00a895f532bdfa6ca026a3c5a29.stex" ]
 
 [params]
 

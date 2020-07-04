@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/chike san afro 3.ogg-598c046fe72f65cce134c1b8bf29dc07.oggstr"
+
+[deps]
+
+source_file="res://music/chike san afro 3.ogg"
+dest_files=[ "res://.import/chike san afro 3.ogg-598c046fe72f65cce134c1b8bf29dc07.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

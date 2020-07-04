@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://resources/Buttons/bck.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Comics/chapter 2/chapter 2.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Comics/chapter 1/spritesheet comics template.png" type="Texture" id=3]
+[ext_resource path="res://scenes/characters/debug_panel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Comics/chapter 1/chapter 1.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/UI & misc/Comics.gd" type="Script" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "slide_in"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, 40 ), Vector2( 0, 40 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.156863 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "slide_out"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 2 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.517647 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 40 ) ]
+}
+
+[node name="Comics" type="Control"]
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 1302.0
+margin_bottom = 777.0
+color = Color( 0.235294, 0.235294, 0.235294, 0.776471 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="placeholder" type="Sprite" parent="."]
+position = Vector2( 673.551, 401.985 )
+scale = Vector2( 1.52556, 1.33479 )
+texture = ExtResource( 3 )
+vframes = 4
+hframes = 5
+
+[node name="Backwards" type="Button" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 380.876
+margin_top = 706.239
+margin_right = 752.876
+margin_bottom = 1024.24
+rect_rotation = 180.0
+icon = ExtResource( 1 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Forward" type="Button" parent="."]
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 925.051
+margin_top = 422.873
+margin_right = 1297.05
+margin_bottom = 740.873
+icon = ExtResource( 1 )
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/slide_in = SubResource( 1 )
+anims/slide_out = SubResource( 2 )
+
+[node name="chapter 2" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="chapter 1" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="debug_panel" parent="." instance=ExtResource( 4 )]
+[connection signal="pressed" from="Backwards" to="." method="_on_Backwards_pressed"]
+[connection signal="pressed" from="Forward" to="." method="_on_Forward_pressed"]

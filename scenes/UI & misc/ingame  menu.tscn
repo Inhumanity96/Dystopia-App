@@ -1,0 +1,232 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Resources/Buttons/menu.png" type="Texture" id=1]
+[ext_resource path="res://fonts/Comic_Andy.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends TextureButton
+
+
+
+\"\"\"
+The game menu script. 
+update code to arrange well in UI and on the game title screen
+\"\"\"
+
+
+onready var continue_game = get_node(\"MarginContainer/HSeparator/continue\") 
+onready var game_menu = get_node(\"MarginContainer\")
+
+
+#create an animation that toggles whenever the user selects comics
+#####im writing code to optimize the scene loading process
+
+#update the UI cancel settings in project settings
+
+
+
+
+#var intro_vid = preload (\"res://Chapters/chapter 1/intro vid .tscn\") ###update to cinematic
+#update scene to load ingame menu
+
+
+
+
+export(String, FILE, \"*.tscn\") var initial_level = \"res://scenes/levels/Outside.tscn\"
+
+func _ready():
+	self.set_toggle_mode(true)
+	game_menu.hide()
+
+	grab_focus()
+	if Globals.load_game(true):
+		continue_game.disabled = false 
+	else:
+		continue_game.disabled = true
+
+	
+
+func _on_continue_pressed():
+	Globals.load_game()
+	if Globals.current_level != \"\":
+		if get_tree().change_scene(Globals.current_level) != OK:
+			push_error(\"Error changing scenes\")
+	else:
+		push_error(\"Error: current_level shouldn't be empty\")
+	pass # Replace with function body.
+
+
+func _on_new_game_pressed():
+	if initial_level != \"\":
+		Globals.current_level = initial_level
+		if Globals.save_game() == false:
+			push_error(\"Error saving game\")
+		var err = get_tree().change_scene(initial_level)
+		if err != OK:
+			push_error(\"Error changing scene: %s\" % err)
+	else:
+		push_error(\"Error: initial_level shouldn't be empty\")
+		
+	pass # Replace with function body.
+
+func _on_chap_1_button_pressed():
+	get_tree().change_scene_to(Globals.chap_1)
+	print ('chap 1 pressed')
+
+
+func _on_chap_2__pressed():
+	get_tree().change_scene_to(Globals.chap_2)
+	print ('chap 2 pressed')
+
+
+
+func _on_Menu_button_toggled(button_pressed):
+	if  button_pressed :
+		game_menu.show()
+		print ('menu button pressed, play popup animation')
+	else :
+		game_menu.hide()
+
+
+func _on_comics_pressed():
+	print ('comics pressed')
+	get_tree().change_scene_to(load ('res://scenes/UI & misc/Comics.tscn'))
+
+
+func _on_controls_pressed():
+	get_tree().change_scene_to(load ('res://scenes/UI & misc/Controls.tscn'))
+	print ('control pressed')
+
+
+
+func _on_quit_Button_pressed():
+	get_tree().quit()
+	print ('quit button pressed')
+
+
+
+
+"
+
+[sub_resource type="DynamicFont" id=2]
+size = 90
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 90
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 90
+font_data = ExtResource( 2 )
+
+[node name="Menu button" type="TextureButton"]
+margin_left = 1076.0
+margin_top = 112.0
+margin_right = 1242.0
+margin_bottom = 255.0
+toggle_mode = true
+texture_normal = ExtResource( 1 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = -563.013
+margin_top = -95.0156
+margin_right = -248.543
+margin_bottom = 572.984
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 314.0
+margin_bottom = 668.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="new game" type="Button" parent="MarginContainer/HSeparator"]
+margin_right = 314.0
+margin_bottom = 108.0
+focus_next = NodePath("../music on & off")
+focus_previous = NodePath("../chap 2 ")
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "new game"
+flat = true
+
+[node name="comics" type="Button" parent="MarginContainer/HSeparator"]
+margin_top = 112.0
+margin_right = 314.0
+margin_bottom = 220.0
+focus_next = NodePath("../music on & off")
+focus_previous = NodePath("../chap 2 ")
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "comics"
+flat = true
+
+[node name="continue" type="Button" parent="MarginContainer/HSeparator"]
+margin_top = 224.0
+margin_right = 314.0
+margin_bottom = 332.0
+focus_next = NodePath("../music on & off")
+focus_previous = NodePath("../chap 2 ")
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "continue"
+flat = true
+
+[node name="multiplayer" type="Button" parent="MarginContainer/HSeparator"]
+show_behind_parent = true
+margin_top = 336.0
+margin_right = 314.0
+margin_bottom = 444.0
+focus_neighbour_top = NodePath("../mini game")
+focus_neighbour_bottom = NodePath("../quit Button")
+focus_next = NodePath("../quit Button")
+focus_previous = NodePath("../mini game")
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+shortcut_in_tooltip = false
+text = "Multiplayer"
+flat = true
+
+[node name="controls" type="Button" parent="MarginContainer/HSeparator"]
+show_behind_parent = true
+margin_top = 448.0
+margin_right = 314.0
+margin_bottom = 556.0
+focus_neighbour_top = NodePath("../mini game")
+focus_neighbour_bottom = NodePath("../quit Button")
+focus_next = NodePath("../quit Button")
+focus_previous = NodePath("../mini game")
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+shortcut_in_tooltip = false
+text = "Controls"
+flat = true
+
+[node name="quit Button" type="Button" parent="MarginContainer/HSeparator"]
+show_behind_parent = true
+margin_top = 560.0
+margin_right = 314.0
+margin_bottom = 668.0
+focus_neighbour_top = NodePath("../music on & off")
+focus_next = NodePath("../chap 1 ")
+focus_previous = NodePath("../music on & off")
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "quit"
+flat = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[connection signal="toggled" from="." to="." method="_on_Menu_button_toggled"]
+[connection signal="pressed" from="MarginContainer/HSeparator/new game" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MarginContainer/HSeparator/comics" to="." method="_on_comics_pressed"]
+[connection signal="pressed" from="MarginContainer/HSeparator/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MarginContainer/HSeparator/controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="MarginContainer/HSeparator/quit Button" to="." method="_on_quit_Button_pressed"]

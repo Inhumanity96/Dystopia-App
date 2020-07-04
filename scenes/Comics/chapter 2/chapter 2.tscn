@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/Comics/chapter 2/cover 2.jpg" type="Texture" id=2]
+[ext_resource path="res://Resources/Buttons/bck.png" type="Texture" id=3]
+[ext_resource path="res://scenes/UI & misc/ingame  menu.tscn" type="PackedScene" id=4]
+
+[node name="chapter 2" type="Node2D"]
+
+[node name="cover page" type="Sprite" parent="."]
+position = Vector2( 1003.36, 357.228 )
+scale = Vector2( 0.218748, 0.207482 )
+texture = ExtResource( 2 )
+
+[node name="back" type="TouchScreenButton" parent="."]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 221.333, 707.32 )
+rotation = 3.14159
+scale = Vector2( 0.496599, 0.513508 )
+normal = ExtResource( 3 )
+
+[node name="menu" parent="." instance=ExtResource( 4 )]
+[connection signal="pressed" from="back" to="." method="_on_back_pressed"]

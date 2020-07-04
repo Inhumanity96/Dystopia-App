@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/quit assets A pressed.png-fad77323e9307f75354350cf57e40be8.stex"
+path="res://.import/quit assets A pressed.png-eaca51c129b20676b313ca41bb9d6d9f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Buttons/quit assets A pressed.png"
-dest_files=[ "res://.import/quit assets A pressed.png-fad77323e9307f75354350cf57e40be8.stex" ]
+source_file="res://resources/Buttons/quit assets A pressed.png"
+dest_files=[ "res://.import/quit assets A pressed.png-eaca51c129b20676b313ca41bb9d6d9f.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coins silver.png-c9a441f9beff62247d6fccf1851294f9.stex"
+path="res://.import/coins silver.png-538d6a5e9e8dd76dff16dc94b87f9102.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/fonts and assets/coins silver.png"
-dest_files=[ "res://.import/coins silver.png-c9a441f9beff62247d6fccf1851294f9.stex" ]
+source_file="res://resources/fonts and assets/coins silver.png"
+dest_files=[ "res://.import/coins silver.png-538d6a5e9e8dd76dff16dc94b87f9102.stex" ]
 
 [params]
 

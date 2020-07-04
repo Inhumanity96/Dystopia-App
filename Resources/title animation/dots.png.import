@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dots.png-b052f496ed15c06c6beafbefa94b02a9.stex"
+path="res://.import/dots.png-4c497a9577a231df5665a2316b512f88.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/title animation/dots.png"
-dest_files=[ "res://.import/dots.png-b052f496ed15c06c6beafbefa94b02a9.stex" ]
+source_file="res://resources/title animation/dots.png"
+dest_files=[ "res://.import/dots.png-4c497a9577a231df5665a2316b512f88.stex" ]
 
 [params]
 

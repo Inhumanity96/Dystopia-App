@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chap 2A asset normal.png-f9edf6505321bc1ba95f221b9aa6923d.stex"
+path="res://.import/chap 2A asset normal.png-073b52df9c1b08493c64297a3ed8fb49.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resources/Buttons/chap 2A asset normal.png"
-dest_files=[ "res://.import/chap 2A asset normal.png-f9edf6505321bc1ba95f221b9aa6923d.stex" ]
+source_file="res://resources/Buttons/chap 2A asset normal.png"
+dest_files=[ "res://.import/chap 2A asset normal.png-073b52df9c1b08493c64297a3ed8fb49.stex" ]
 
 [params]
 

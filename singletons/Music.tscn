@@ -1,0 +1,248 @@
+[gd_scene load_steps=7 format=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node
+
+export(String, FILE, \"*.ogg\") var music_track = \"\"
+
+var playlist_one = {
+	0:'res://music/310-world-map-loop.ogg', 
+	1:'res://music/chike san afro 1.ogg',
+	2:'res://music/chike san afro 2.ogg',
+	3:'res://music/chike san afro 3.ogg',
+	4:'res://music/Zade Callertune.ogg',
+	5:'res://music/chuks-dane_chuks-dane-shoot-back.ogg',
+}
+#what is playing my music, the music track or the music singleton
+onready var Music_streamer =  get_node(\"A\") #Refrences the music player node
+onready var track
+#create all your music actions here as animated nodes
+\"\"\"
+I put in an automatic music shuffling script in here. Feel free to update it 
+and map the buttons to the game's UI when finished
+\"\"\"
+
+
+
+\"\"\"
+Music singleton that handles crossfading when a new song starts
+and applies a low pass filter when the game is paused. Nothing too wise
+\"\"\"
+onready var music_debug = ''
+onready var current_track
+
+
+var music_bus
+
+func _ready():
+	randomize() #randomizes shuffle code seed
+	music_track = Music.shuffle()
+	music_bus = AudioServer.get_bus_index($A.bus)
+	
+	Music.play(music_track)
+	#print((playlist_one[3])) #returns the value of key 3
+	#use this to cycle though track lists
+	
+
+#create your signals and finctions in this node
+
+func _process(_delta):
+	
+	\"\"\"
+	The music debug variable stores all the music debug logs 
+	and maps them to the game's staus ui 
+	\"\"\"
+	
+	#update music debug code to separate and store music values separately
+	music_debug = ('Time:' + str (int(Music_streamer.get_playback_position())) + ' Track: ' + music_track.get_file())
+	
+	
+	
+	
+	pass
+
+
+
+
+func play(stream):
+	if current_track == \"a\":
+		$B.stream = load(stream)
+		$anims.play(\"AtoB\")
+		current_track = \"b\"
+	else:
+		$A.stream = load(stream)
+		$anims.play(\"BtoA\")
+		current_track = \"a\"
+	
+	
+
+
+# Simple 'muffled music' effect on pause using a low pass filter
+func _notification(what):
+	if what == NOTIFICATION_PAUSED:
+		AudioServer.set_bus_effect_enabled(music_bus,0,true)
+		AudioServer.set_bus_volume_db(music_bus,-10)
+	elif what == NOTIFICATION_UNPAUSED:
+		AudioServer.set_bus_effect_enabled(music_bus,0,false)
+		AudioServer.set_bus_volume_db(music_bus,0)
+
+
+
+	#get the music stream node
+	#check if the current track is the same as the music track
+	#if it is, get the playlist dictionarry and get a ramdom trck in it
+	
+
+
+	\"\"\"
+	this code shuffles the music to a random track once called
+	###update code to interract directly with the music streamer node
+	\"\"\"
+func shuffle ():
+	track = int(rand_range(-1,playlist_one.size())) #selects a random track number
+	music_track = playlist_one[track]
+	return music_track
+	#print('music finished')
+	#for track in playlist_one:
+	#	
+	#		track = playlist_one[n] 
+	#		Music.play(track)
+	#		n = n+1
+	#	else :
+	#		break
+
+
+func _on_A_finished(): #This  signals when the music has finished and autoshuffles
+	randomize()
+	music_track=Music.shuffle()
+	Music.play(music_track)
+	print('music shuffled')
+"
+
+[sub_resource type="Animation" id=2]
+tracks/0/type = "value"
+tracks/0/path = NodePath("A:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -30.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("B:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -30.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("A:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("B:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=3]
+tracks/0/type = "value"
+tracks/0/path = NodePath("A:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -30.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("B:volume_db")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -30.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("B:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("A:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Change track (straight)"
+
+[sub_resource type="Animation" id=5]
+length = 0.5
+
+[sub_resource type="Animation" id=6]
+resource_name = "play"
+
+[node name="Music" type="Node"]
+pause_mode = 2
+script = SubResource( 1 )
+
+[node name="A" type="AudioStreamPlayer" parent="."]
+bus = "Music"
+
+[node name="B" type="AudioStreamPlayer" parent="."]
+volume_db = -30.0
+bus = "Music"
+
+[node name="anims" type="AnimationPlayer" parent="."]
+anims/AtoB = SubResource( 2 )
+anims/BtoA = SubResource( 3 )
+"anims/Change track (straight)" = SubResource( 4 )
+anims/pause = SubResource( 5 )
+anims/play = SubResource( 6 )
+[connection signal="finished" from="A" to="." method="_on_A_finished"]
