@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/UI & misc/Controls.gd" type="Script" id=1]
-[ext_resource path="res://resources/misc/controls.png" type="Texture" id=2]
+[ext_resource path="res://resources/illustrations/Maps Concept Art.jpg" type="Texture" id=2]
 [ext_resource path="res://fonts/dialog.tres" type="DynamicFont" id=3]
-[ext_resource path="res://scenes/characters/debug_panel.tscn" type="PackedScene" id=4]
 
 [node name="Controls" type="Control"]
 anchor_right = 1.0
@@ -32,7 +31,7 @@ __meta__ = {
 }
 
 [node name="Button" type="Button" parent="VBoxContainer"]
-margin_right = 108.0
+margin_right = 154.0
 margin_bottom = 49.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
@@ -47,12 +46,12 @@ __meta__ = {
 
 [node name="music" type="Button" parent="VBoxContainer"]
 margin_top = 53.0
-margin_right = 108.0
+margin_right = 154.0
 margin_bottom = 102.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.364706, 0.364706, 0.364706, 1 )
-text = "music"
+text = "music shuffle"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -61,20 +60,19 @@ __meta__ = {
 
 [node name="Debug" type="Button" parent="VBoxContainer"]
 margin_top = 106.0
-margin_right = 108.0
+margin_right = 154.0
 margin_bottom = 155.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0.364706, 0.364706, 0.364706, 1 )
 toggle_mode = true
 shortcut_in_tooltip = false
-text = "Debug on"
+text = "Debug "
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
-
-[node name="debug_panel" parent="." instance=ExtResource( 4 )]
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="VBoxContainer/music" to="." method="_on_music_pressed"]
 [connection signal="toggled" from="VBoxContainer/Debug" to="." method="_on_Debug_toggled"]

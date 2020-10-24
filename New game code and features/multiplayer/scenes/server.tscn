@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://New game code and features/multiplayer/scripts/server.gd" type="Script" id=1]
+[ext_resource path="res://scenes/levels/Testing Scene.tscn" type="PackedScene" id=2]
+
+[node name="world" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Node2D" parent="." instance=ExtResource( 2 )]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Player" type="Node" parent="."]

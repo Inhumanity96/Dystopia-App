@@ -9,6 +9,7 @@ and probably both should extend some parent script
 """
 
 
+
 export(int) var WALK_SPEED = 350 # pixels per second
 export(int) var ROLL_SPEED = 1000 # pixels per second
 export(int) var hitpoints = 3
@@ -35,7 +36,7 @@ func _ready():
 
 	var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
 	for spawnpoint in spawnpoints:
-		if spawnpoint.name == Globals.spawnpoint:
+		if spawnpoint.name == Globals.spawnpoint: #it breaks here
 			global_position = spawnpoint.global_position
 			break
 	if not (

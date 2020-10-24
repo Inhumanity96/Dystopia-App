@@ -1,9 +1,7 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://resources/pj/pj.png" type="Texture" id=1]
-[ext_resource path="res://scenes/characters/Player.gd" type="Script" id=2]
-[ext_resource path="res://scenes/characters/debug_character.tscn" type="PackedScene" id=3]
-
+[ext_resource path="res://scenes/characters/Player.gd" type="Script" id=1]
+[ext_resource path="res://resources/pj/pj.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 35.8589
@@ -851,7 +849,7 @@ height = 67.6021
 "player",
 ]]
 position = Vector2( 585.638, 309.087 )
-script = ExtResource( 2 )
+script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -859,10 +857,11 @@ __meta__ = {
 [node name="sprite" type="Sprite" parent="."]
 modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 6.30249, -86.9744 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
+flip_h = true
 vframes = 4
 hframes = 8
-frame = 11
+frame = 9
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
 position = Vector2( -0.882385, -27.9806 )
@@ -871,11 +870,10 @@ shape = SubResource( 1 )
 
 [node name="player_sword" type="Area2D" parent="."]
 position = Vector2( 6.30249, -86.9744 )
+monitorable = false
 collision_layer = 32
 
 [node name="slash" type="CollisionPolygon2D" parent="player_sword"]
-position = Vector2( -18, -39 )
-rotation = -0.570726
 polygon = PoolVector2Array( -134.513, -92.9393, -124.246, 19.4555, -59.4026, 109.155, 76.2278, 112.938, 75.147, 26.4802, -2.66479, 20.5363, -36.1671, -8.64319, -57.2411, -40.5244 )
 
 [node name="anims" type="AnimationPlayer" parent="."]
@@ -902,13 +900,7 @@ position = Vector2( 6.30249, -86.9744 )
 current = true
 zoom = Vector2( 2, 2 )
 
-[node name="debug" parent="." instance=ExtResource( 3 )]
-path_to_node = NodePath("..")
-properties = [ "linear_vel", "roll_direction", "facing" ]
-enabled = false
-
 [node name="hurtbox" type="Area2D" parent="."]
-position = Vector2( 0, -0.699804 )
 collision_mask = 32
 __meta__ = {
 "_editor_description_": ""
@@ -920,4 +912,7 @@ shape = SubResource( 18 )
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="ScentTimer" type="Timer" parent="."]
+wait_time = 0.1
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]

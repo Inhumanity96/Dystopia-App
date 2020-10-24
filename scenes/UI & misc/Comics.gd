@@ -1,135 +1,227 @@
-extends Control
+# *************************************************
+# godot3-Dystopia-game by INhumanity_arts
+# Released under MIT License
+# *************************************************
+#
+# This is a pluggin containing
+# information used by the comics placeholder codes.
+#
+# *************************************************
 
+extends Control 
 
+export (bool) var enabled = false
+export (bool) var can_drag = false #Variable for the drag function
 """
 COMICS PLACEHOLDER CODE. IT INHERITS FROM A CONTROL NODE
 
 """
+var comics = {
+	 1: 'res://scenes/Comics/chapter 1/chapter 1.tscn',
+	2:'res://scenes/Comics/chapter 2/chapter 2.tscn',
+	3:'res://scenes/Comics/chapter 3/chapter 3.tscn'
+}
 
-#It comtains code to get several properties from the comic's placeholder 
-#node and control them
+var memory = {}
 
-#gets the Sprite node and gets several properties from the sprite node
+var current_frame  #=$placeholder.get_sprite_frames() 
 
-onready var current_frame  
-onready var hframe 
-onready var vframe
-onready var texture
 var next_scene = null
-var max_frame = 4
+var max_frame 
+var current_comics
+onready var zoom = false
+onready var comics_placeholder#The comics placeholder sprite
 
-#Set signal that emits when the comics is visible
-#signal comics_showing 
-#signal comics_not_showing
-onready var comics_placeholder= $placeholder #The comics placeholder sprite
-onready var comics = self
-onready var slide_in_animation = $AnimationPlayer
-
-#Returns true / false if the comics placeholder sprite is showing
-var is_comics_showing 
-
-
+onready var animation = $AnimationPlayer #use this to program transitions
+onready var texture
+onready var area2d = $Area2D #the area 2d node for drag and drop
+onready var position 
+onready var center
+onready var target =Vector2() #set position to the center of the viewport
+onready var Touch_page = false
 func _ready():
+	"""
+	ERROR CATCHER 
+	"""
+	if target == null: #catches a null error in the drag and drop codes
+		target = Vector2()
+		push_error('target cannot be null')
+	load_comics()
+
+"""
+DRAG AND DROP
+"""
+
+func _input(event): 
+#Toggles comics visibility on/off
+	if event.is_action_pressed("comics") and enabled == false:
+		enabled = true 
+	elif event.is_action_pressed("comics") and enabled == true:
+		enabled = false
 	
-	comics.hide()     #.show() #use .hide()
-	current_frame  = comics_placeholder.get_frame() #gets the cuttent frame of the placeholder
-	hframe =comics_placeholder.get_hframes() #gets the hframe count of the spritesheet
-	vframe = comics_placeholder.get_vframes()
-	
-	
-	#gets the current texture in the placeholder. Saves it to a variable
-	#write code to cycle through spritesheets in a global variable
-	texture =  comics_placeholder.get_texture()
-	
-	
+	if (can_drag == false and Input.is_action_pressed("ui_select")): 
+		can_drag = true
+	if (can_drag == true and Input.is_action_pressed("ui_select")):
+		drag() #calls up the drag function
+	else:
+		can_drag = false #this block of code works
+	# Handle Touch
+	if event is InputEventScreenTouch:
+		if event.is_pressed() and !can_drag:
+			drag() ; can_drag = true
+		if !event.is_pressed():
+			can_drag = false
+
+
+	# Handles ScreenDragging
+	if event is InputEventScreenDrag:
+		if event.is_pressed() and !can_drag:
+			drag() ; can_drag = true
+
+# Handles releasing 
+
+	#no code yet
+
+# Handles double clicking
+
+	if event is InputEventMouseButton && event.doubleclick && !zoom:
+		print ('double click')
+		$Area2D/placeholder.set_scale(Vector2(0.3,-0.3)) ; zoom = true 
+	elif event is InputEventMouseButton && event.doubleclick && zoom :
+		$Area2D/placeholder.set_scale(Vector2(0.12,-0.13)) ; zoom = false
+
+#Comic panel changer
+
+	if event.is_action_pressed("ui_focus_next"):
+		next_panel()
+	if event.is_action_pressed("ui_focus_prev"):
+		prev_panel()
 
 func _process(_delta):
+	 #update position for drag function
+	#max_frame = current_frame #figure out a way to get the max frames
+	texture = comics_placeholder.get_sprite_frames()
+
+	if can_drag == true: #my code
+		drag()
+		
 	"""
 	CONTROLS THE ANIMATED PLAYER NODE TO CYCLE THOUGH IMAGE
-	update code to account for comics hframes and v frames
-	and to adapt accordingly
-	"""
-	#Checks if the Comics placeholder is visible and saves it as a boolean
-	is_comics_showing = null #comics_placeholder.is_pixel_opaque()
-	
-	
-	Debug.Comics_debug = str( current_frame, hframe, vframe, texture, is_comics_showing)
-	#moves the current image frame forward
-	#current_frame = current_frame + 1
-	#set_frame(current_frame)
-	if current_frame == max_frame :
-		get_tree().change_scene_to(next_scene)
-		queue_free() 
-	
-	#moves the current image frame backwards
-	#current_frame = current_frame - 1
-	#set_frame(current_frame)
-
-
-	"""
-	FUNCTION THE COMICS PANEL TO THE NEXT PANEL, PREVIOUS PANEL AND THE NEXT CHAPTER
-	it also loads the next chapter if its available and locks unavailable chapters
+	It passes it's Debug to the Debug panel
 	"""
 
-func _comics(): #replace with actual code
-	print('any other miscellaneous codes you forgot to add')
+		
+	#sets the comic's placeholder to the current frame
+	comics_placeholder.set_frame(int(current_frame))
+	
+	#Debug Variable
+	if enabled:
+		Debug.Comics_debug = str(
+			'Current frame:', current_frame  , ' Max frames :' , max_frame, ' Texture: ',
+			texture, enabled,'can drag: ',can_drag, ' target: ',target, 'touchpage:', Touch_page
+			)
+
+	"""
+	ANIMATION PLAYER
+	"""
+	#rewrite with turnary statement 
+	if enabled == true:
+		show()
+		animation.play("visible")
+	else:
+		#animation.play("slide_out")
+		hide()
+"""
+DRAG FUNCTION
+"""
+func drag():  #Vector Maths
+	#kinda works
+	target = get_viewport().get_mouse_position()
+	position = area2d.position
+	center = restaVectores(target, position)
+	if Touch_page == false:
+		if abs(position.distance_to(target)) > 200: #if its far...
+			##use suma vectores function for vector maths
+			area2d.move_and_slide(center) #move and slide to center
+			
+			 #update position
+			pass
+		if abs(position.distance_to(target)) < 200 : #if its close
+			area2d.move_and_slide(target) #move and slide to target
+			
+	if Touch_page == true: #if touching page set position to position
+		area2d.set_position(target)
 
 func next_panel():
-	print ('next panel') #replace with actual code
-	pass
+	current_frame = current_frame + 1
+	return int(current_frame) 
+
 
 func prev_panel():
-	print ('previous panel') #replace with actual code
-	pass
-
-func next_chap():
-	print ('next chapter') #replace with actual code
-
-func prev_chap():
-	print ('prev chapter') #replace with actual code
-
-
-func guided_view(): #replace with actual code
-	print('guided view')
-
-
-func load_comics():
-	print ('loading new comics') ##replace with actual code
-	#run as a loop
-
-
-
-"""
-Checks if the comic is visible and plays the appropriate animation
-"""
-
-
-func _on_comics_button_pressed():
-	if true :  #and is_comics_showing == false #this was a second condition to call the comics placeholder code to
-		comics.show()
-		slide_in_animation.play("slide_in")
-		#emit_signal("comics_showing")
-		pass
-	else:
-		comics.hide()
-		slide_in_animation.play("slide_out")
-		#emit_signal("comics_not_showing") #get rid of this code only emit one signal from this code
-	pass
-# this code closes the comics placeholder when touched or clicked
-
-
-
-
-
-
-
-
-
-
+	current_frame =current_frame - 1 #fix this code
+	return int(current_frame) 
 
 func _on_Backwards_pressed():
 	prev_panel()
 
 
 func _on_Forward_pressed():
-	next_panel()
+	next_panel()#fix this code
+
+
+func next_chap():
+	print ('next chapter') #replace with actual code
+	#conditional
+	if current_frame > max_frame: #Hopefully, this doesn't break 
+		comics_placeholder = comics[2] #you can use memory[1] to change to next chapter 
+		load_comics()
+
+func prev_chap():
+	print ('prev chapter') #duplicate code above
+
+
+func guided_view(): #duplicate code above
+	print('guided view')
+
+
+func load_comics(): #pass a value to determine which comic gets loaded
+	print ('loading new comics') 
+	if memory.empty() == true: #error catcher 1
+		current_comics = load(comics[1])
+	if memory.empty() != true && current_comics == null: #error catcher 2
+		current_comics = memory[0] #default comics
+		#comics_placeholder = current_comics
+
+	current_frame = 0
+#reparent comics scene
+	get_node('Area2D/placeholder').add_child(current_comics.instance())
+	update_mem()
+	comics_placeholder.set_frame(current_frame) #try and get the comic node, not the scene file
+	comics_placeholder.position = Vector2(0,0)
+	#comics_placeholder.set_flip_v(180) #corrects a flipping problem
+	#set placeholder size with code
+	
+	#print (comics_placeholder.get_offset())
+	current_frame  =int(comics_placeholder.get_frame())  #gets the current frame of the placeholder
+
+func update_mem():
+	memory=get_tree().get_nodes_in_group("comics") #retuns an array of all comics in the scene tree
+	comics_placeholder = memory[0]
+
+"""
+DRAG AND DROP 
+"""
+#it requires you set mouse filter to ignore on all control nodes 
+#so the area 2d can get mouse input data
+
+#find a way to set the collision shape size to the size of the current frame
+func _on_Area2D_mouse_entered():
+	Touch_page = true
+func _on_Area2D_mouse_exited():
+	Touch_page = false 
+
+func restaVectores(v1, v2): #vector substraction
+	return Vector2(v1.x - v2.x, v1.y - v2.y)
+	
+func sumaVectores(v1, v2): #vector sum
+	return Vector2(v1.x + v2.x, v1.y + v2.y)

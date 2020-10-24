@@ -1,10 +1,20 @@
+# *************************************************
+# godot3-Dystopia-game by INhumanity_arts
+# Released under MIT License
+# *************************************************
+#
+# This is a auto-included singleton containing
+# information used by the Game 
+#
+# *************************************************
+
 extends Node
 #update code to use global dictionaries
-#update cglobals order
+
 var cinematics = 'res://scenes/levels/cinematics.tscn'
 var title_screen = 'res://scenes/Title screen.tscn'
 var next_scene = null
-var comic_books = {
+var comic_books = { #reuse this array#
 	2:'res://Chapters/chapter 2/chapter 2.tscn', 
 	1:'res://scenes/Comics/chapter 1/chapter 1.tscn',
 	0:'resres://scenes/UI & misc/ingame  menu.tscn',
@@ -20,24 +30,17 @@ var current_level = ""
 
 func _ready():
 
-	
+	player = get_tree().get_nodes_in_group('player') #gets all player nodes in the scene
+	if player.empty(): #error catcher 1
+		player = null
+
 
 	VisualServer.set_default_clear_color(ColorN("white"))
 func _process(_delta):
-	#WRITE CODE TO HANDLE ERRORS IF PLAYERS ARE MORE THAN 1
+	
 	enemy_debug = enemy_debug #updates the enemy debug variable
 	pass
 
-
-
-	"""
-	This handles cases where the player doesn't exist in the scene tree, 
-	checks of the player exists at path and sets the player to itself 
-	"""
-	if has_node('/root/Outside/level/character') != true: 
-		player = player
-	else :
-		 player = player
 
 """
 Really simple save file implementation. Just saving some variables to a dictionary

@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://resources/misc/heart.png" type="Texture" id=1]
-
+[ext_resource path="res://resources/misc/Pixel Heart 32x32.png" type="Texture" id=1]
 
 [node name="heart" type="TextureRect"]
 margin_right = 33.0
 margin_bottom = 28.0
+rect_scale = Vector2( 8.18016, 8.00303 )
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

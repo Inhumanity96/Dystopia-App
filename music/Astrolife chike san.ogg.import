@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Astrolife chike san.ogg-06d1120464a03707ce8806a50ae90ae6.oggstr"
+
+[deps]
+
+source_file="res://music/Astrolife chike san.ogg"
+dest_files=[ "res://.import/Astrolife chike san.ogg-06d1120464a03707ce8806a50ae90ae6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

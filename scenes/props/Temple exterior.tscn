@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://scenes/UI & misc/Exit.gd" type="Script" id=1]
-[ext_resource path="res://resources/props/temple exterior..png" type="Texture" id=2]
-
+[ext_resource path="res://resources/props/temple exterior 3d WEBP.webp" type="Texture" id=1]
+[ext_resource path="res://scenes/UI & misc/Exit.gd" type="Script" id=2]
+[ext_resource path="res://resources/props/portal.png" type="Texture" id=3]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends StaticBody2D
@@ -13,53 +13,137 @@ export(String) var spawnpoint = ''
 func _ready():
 	$to_inside.to_scene = to_scene
 	$to_inside.spawnpoint = spawnpoint
-	Globals.spawnpoint = get_node(\"temple spawnpoint\")
+	Globals.spawnpoint = Globals.spawnpoint #i dunno what this does but lets see what happens
 	pass # Replace with function body.
 "
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 639.624, 61.6562 )
+extents = Vector2( 235.097, 81.3037 )
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 190.939
-height = 559.523
+radius = 141.088
+height = 122.633
 
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 158.394
-height = 401.342
+radius = 35.0523
+height = 271.917
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 68.5168, 85.0471 )
+[sub_resource type="SegmentShape2D" id=5]
+a = Vector2( -63, 28 )
+b = Vector2( -162, 37 )
+
+[sub_resource type="SegmentShape2D" id=6]
+a = Vector2( -65, 10 )
+b = Vector2( -168, 45 )
+
+[sub_resource type="SegmentShape2D" id=7]
+a = Vector2( 44, -72 )
+b = Vector2( -64, 10 )
+
+[sub_resource type="SegmentShape2D" id=8]
+a = Vector2( 117, -135 )
+b = Vector2( 68, -96 )
+
+[sub_resource type="SegmentShape2D" id=9]
+a = Vector2( 675.55, -162.932 )
+b = Vector2( 691.106, -114.849 )
+
+[sub_resource type="SegmentShape2D" id=10]
+a = Vector2( 13.6975, 445.18 )
+b = Vector2( -185.707, 337.699 )
+
+[sub_resource type="SegmentShape2D" id=11]
+a = Vector2( -122, 384 )
+b = Vector2( -61, 449 )
+
+[sub_resource type="SegmentShape2D" id=12]
+a = Vector2( -186.5, 340.5 )
+b = Vector2( -125, 383 )
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 34.665, 78.5223 )
 
 [node name="Temple" type="StaticBody2D"]
 script = SubResource( 1 )
 
 [node name="temple" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+position = Vector2( 56.652, -16.0833 )
+texture = ExtResource( 1 )
 offset = Vector2( -216.037, -247.153 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -217.389, 33.4611 )
+position = Vector2( -179.205, -153.215 )
 rotation = 3.12257
 shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2( -210.653, -88.334 )
+position = Vector2( -173.883, -246.727 )
 rotation = 1.5708
 shape = SubResource( 3 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
-position = Vector2( -199.339, -422.09 )
+position = Vector2( -180.955, -371.178 )
 rotation = -0.00745004
 shape = SubResource( 4 )
 
+[node name="dune lines" type="YSort" parent="."]
+position = Vector2( -583, -353 )
+
+[node name="dune lines" type="StaticBody2D" parent="dune lines"]
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="dune lines/dune lines"]
+shape = SubResource( 5 )
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="dune lines/dune lines"]
+position = Vector2( 113.707, -14 )
+shape = SubResource( 6 )
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="dune lines/dune lines"]
+position = Vector2( 115, -14 )
+shape = SubResource( 7 )
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="dune lines/dune lines"]
+position = Vector2( 115, -14 )
+shape = SubResource( 8 )
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="dune lines/dune lines"]
+position = Vector2( 115, -14 )
+shape = SubResource( 9 )
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="dune lines/dune lines"]
+position = Vector2( 115, -14 )
+shape = SubResource( 10 )
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="dune lines/dune lines"]
+position = Vector2( 115, -14 )
+shape = SubResource( 11 )
+one_way_collision_margin = 0.0
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="dune lines/dune lines"]
+position = Vector2( 115, -14 )
+shape = SubResource( 12 )
+one_way_collision_margin = 0.0
+
 [node name="to_inside" type="Area2D" parent="."]
-position = Vector2( 7.79211, 0.0572205 )
-script = ExtResource( 1 )
+position = Vector2( -184.208, -7.9427 )
+scale = Vector2( 0.95818, 1.51276 )
+script = ExtResource( 2 )
+
+[node name="portal" type="Sprite" parent="to_inside"]
+visible = false
+position = Vector2( 2.6039, 50.1617 )
+scale = Vector2( 0.572252, 0.368899 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="to_inside"]
-position = Vector2( -193.304, 179.991 )
-shape = SubResource( 5 )
+position = Vector2( 5.73036, -82.6158 )
+shape = SubResource( 13 )
 
 [node name="spawnpoint" type="Position2D" parent="."]
 position = Vector2( -182.434, 373.354 )

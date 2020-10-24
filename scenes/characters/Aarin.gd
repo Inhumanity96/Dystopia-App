@@ -21,7 +21,8 @@ signal health_changed(current_hp)
 
 export(String, "up", "down", "left", "right") var facing = "down"
 
-var despawn_fx = preload("res://scenes/misc/DespawnFX.tscn")
+#copy the codes from the player script
+var despawn_fx = null #preload("res://scenes/misc/DespawnFX.tscn")
 
 var anim = ""
 var new_anim = ""

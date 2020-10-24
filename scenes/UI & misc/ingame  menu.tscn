@@ -1,12 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Resources/Buttons/menu.png" type="Texture" id=1]
-[ext_resource path="res://fonts/Comic_Andy.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://fonts/Comic_Andy.ttf" type="DynamicFontData" id=1]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends TextureButton
+script/source = "extends Control
 
-
+export var enabled = true
 
 \"\"\"
 The game menu script. 
@@ -18,16 +17,8 @@ onready var continue_game = get_node(\"MarginContainer/HSeparator/continue\")
 onready var game_menu = get_node(\"MarginContainer\")
 
 
-#create an animation that toggles whenever the user selects comics
-#####im writing code to optimize the scene loading process
+#create an animation that toggles whenever the user selects comics #toggle focus
 
-#update the UI cancel settings in project settings
-
-
-
-
-#var intro_vid = preload (\"res://Chapters/chapter 1/intro vid .tscn\") ###update to cinematic
-#update scene to load ingame menu
 
 
 
@@ -35,16 +26,28 @@ onready var game_menu = get_node(\"MarginContainer\")
 export(String, FILE, \"*.tscn\") var initial_level = \"res://scenes/levels/Outside.tscn\"
 
 func _ready():
-	self.set_toggle_mode(true)
-	game_menu.hide()
-
-	grab_focus()
+	#grab_focus() delete later if it affects nothing
+	#set_focus_mode() #update this code bruh, dont know what it does, the ide recomended it to me for control nodes
 	if Globals.load_game(true):
 		continue_game.disabled = false 
 	else:
 		continue_game.disabled = true
 
-	
+func _input(event): #Toggles menu visibility on/off
+	if event.is_action_pressed(\"menu\") and enabled == false:
+		enabled = true 
+	elif event.is_action_pressed(\"menu\") and enabled == true:
+		enabled = false
+
+
+func _process(_delta): #update code to use turnary statements
+	if enabled == true: 
+		show()
+		Music._notification(NOTIFICATION_PAUSED)
+	else:
+		hide()
+		Music._notification(NOTIFICATION_UNPAUSED)
+
 
 func _on_continue_pressed():
 	Globals.load_game()
@@ -83,14 +86,13 @@ func _on_chap_2__pressed():
 func _on_Menu_button_toggled(button_pressed):
 	if  button_pressed :
 		game_menu.show()
-		print ('menu button pressed, play popup animation')
 	else :
 		game_menu.hide()
 
 
 func _on_comics_pressed():
-	print ('comics pressed')
-	get_tree().change_scene_to(load ('res://scenes/UI & misc/Comics.tscn'))
+	print_debug ('comics pressed')
+	get_tree().change_scene_to(load ('res://scenes/UI & misc/Comics____2.tscn'))
 
 
 func _on_controls_pressed():
@@ -106,37 +108,40 @@ func _on_quit_Button_pressed():
 
 
 
+
+
+func _on_multiplayer_pressed():
+	get_tree().change_scene_to(load ('res://New game code and features/multiplayer/scenes/login.tscn'))
 "
 
 [sub_resource type="DynamicFont" id=2]
 size = 90
-font_data = ExtResource( 2 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 90
-font_data = ExtResource( 2 )
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 90
-font_data = ExtResource( 2 )
+font_data = ExtResource( 1 )
 
-[node name="Menu button" type="TextureButton"]
-margin_left = 1076.0
-margin_top = 112.0
-margin_right = 1242.0
-margin_bottom = 255.0
-toggle_mode = true
-texture_normal = ExtResource( 1 )
+[node name="Menu " type="Control"]
+margin_left = 28.0
+margin_top = 116.0
+margin_right = 1210.0
+margin_bottom = 715.0
 script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = -563.013
-margin_top = -95.0156
-margin_right = -248.543
-margin_bottom = 572.984
+margin_left = 444.987
+margin_top = -91.0156
+margin_right = 759.457
+margin_bottom = 576.984
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -224,9 +229,9 @@ text = "quit"
 flat = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-[connection signal="toggled" from="." to="." method="_on_Menu_button_toggled"]
 [connection signal="pressed" from="MarginContainer/HSeparator/new game" to="." method="_on_new_game_pressed"]
 [connection signal="pressed" from="MarginContainer/HSeparator/comics" to="." method="_on_comics_pressed"]
 [connection signal="pressed" from="MarginContainer/HSeparator/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MarginContainer/HSeparator/multiplayer" to="." method="_on_multiplayer_pressed"]
 [connection signal="pressed" from="MarginContainer/HSeparator/controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="MarginContainer/HSeparator/quit Button" to="." method="_on_quit_Button_pressed"]

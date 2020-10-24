@@ -16,27 +16,33 @@ I Added a couple of New funtions and Global variables to help in coding
 
 (4) Fonts, Music and Videos
 	I added a couple of new Dynamic Fonts and Music funtions that can be called from the Music track node. A cinematic scene
-	was added to habdle all video playing functions. (Note: video player works best with .ogv video format)
+	was added to handle all video playing functions. (Note: video player works best with .ogv video format)
 
 
 (5) Ingame Menu:
 	This is a reusable ingame menu i added to give access to all major scenes in the App
 
 
+(6) Custom input maps:
+	Added a couple of custom input maps to enable and disable the comics and game menu scenes 
 -Features to Fix
 	-Globals.savegame() filesystem for android devices
-	-Comics placeholder code, to use Spritesheets
-	-Fix up the Game's controls to be able to control the Music and Debug nodes
+	-
+	-Fix up the Game's controls to be able to control the Music node
 	-Fix up Game's spawnpoints (look at the Exit code in the Temple interior scene)
 	-Fix up game's assets and animation
-	-AI mob chase / enemy state changer
-
+	-auto enemy spawner
+	-Idol autosave
+	-A better state machine
+	-Cinematic video loading code system
 
 -Features to Add
+	-New animation
 	-Particle effects when player attacks
-	-Fix UI
+	-update control art with new button maps
+	-	
 	-Add multiplayer Network and DLC network code/singleton
-	-Improve Loading Cinematic video
+	-
 	-Guided view ( Check ://sourcefile/New game code and features)
 	-Login UI
 	-Mana meter (Ogun meter)

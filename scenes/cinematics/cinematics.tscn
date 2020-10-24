@@ -1,57 +1,92 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/cinematics/title animation.webm" type="VideoStream" id=2]
-[ext_resource path="res://singletons/Title animation.tres" type="Animation" id=3]
-[ext_resource path="res://resources/Buttons/bck.png" type="Texture" id=4]
-[ext_resource path="res://music/wind_2.wav" type="AudioStream" id=5]
+[ext_resource path="res://singletons/Title animation.tres" type="Animation" id=1]
+[ext_resource path="res://resources/Buttons/bck.png" type="Texture" id=3]
+[ext_resource path="res://scenes/UI & misc/MusicTrack.tscn" type="PackedScene" id=4]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends Control
+script/source = "# *************************************************
+# godot3-Dystopia-game by INhumanity_arts
+# Released under MIT License
+# *************************************************
+#
+# This is the cinematics script
+# information used by the comics placeholder codes.
+# organize this code 
+# *************************************************
+
+extends Control
+
+
+#save resource to a .tres file
 #update code to use as videoplayer's base node to play all videos in the scene
+onready var vid_stream = load (cinematic[1]) 
+onready var animation = $Node2D/Intro_animation
+onready var videoplayer = $Node2D/VideoPlayer
+var cinematic = {
+	0:'res://scenes/cinematics/animatic 1.webm', 
+	1:'res://resources/title animation/title..ogv',
+	2:'',
+	3:'',
+	4:'',
+}
+var x #a switch for the cinematic changer
 \"\"\"
-This is the cinematic node. it playes all game cinematics 
-and videos. it plays sound though the stream player node
+CINEMATICS
 \"\"\"
 ###export your video as webm format
 #update code to reference all in game animations
-func _ready():
+func _ready(): #create a video player function
+	if OS.get_name() == str('Android'): #cinematic bug fix for android
+		Debug.misc_debug = OS.get_name()
+		#OS_play('res://resources/title animation/title..ogv') code breaks here. run with a test scene
+		videoplayer.stream =vid_stream
+		videoplayer.play()
+		x = 0
+	if OS.get_name() != str('Android'):
+		videoplayer.stream =vid_stream
+		videoplayer.play()
+		x = 0
 	
+	 
 	
-	#this code is to tell the os to play this video 
-	#OS.native_video_play('res://Chapters/chapter 1/intro.ogv', 1,'res://Resources/sounds/intro.ogg','')
 	#print ('playing')
-	pass
-func _on_VideoPlayer_finished():
-	$VideoPlayer.hide()
-	$skip.hide()
-	
+
+func _on_VideoPlayer_finished(): 
+	if x == 0: #polish this code here
+		vid_stream = load(cinematic[0]) 
+		videoplayer.stream = vid_stream
+		Music.pause()
+		videoplayer.play()
+		x = 1
+	#pass a variable through the function
+	elif x == 1:
+		get_tree().change_scene(Globals.title_screen)
+		Music.clear()
+
 
 
 
 func _on_skip_pressed():
-	$VideoPlayer.stop()
-	$skip.hide()
-	get_node(\"VideoPlayer\").hide()
-	
-
-	
-
-
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-# warning-ignore:unused_argument
-func _on_Intro_animation_animation_finished(anim_name):
+	videoplayer.stop()
 	get_tree().change_scene(Globals.title_screen)
+
+func OS_play(streaming): #streamer for android and ios
+	while OS.get_name() == str('Android'):
+		OS.native_video_play (streaming,0,'','')
+		if OS. native_video_stop() == true:
+			get_tree().change_scene(Globals.title_screen)
+			Music.clear()
+			Debug.misc_debug += 'os play done'
+			break
+# warning-ignore:unused_argument
+func _on_Intro_animation_animation_finished(anim_name): #unused animation code
+	get_tree().change_scene(Globals.title_screen)
+	Music.clear()
 	pass
 
-func _on_AnimatedSprite_tree_entered():# code not relevant
-	#$\"Node2D/Intro animation/AnimatedSprite\".play()
-	pass
+
+
 "
 
 [node name="Cinematics" type="Control"]
@@ -63,33 +98,32 @@ __meta__ = {
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2( 479.384, 325.549 )
 
-[node name="Intro animation" type="AnimationPlayer" parent="Node2D"]
+[node name="Intro_animation" type="AnimationPlayer" parent="Node2D"]
 autoplay = "intro_animation"
-anims/intro_animation = ExtResource( 3 )
+anims/intro_animation = ExtResource( 1 )
 
 [node name="VideoPlayer" type="VideoPlayer" parent="Node2D"]
 margin_left = -472.0
 margin_top = -328.0
 margin_right = 773.0
 margin_bottom = 396.0
-stream = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="skip" type="TextureButton" parent="Node2D/VideoPlayer"]
+[node name="skip" type="TextureButton" parent="Node2D"]
 modulate = Color( 1, 1, 1, 0.396078 )
-margin_left = 563.686
-margin_top = 560.083
-margin_right = 923.686
-margin_bottom = 872.083
+margin_left = 91.6859
+margin_top = 232.083
+margin_right = 451.686
+margin_bottom = 544.083
 rect_scale = Vector2( 0.488382, 0.469212 )
-texture_normal = ExtResource( 4 )
+texture_normal = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="wind" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 5 )
-volume_db = 10.0
-[connection signal="animation_finished" from="Node2D/Intro animation" to="." method="_on_Intro_animation_animation_finished" flags=6]
+[node name="music_track" parent="." instance=ExtResource( 4 )]
+music_track = "res://music/wind_2.ogg"
+[connection signal="finished" from="Node2D/VideoPlayer" to="." method="_on_VideoPlayer_finished"]
+[connection signal="pressed" from="Node2D/skip" to="." method="_on_skip_pressed"]

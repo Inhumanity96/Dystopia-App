@@ -5,6 +5,8 @@ var Touch_interface = self
 func _ready():
 	Dialogs.connect("dialog_started", self, "_on_dialog_started")
 	Dialogs.connect("dialog_ended", self, "_on_dialog_ended")
+	
+	#connect comicss and comics button
 	pass # Replace with function body.
 
 func _on_dialog_started():
@@ -27,11 +29,3 @@ func _notification(what):
 			child.show()
 
 
-
-
-func _on_Comics_comics_showing():
-	 Touch_interface.hide() 
-
-
-func _on_Comics_comics_not_showing():
-	Touch_interface.show()

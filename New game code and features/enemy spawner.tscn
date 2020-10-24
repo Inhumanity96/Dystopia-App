@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://New game code and features/enemy spawner.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 235.022, 112.914 )
+
+[node name="enemy_spawner" type="Node"]
+script = ExtResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 1487.75, 1343.5 )
+scale = Vector2( -9.25723, -9.25723 )
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="Area2D"]
+
+[node name="enemy spawner" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+[connection signal="timeout" from="enemy spawner" to="." method="_on_enemy_spawner_timeout"]

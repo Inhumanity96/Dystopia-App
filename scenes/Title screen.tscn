@@ -1,31 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://resources/title animation/Dystopia Logo Drop shadow.png" type="Texture" id=1]
-[ext_resource path="res://resources/illustrations/Game_Cover Art.png" type="Texture" id=2]
-[ext_resource path="res://fonts/Comic_Andy.ttf" type="DynamicFontData" id=3]
-[ext_resource path="res://scenes/UI & misc/ingame  menu.tscn" type="PackedScene" id=4]
-
-[sub_resource type="DynamicFont" id=1]
-size = 60
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=2]
-size = 60
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=3]
-size = 60
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=4]
-size = 70
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 70
-font_data = ExtResource( 3 )
+[ext_resource path="res://resources/illustrations/Game_Cover Art WEBP.webp" type="Texture" id=1]
+[ext_resource path="res://resources/title animation/Dystopia Logo webp.webp" type="Texture" id=2]
+[ext_resource path="res://scenes/UI & misc/ingame  menu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resources/Buttons/menu.png" type="Texture" id=4]
+[ext_resource path="res://scenes/UI & misc/MusicTrack.tscn" type="PackedScene" id=5]
 
 [node name="Menu" type="Control"]
+light_mask = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 focus_neighbour_left = NodePath("quit")
@@ -37,129 +19,53 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BG 3" type="TextureRect" parent="."]
+margin_left = 281.378
+margin_top = 7.53923
+margin_right = 10202.4
+margin_bottom = 7023.54
+rect_scale = Vector2( 0.100682, 0.103401 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="."]
+light_mask = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 303.583
+margin_top = 0.82846
+margin_right = 1873.58
+margin_bottom = 3030.83
+rect_scale = Vector2( 0.192205, 0.192205 )
+texture = ExtResource( 1 )
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="logo" type="TextureRect" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -56.3953
-margin_top = 109.937
-margin_right = 416.605
-margin_bottom = 289.937
-rect_scale = Vector2( 1.5208, 1.5208 )
-texture = ExtResource( 1 )
+margin_left = -71.9344
+margin_top = 53.0254
+margin_right = 401.065
+margin_bottom = 233.025
+rect_scale = Vector2( 1.63671, 1.63671 )
+texture = ExtResource( 2 )
 expand = true
 stretch_mode = 6
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Old menu, delete " type="VBoxContainer" parent="."]
-visible = false
-margin_left = 561.98
-margin_top = 347.917
-margin_right = 756.98
-margin_bottom = 577.917
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Menu " parent="." instance=ExtResource( 3 )]
 
-[node name="new_game" type="Button" parent="Old menu, delete "]
-margin_right = 195.0
-margin_bottom = 74.0
-focus_neighbour_left = NodePath("../quit")
-focus_neighbour_top = NodePath("../quit")
-focus_neighbour_right = NodePath("../controls")
-focus_neighbour_bottom = NodePath("../continue")
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0.364706, 0.364706, 0.364706, 1 )
-text = "New Game"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( 25.4558, 9.85788 )
+normal = ExtResource( 4 )
+action = "menu"
 
-[node name="continue" type="Button" parent="Old menu, delete "]
-margin_top = 78.0
-margin_right = 195.0
-margin_bottom = 152.0
-focus_neighbour_left = NodePath("../quit")
-focus_neighbour_top = NodePath("../new_game")
-focus_neighbour_right = NodePath("../controls")
-focus_neighbour_bottom = NodePath("../controls")
-custom_fonts/font = SubResource( 2 )
-custom_colors/font_color_disabled = Color( 0.780392, 0.780392, 0.780392, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0.364706, 0.364706, 0.364706, 1 )
-text = "Continue"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Comics" type="Button" parent="Old menu, delete "]
-margin_top = 156.0
-margin_right = 195.0
-margin_bottom = 230.0
-focus_neighbour_left = NodePath("../quit")
-focus_neighbour_top = NodePath("../new_game")
-focus_neighbour_right = NodePath("../controls")
-focus_neighbour_bottom = NodePath("../controls")
-custom_fonts/font = SubResource( 3 )
-custom_colors/font_color_disabled = Color( 0.780392, 0.780392, 0.780392, 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-custom_colors/font_color_hover = Color( 0.364706, 0.364706, 0.364706, 1 )
-text = "Comics"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="controls" type="Button" parent="Old menu, delete "]
-margin_top = 234.0
-margin_right = 195.0
-margin_bottom = 319.0
-focus_neighbour_left = NodePath("../quit")
-focus_neighbour_top = NodePath("../VBoxContainer/Comics")
-custom_fonts/font = SubResource( 4 )
-text = "Controls"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="quit" type="Button" parent="Old menu, delete "]
-margin_top = 323.0
-margin_right = 195.0
-margin_bottom = 408.0
-focus_neighbour_top = NodePath("../VBoxContainer/Comics")
-focus_neighbour_right = NodePath("../controls")
-focus_neighbour_bottom = NodePath("../new_game")
-custom_fonts/font = SubResource( 5 )
-text = "Quit"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="menu" parent="." instance=ExtResource( 4 )]
-
-[node name="BG" type="TextureRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -9.45596
-margin_top = -21.6569
-margin_right = 135.544
-margin_bottom = 1133.34
-rect_scale = Vector2( 0.400735, 0.400735 )
-texture = ExtResource( 2 )
-stretch_mode = 7
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="Old menu, delete /new_game" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="Old menu, delete /continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="Old menu, delete /Comics" to="." method="_on_Comics_pressed"]
-[connection signal="pressed" from="Old menu, delete /controls" to="." method="_on_controls_pressed"]
-[connection signal="pressed" from="Old menu, delete /quit" to="." method="_on_quit_pressed"]
+[node name="music_track" parent="." instance=ExtResource( 5 )]

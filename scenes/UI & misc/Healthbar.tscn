@@ -2,7 +2,6 @@
 
 [ext_resource path="res://scenes/UI & misc/Healthbar.gd" type="Script" id=1]
 
-
 [node name="Healthbar" type="HBoxContainer"]
 margin_left = 8.0
 margin_top = 11.0

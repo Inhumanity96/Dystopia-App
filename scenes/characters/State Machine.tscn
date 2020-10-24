@@ -1,0 +1,22 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/characters/State Machine.gd" type="Script" id=1]
+[ext_resource path="res://scenes/characters/states/motion/on_ground/idle.gd" type="Script" id=3]
+[ext_resource path="res://scenes/characters/states/combat/attack.gd" type="Script" id=4]
+[ext_resource path="res://scenes/characters/states/motion/motion.gd" type="Script" id=5]
+[ext_resource path="res://scenes/characters/states/motion/on_ground/roll.gd" type="Script" id=6]
+
+[node name="State_Machine" type="Node"]
+script = ExtResource( 1 )
+
+[node name="idle" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="motion" type="Node" parent="."]
+script = ExtResource( 5 )
+
+[node name="roll" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[node name="attack" type="Node" parent="."]
+script = ExtResource( 4 )

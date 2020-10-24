@@ -1,6 +1,4 @@
-[gd_scene load_steps=3 format=2]
-
-[ext_resource path="res://fonts/stats.tres" type="DynamicFont" id=1]
+[gd_scene load_steps=2 format=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -26,29 +24,24 @@ export(String, FILE, \"*.ogg\") var music_track = \"\" #trying music codes
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	
-	
-	 #This prints the current track onscreen
-
-		 
-		
-		
-	pass
-
 	if music_track != \"\":
 		Music.play(music_track)
 	pass # Replace with function body.
 
-
+	#This code breaks the playlist and shuffle funtions in the singleton, edit them 
 	
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 
-#func _process(_delta): 
-# i have created signal thats emitted when a song has finished playing
- # im trying to create a function i can call from music node
-	#get_node(\"Tabs/Label\") #map this code to the game's UI
-	#pass
+func _process(_delta): #auto delete self if not being used
+	if music_track == \"\":
+		Music.music_track = ''
+		self.queue_free() 
+		reset()
+func reset(): #reset music instructions upon deletion
+	if Music.music_track != '':
+		Music.music_track = ''
+	elif Music.music_track == '': #stops a stack overflow error
+		pass
 
 
 
@@ -59,32 +52,3 @@ func _ready():
 
 [node name="music_track" type="Node2D"]
 script = SubResource( 1 )
-
-[node name="Tabs" type="Node" parent="."]
-
-[node name="Label" type="Label" parent="Tabs"]
-visible = false
-modulate = Color( 0, 0, 0, 1 )
-margin_left = 408.708
-margin_top = 1.41422
-margin_right = 976.708
-margin_bottom = 96.4142
-rect_scale = Vector2( 0.741604, 0.772055 )
-custom_fonts/font = ExtResource( 1 )
-text = "current track displayer"
-valign = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ColorRect" type="ColorRect" parent="Tabs/Label"]
-visible = false
-margin_right = 40.0
-margin_bottom = 40.0
-rect_scale = Vector2( 15.1259, 2.12953 )
-color = Color( 0.223529, 0.223529, 0.223529, 0.631373 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tabs"]

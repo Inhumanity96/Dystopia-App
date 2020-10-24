@@ -1,0 +1,158 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://resources/props/desert dunes 3d 2.png" type="Texture" id=1]
+
+[sub_resource type="SegmentShape2D" id=1]
+a = Vector2( -148.284, 53.6612 )
+b = Vector2( -218.994, 62.8536 )
+
+[sub_resource type="SegmentShape2D" id=2]
+a = Vector2( -98.786, 36.6906 )
+b = Vector2( -144.041, 50.1256 )
+
+[sub_resource type="SegmentShape2D" id=3]
+a = Vector2( -16.0545, 35.2764 )
+b = Vector2( -91.715, 39.519 )
+
+[sub_resource type="SegmentShape2D" id=4]
+a = Vector2( -260.146, 164.824 )
+b = Vector2( -454.601, 193.108 )
+
+[sub_resource type="SegmentShape2D" id=5]
+a = Vector2( -188.021, 241.899 )
+b = Vector2( -267.217, 236.242 )
+
+[sub_resource type="SegmentShape2D" id=6]
+a = Vector2( 144.867, 144.661 )
+b = Vector2( 36.8386, 147.147 )
+
+[sub_resource type="SegmentShape2D" id=7]
+a = Vector2( 238.913, 158.803 )
+b = Vector2( 149.11, 143.247 )
+
+[sub_resource type="SegmentShape2D" id=8]
+a = Vector2( 338.615, 167.289 )
+b = Vector2( 243.155, 158.803 )
+
+[sub_resource type="SegmentShape2D" id=9]
+a = Vector2( 473.672, 167.289 )
+b = Vector2( 345.686, 166.581 )
+
+[sub_resource type="SegmentShape2D" id=10]
+a = Vector2( -10.4822, -22.6749 )
+b = Vector2( 17.9453, 42.2087 )
+
+[sub_resource type="SegmentShape2D" id=11]
+a = Vector2( 70.4595, 92.4164 )
+b = Vector2( 131.46, 139.416 )
+
+[sub_resource type="SegmentShape2D" id=12]
+a = Vector2( 139.46, 142.416 )
+b = Vector2( 197.46, 154.416 )
+
+[sub_resource type="SegmentShape2D" id=13]
+a = Vector2( 355.46, 126.416 )
+b = Vector2( 208.46, 156.416 )
+
+[sub_resource type="SegmentShape2D" id=14]
+a = Vector2( 355.909, 128.231 )
+b = Vector2( 442.176, 174.9 )
+
+[sub_resource type="SegmentShape2D" id=15]
+a = Vector2( -158.373, 67.42 )
+b = Vector2( 53.2676, 73.0769 )
+
+[sub_resource type="SegmentShape2D" id=16]
+a = Vector2( 83.4573, 30.6505 )
+b = Vector2( -145.645, 58.9347 )
+
+[sub_resource type="CapsuleShape2D" id=17]
+radius = 29.7172
+height = 472.177
+
+[sub_resource type="CapsuleShape2D" id=18]
+radius = 19.9892
+height = 270.559
+
+[node name="Dune Big" type="StaticBody2D"]
+collision_mask = 0
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 628.909, 338 )
+scale = Vector2( 0.786585, 0.786585 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 624, 336 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 624, 336 )
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2( 624, 336 )
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2( 624, 336 )
+shape = SubResource( 4 )
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="."]
+position = Vector2( 624, 336 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="."]
+position = Vector2( 625.414, 339.536 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="."]
+position = Vector2( 625.414, 339.536 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="."]
+position = Vector2( 625.414, 339.536 )
+shape = SubResource( 8 )
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="."]
+position = Vector2( 625.414, 339.536 )
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="."]
+position = Vector2( 574.541, 195.584 )
+rotation = 1.65306
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="."]
+position = Vector2( 528.541, 95.584 )
+shape = SubResource( 11 )
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="."]
+position = Vector2( 528.541, 95.584 )
+shape = SubResource( 12 )
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="."]
+position = Vector2( 528.541, 95.584 )
+shape = SubResource( 13 )
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="."]
+position = Vector2( 528.541, 95.584 )
+shape = SubResource( 14 )
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="."]
+position = Vector2( 528.541, 95.584 )
+shape = SubResource( 15 )
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="."]
+position = Vector2( 528.541, 95.584 )
+shape = SubResource( 16 )
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="."]
+position = Vector2( 867.952, 154.981 )
+rotation = 1.64775
+shape = SubResource( 17 )
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="."]
+position = Vector2( 290.953, 187.508 )
+rotation = 1.3569
+shape = SubResource( 18 )

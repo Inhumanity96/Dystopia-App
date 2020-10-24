@@ -40,10 +40,12 @@ enum { STATE_IDLE, STATE_WALKING, STATE_ATTACK, STATE_ROLL, STATE_DIE, STATE_HUR
 
 var state = STATE_IDLE
 
+
 func _ready():
 	randomize()
 	#debugs the enemy's codes to a global variable
-	Globals.enemy_debug = self 
+	Debug.enemy = self 
+	#player = get_tree().get_nodes_in_group('player')
 
 func _process(_delta):
 	
@@ -161,6 +163,7 @@ func _on_hurtbox_area_entered(area):
 	pass # Replace with function body.
 
 func despawn():
+	Debug.kill_count += 1
 	var despawn_particles = despawn_fx.instance()
 	get_parent().add_child(despawn_particles)
 	despawn_particles.global_position = global_position
@@ -181,11 +184,12 @@ once it sights him
 # warning-ignore:unused_argument
 #m
 func _on_enemy_eyesight_body_entered(body):
-	if body == Globals.player:
+	if body == Globals.player :
 		player = Globals.player
 		run_speed = 150 #increase run speed if player is seen
-
-
+		state= STATE_ATTACK #fix this up
+	#if Globals.player.empty() == true:
+		pass
 
 func _on_enemy_eyesight_body_exited(body):
 	#help detect the player when he leaves

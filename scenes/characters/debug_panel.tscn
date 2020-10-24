@@ -1,51 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://fonts/spiritmedium.ttf" type="DynamicFontData" id=1]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends \"res://singletons/Debug.gd\"
-
-\"\"\"
-it Inherits from the Debug singleton. COnnect it to a signal from the Debug singleton
-\"\"\"
-#lists of labels being used
-onready var music_label 
-onready var player_label 
-onready var ram_label
-onready var fps_label
-onready var enemy_label
-onready var network_label
-onready var comics_label
-
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	#call the label node and save it as a variable 
-	music_label =$CanvasLayer/Control/MarginContainer/VBoxContainer/Label
-	player_label =$CanvasLayer/Control/MarginContainer/VBoxContainer/Label2
-	ram_label =$CanvasLayer/Control/MarginContainer/VBoxContainer/Label3
-	fps_label =$CanvasLayer/Control/MarginContainer/VBoxContainer/Label4
-	enemy_label =$CanvasLayer/Control/MarginContainer/VBoxContainer/Label5
-	network_label =$CanvasLayer/Control/MarginContainer/VBoxContainer/Label6
-	comics_label =$CanvasLayer/Control/MarginContainer/VBoxContainer/Label7
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	if debug_panel != null:
-		music_label.text =Debug.Music_debug
-		player_label.text =Debug.Player_debug
-		ram_label.text =(Debug.Ram_debug) 
-		fps_label.text =Debug.FPS_debug
-		enemy_label.text =Debug.Enemy_debug
-		network_label.text = 'Network Debug : Null'
-		comics_label.text = Debug.Comics_debug
-	elif debug_panel == null:
-		push_error(\"Error getting Debug singleton\")
-"
-
 [sub_resource type="DynamicFont" id=2]
 size = 56
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -68,8 +27,9 @@ font_data = ExtResource( 1 )
 size = 56
 font_data = ExtResource( 1 )
 
-[node name="debug_panel" type="Node"]
-script = SubResource( 1 )
+[node name="debug_panel" type="Node" groups=[
+"debug",
+]]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 pause_mode = 1
@@ -176,6 +136,24 @@ margin_right = 907.0
 margin_bottom = 423.0
 custom_fonts/font = SubResource( 7 )
 text = "Comics Debug"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label8" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+margin_top = 427.0
+margin_right = 907.0
+margin_bottom = 484.0
+custom_fonts/font = SubResource( 7 )
+text = "Auto-save "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/MarginContainer/VBoxContainer"]
+margin_top = 488.0
+margin_right = 907.0
+margin_bottom = 488.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
