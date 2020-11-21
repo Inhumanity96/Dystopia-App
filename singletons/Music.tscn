@@ -21,9 +21,8 @@ var playlist_one = {
 	1:'res://music/chike san afro 1.ogg',
 	2:'res://music/chike san afro 2.ogg',
 	3:'res://music/chike san afro 3.ogg',
-	4:'res://music/Zade Callertune.ogg',
-	5:'res://music/chuks-dane_chuks-dane-shoot-back.ogg',
-	6:'res://music/Astrolife chike san.ogg',
+	4:'res://music/chuks-dane_chuks-dane-shoot-back.ogg',
+	5:'res://music/Astrolife chike san.ogg',
 }
 onready var Music_streamer =get_node(\"A\")  #Refrences the music player node
 onready var track
@@ -92,8 +91,8 @@ func play(stream):
 			current_track = \"a\"
 	if stream == null or stream == '':
 		push_error('Music stream is null, fix')
-		print(stream)
-		print(music_track)
+		print_debug(stream)
+		print_debug(music_track)
 func clear():# triggers an autodelete in music track nodes
 	music_track = ''
 

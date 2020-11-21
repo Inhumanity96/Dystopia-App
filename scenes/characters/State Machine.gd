@@ -1,6 +1,7 @@
 extends Node
 class_name StateMachine
 
+#this code introduces wierd printing codes into the scene tree
 signal state_changed(current_state)
 
 export(NodePath) var start_state
@@ -65,10 +66,10 @@ func _enter_state():
 	#state.enter()
 	#states_map['idle'].enter()
 	#Debugging tests for the idle state
-	print (idle)
-	print (state, state.name)
+	#print (idle)
+	#print (state, state.name)
 	#print (states_map['idle']) #states map is buggy
-	print ('1234')
+	#print ('1234')
 	pass
 #Route Game Loop Funtion Calls to current state handler method if it exits
 func _process(delta):

@@ -8,13 +8,13 @@
 [ext_resource path="res://scenes/UI & misc/MusicTrack.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/UI & misc/UI.tscn" type="PackedScene" id=7]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 706.212, 168.399 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 135.229, 51.6376 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 689.221, 157.199 )
 
 [node name="HouseInside" type="Node"]
@@ -31,17 +31,17 @@ scale = Vector2( 1.12729, 1.09041 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="house_inside/walls"]
 position = Vector2( 562.864, 22.7747 )
 rotation = 1.19792
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="house_inside/walls"]
 position = Vector2( -59.3924, -350.579 )
 rotation = 0.0128795
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="house_inside/walls"]
 position = Vector2( -503.537, 34.2402 )
 rotation = -1.26491
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="Dadbug" parent="house_inside" instance=ExtResource( 2 )]
 position = Vector2( 81.8337, 203.472 )
@@ -71,7 +71,7 @@ scale = Vector2( 1, 1 )
 
 [node name="trigger" parent="house_inside/Dadbug" index="2"]
 position = Vector2( -4.31702, 233.447 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )
 
 [node name="exit" type="Area2D" parent="."]
 position = Vector2( -48.1591, 495.576 )
@@ -83,7 +83,7 @@ position = Vector2( 145.2, -306.008 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="exit"]
 position = Vector2( -75.9377, 189.844 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Player" parent="exit" instance=ExtResource( 5 )]
 position = Vector2( 3.45074, -202.225 )

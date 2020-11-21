@@ -149,22 +149,17 @@ func start_debug(): #fix code, disable mouse filter
 	
 
 
-	#if Debug.Comics_debug != null : #remove this code, see what happens
-		#
-	#else:
-		#comics_label.text = 'comics debug null'
-
 func show_debug():
 	if debug_panel != null :
-		music_label.text= (Music_debug) #change all scripts to set_text() #compare set_text vs text()
+		music_label.set_text (Music_debug) #change all scripts to set_text() #compare set_text vs text()
 		player_label.set_text (Player_debug)
-		ram_label.text =Ram_debug 
-		fps_label.text =FPS_debug
-		enemy_label.text =Enemy_debug
-		network_label.text = 'Network Debug : Null'
+		ram_label.set_text (Ram_debug) 
+		fps_label.set_text (FPS_debug)
+		enemy_label.set_text (Enemy_debug)
+		network_label.set_text ('Network Debug : Null')
 		comics_label.set_text  (Comics_debug)
-		autosave_label.text =Autosave_debug
-		misc_label.text = misc_debug
+		autosave_label.set_text (Autosave_debug)
+		misc_label.set_text( misc_debug)
 	if debug_panel != null and enabled: 
 		return
 	if debug_panel == null and !enabled :

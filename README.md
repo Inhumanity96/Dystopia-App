@@ -25,6 +25,10 @@ I Added a couple of New funtions and Global variables to help in coding
 
 (6) Custom input maps:
 	Added a couple of custom input maps to enable and disable the comics and game menu scenes 
+
+(7) Enemy kill count
+
+(8) Twitter Login
 -Features to Fix
 	-Globals.savegame() filesystem for android devices
 	-
@@ -46,7 +50,7 @@ I Added a couple of New funtions and Global variables to help in coding
 	-Guided view ( Check ://sourcefile/New game code and features)
 	-Login UI
 	-Mana meter (Ogun meter)
-	-Enemy kill count
+	
 	-YouTube load video
 	//Twitter Tweet feature//
 	//Clouddust Login//

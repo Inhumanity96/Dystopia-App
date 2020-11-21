@@ -1,12 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://scenes/UI & misc/Comics.gd" type="Script" id=1]
-[ext_resource path="res://resources/Buttons/bck.png" type="Texture" id=3]
+[ext_resource path="res://scenes/UI & misc/Comics.v2.gd" type="Script" id=1]
+[ext_resource path="res://resources/Buttons/bck.png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 14.6307, 23.2927 )
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:rect_position")
@@ -33,7 +30,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 0.156863 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -60,7 +57,7 @@ tracks/1/keys = {
 "values": [ Vector2( 0, 0 ), Vector2( 0, 40 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "visible"
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -75,57 +72,47 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[node name="Comics" type="Control"]
-mouse_filter = 2
+[node name="Comics" type="Control" groups=[
+"Cmx_Root",
+]]
+margin_top = 40.0
+margin_bottom = 40.0
+mouse_filter = 1
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 1302.0
-margin_bottom = 777.0
+margin_left = 10.0908
+margin_top = -57.1809
+margin_right = 1312.09
+margin_bottom = 719.819
 mouse_filter = 2
 color = Color( 0.235294, 0.235294, 0.235294, 0.776471 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Area2D" type="KinematicBody2D" parent="."]
-position = Vector2( 568.115, 375.209 )
-scale = Vector2( 8.46925, -7.66479 )
-input_pickable = true
-
-[node name="placeholder" type="Node2D" parent="Area2D"]
-position = Vector2( 0, -0.414215 )
-scale = Vector2( 0.118074, -0.130467 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0.306204, 1.74924 )
-scale = Vector2( 1, 0.701216 )
-shape = SubResource( 2 )
-one_way_collision = true
-
 [node name="Buttons" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0.741176 )
 
 [node name="Backwards" type="TouchScreenButton" parent="Buttons"]
 modulate = Color( 1, 1, 1, 0.647059 )
 self_modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 342.879, 736.554 )
 rotation = -3.11961
-normal = ExtResource( 3 )
+normal = ExtResource( 2 )
 action = "ui_focus_prev"
 
 [node name="Forward" type="TouchScreenButton" parent="Buttons"]
 modulate = Color( 1, 1, 1, 0.647059 )
 self_modulate = Color( 0, 0, 0, 1 )
 position = Vector2( 974.664, 434.948 )
-normal = ExtResource( 3 )
+normal = ExtResource( 2 )
 action = "ui_focus_next"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/slide_in = SubResource( 3 )
-anims/slide_out = SubResource( 4 )
-anims/visible = SubResource( 5 )
-[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
-[connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
+anims/slide_in = SubResource( 1 )
+anims/slide_out = SubResource( 2 )
+anims/visible = SubResource( 3 )

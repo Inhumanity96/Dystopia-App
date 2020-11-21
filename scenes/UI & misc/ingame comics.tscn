@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/UI & misc/Comics.tscn" type="PackedScene" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends \"res://scenes/UI & misc/Comics.v2.gd\"
+
+#delete this scene
+#rewrite the comics button to use input function
+
+func _ready():
+	
+	
+	
+	pass
+
+
+
+func _input(event): #buggy
+	if event.is_action_pressed(\"comics\") and loaded_comics == false:
+		current_comics = load(comics[1])
+		load_comics()
+		pass
+"
+
+[node name="in game comics" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = SubResource( 1 )
+
+[node name="Comics" parent="." instance=ExtResource( 1 )]

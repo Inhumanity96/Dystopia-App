@@ -46,3 +46,7 @@ func _on_button_start_server_pressed(): #someone starts the server #inhumanity
 		push_error("Unable to load server scene!")
 
 
+
+
+func _on_Twitter_Button_pressed():
+	OS.shell_open('https://twitter.com')

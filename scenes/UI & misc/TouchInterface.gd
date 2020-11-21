@@ -1,6 +1,6 @@
 extends Node2D
 
-var Touch_interface = self
+#var Touch_interface = self
 
 func _ready():
 	Dialogs.connect("dialog_started", self, "_on_dialog_started")
@@ -29,3 +29,7 @@ func _notification(what):
 			child.show()
 
 
+
+
+func _on_Comics_loaded_comics(): #toggle hud visibility
+	pass #my code

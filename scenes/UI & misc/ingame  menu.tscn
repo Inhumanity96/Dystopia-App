@@ -9,25 +9,20 @@ export var enabled = true
 
 \"\"\"
 The game menu script. 
-update code to arrange well in UI and on the game title screen
 \"\"\"
-
+#update code to arrange well in UI and on the game title screen
 
 onready var continue_game = get_node(\"MarginContainer/HSeparator/continue\") 
 onready var game_menu = get_node(\"MarginContainer\")
 
 
-#create an animation that toggles whenever the user selects comics #toggle focus
-
-
-
-
-
 export(String, FILE, \"*.tscn\") var initial_level = \"res://scenes/levels/Outside.tscn\"
 
+func _enter_tree():
+	self.hide()
+
 func _ready():
-	#grab_focus() delete later if it affects nothing
-	#set_focus_mode() #update this code bruh, dont know what it does, the ide recomended it to me for control nodes
+
 	if Globals.load_game(true):
 		continue_game.disabled = false 
 	else:
@@ -36,17 +31,15 @@ func _ready():
 func _input(event): #Toggles menu visibility on/off
 	if event.is_action_pressed(\"menu\") and enabled == false:
 		enabled = true 
-	elif event.is_action_pressed(\"menu\") and enabled == true:
-		enabled = false
-
-
-func _process(_delta): #update code to use turnary statements
-	if enabled == true: 
 		show()
 		Music._notification(NOTIFICATION_PAUSED)
-	else:
+		set_focus_mode(2)
+	elif event.is_action_pressed(\"menu\") and enabled == true:
+		enabled = false
 		hide()
 		Music._notification(NOTIFICATION_UNPAUSED)
+		set_focus_mode(0)
+
 
 
 func _on_continue_pressed():
@@ -72,41 +65,34 @@ func _on_new_game_pressed():
 		
 	pass # Replace with function body.
 
-func _on_chap_1_button_pressed():
-	get_tree().change_scene_to(Globals.chap_1)
-	print ('chap 1 pressed')
-
-
-func _on_chap_2__pressed():
-	get_tree().change_scene_to(Globals.chap_2)
-	print ('chap 2 pressed')
-
 
 
 func _on_Menu_button_toggled(button_pressed):
-	if  button_pressed :
-		game_menu.show()
-	else :
-		game_menu.hide()
+	game_menu.show() if button_pressed else game_menu.hide()
+
+	#if  button_pressed :
+	#	game_menu.show()
+	#else :
+	#	game_menu.hide()
 
 
 func _on_comics_pressed():
-	print_debug ('comics pressed')
+	#print_debug ('comics pressed')
 	get_tree().change_scene_to(load ('res://scenes/UI & misc/Comics____2.tscn'))
 
 
 func _on_controls_pressed():
 	get_tree().change_scene_to(load ('res://scenes/UI & misc/Controls.tscn'))
-	print ('control pressed')
+
 
 
 
 func _on_quit_Button_pressed():
-	get_tree().quit()
-	print ('quit button pressed')
-
-
-
+	if get_tree().get_current_scene().get_name() == 'Menu':
+		get_tree().quit()
+	else:
+		get_tree().change_scene_to(load ('res://scenes/Title screen.tscn'))
+	#print ('quit button pressed')
 
 
 
@@ -158,6 +144,7 @@ margin_right = 314.0
 margin_bottom = 108.0
 focus_next = NodePath("../music on & off")
 focus_previous = NodePath("../chap 2 ")
+mouse_filter = 1
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "new game"

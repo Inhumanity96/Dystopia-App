@@ -11,14 +11,15 @@
 extends Node
 #update code to use global dictionaries
 
+#use variables to code ux +add a scene calculator
 var cinematics = 'res://scenes/levels/cinematics.tscn'
 var title_screen = 'res://scenes/Title screen.tscn'
+var controls
+var game_loop
+var prev_scene
 var next_scene = null
-var comic_books = { #reuse this array#
-	2:'res://Chapters/chapter 2/chapter 2.tscn', 
-	1:'res://scenes/Comics/chapter 1/chapter 1.tscn',
-	0:'resres://scenes/UI & misc/ingame  menu.tscn',
-}
+var curr_scene
+
 var player  = null
 var enemy = null
 var enemy_debug
@@ -29,7 +30,7 @@ var spawnpoint = ""
 var current_level = ""
 
 func _ready():
-
+	
 	player = get_tree().get_nodes_in_group('player') #gets all player nodes in the scene
 	if player.empty(): #error catcher 1
 		player = null

@@ -191,6 +191,6 @@ required_amount = 3
 initial_text = "TLDR; bring me 3 Generic Items"
 pending_text = "You forgot? I want 3 Generic Items"
 
-[node name="music_track" parent="." instance=ExtResource( 14 )]
-
 [node name="UI" parent="." instance=ExtResource( 15 )]
+
+[node name="music_track" parent="." instance=ExtResource( 14 )]
