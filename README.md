@@ -56,7 +56,7 @@ I Added a couple of New funtions and Global variables to help in coding
 	//Clouddust Login//
 	//Wetalksound playlist feature//
 
-[![Watch a playtest demo video](https://img.youtube.com/vi/WLTgP-Axb-g/maxresdefault.jpg)](https://youtu.be/WLTgP-Axb-g)
+[![Watch a playtest demo video](https://img.youtube.com/vi/WLTgP-Axb-g/hqdefault.jpg)](https://youtu.be/WLTgP-Axb-g)
 	
 
 Import and compile with Godot IDE
