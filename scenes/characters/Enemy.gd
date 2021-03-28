@@ -29,6 +29,8 @@ export(int) var ROLL_SPEED = 1000
 export(int) var hitpoints = 3
 
 var despawn_fx = preload("res://scenes/UI & misc/DespawnFX.tscn")
+var blood_fx = preload("res://scenes/UI & misc/Blood_Splatter_FX.tscn")
+
 
 var linear_vel = Vector2()
 export(String, "up", "down", "left", "right") var facing = "down"
@@ -156,6 +158,9 @@ func _on_hurtbox_area_entered(area):
 		var pushback_direction = (global_position - area.global_position).normalized()
 		move_and_slide( pushback_direction * 5000)
 		state = STATE_HURT
+		var blood = blood_fx.instance()
+		get_parent().add_child(blood)
+		blood.global_position = global_position
 		$state_changer.start()
 		if hitpoints <= 0:
 			$state_changer.stop()
@@ -165,19 +170,19 @@ func _on_hurtbox_area_entered(area):
 func despawn():
 	Debug.kill_count += 1
 	var despawn_particles = despawn_fx.instance()
+	var blood = blood_fx.instance()
 	get_parent().add_child(despawn_particles)
+	get_parent().add_child(blood)
 	despawn_particles.global_position = global_position
+	blood.global_position = global_position
 	if has_node("item_spawner"):
 		get_node("item_spawner").spawn()
-	queue_free()
+	
+	get_parent().remove_child(self)
+	#self.queue_free()
 	pass
 
-"""
-help detect the player so not all enemy converge at once
-This also changes the mob behaviour to chase the player
-once it sights him
 
-"""
 
 
 #NEW_CODES

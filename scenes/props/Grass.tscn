@@ -1,20 +1,33 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://resources/props/grass.png" type="Texture" id=1]
+[ext_resource path="res://resources/Environment Tilesets & Tilemaps/grass_1.webp" type="Texture" id=1]
+[ext_resource path="res://scenes/props/Grass.gd" type="Script" id=2]
 
+[sub_resource type="CircleShape2D" id=1]
+radius = 27.4829
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 85.0733, 186.947 )
+[sub_resource type="CircleShape2D" id=2]
+radius = 60.7539
 
-[node name="grass" type="StaticBody2D"]
+[node name="grass" type="Area2D"]
+scale = Vector2( 1.16146, 1.16146 )
+script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -60.3958, 136.337 )
-scale = Vector2( 0.536634, 0.534521 )
+position = Vector2( -12.163, -33.6706 )
+scale = Vector2( 4.06512, 4.04912 )
 texture = ExtResource( 1 )
-offset = Vector2( 36.3788, -295.101 )
+offset = Vector2( -6.06301, -4.58121 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -121.622, -25.4559 )
+[node name="hurtbox" type="CollisionShape2D" parent="."]
+position = Vector2( -38.1834, -46.6691 )
 rotation = 1.5708
+scale = Vector2( 2.29674, 2.69787 )
 shape = SubResource( 1 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( -42.6165, -46.2693 )
+shape = SubResource( 2 )
+[connection signal="area_entered" from="." to="." method="_on_grass_area_entered"]

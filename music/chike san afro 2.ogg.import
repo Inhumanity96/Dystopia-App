@@ -11,5 +11,5 @@ dest_files=[ "res://.import/chike san afro 2.ogg-ef8d1c76430e676d75e25865b3b6380
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

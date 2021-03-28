@@ -18,9 +18,6 @@ signal freed_comics
 
 export (PackedScene) var current_comics 
 
-"""
-
-"""
 var comics = {
 	 1: 'res://scenes/Comics/chapter 1/chapter 1.tscn',
 	2:'res://scenes/Comics/chapter 2/chapter 2.tscn',
@@ -33,14 +30,14 @@ var memory = {}
 
 var  current_frame   = int (0)
 
-var next_comic = null
+var next_scene = null
 
 var can_drag = false
 onready var zoom = false
 onready var comics_placeholder 
 
 #onready var animation = $AnimationPlayer 
-#onready var buttons
+onready var buttons
 onready var Kinematic_2d  #the kinematic 2d node for drag and drop
 #onready var camera2d = $Kinematic_2D/placeholder/Camera2D 
 onready var position 
@@ -49,8 +46,7 @@ onready var target =Vector2(0,0) #set position to the center of the viewport
 
 onready var loaded_comics = false
 
-#delete this code
-#onready var Touch_debug = load ("res://New game code and features/Multitouch debug/Main.tscn")
+onready var _input_device
 
 func _enter_tree():
 	if current_comics !=null:
@@ -64,11 +60,7 @@ func _ready():
 	enabled = false
 	
 	
-	target = Vector2()
-	
-
-	
-
+	target = Vector2() 
 
  
 func load_comics(): 
@@ -106,7 +98,11 @@ func load_comics():
 	
 			print ('loading comics') 
 			emit_signal("loaded_comics")
-			Kinematic_2d.add_child(current_comics.instance()) 
+			var _x = current_comics.instance()
+			Kinematic_2d.add_child(_x) 
+			
+			#position pages
+			_x.position =Kinematic_2d.position
  
 	if current_comics == null and current_comics.can_instance() == false  :
 		push_error('unable to instance comics scene')
@@ -127,9 +123,10 @@ func load_comics():
 
 func _input(event): 
 	#[ignore warning]
+	#_input_device = event.get_device() #it doesn't work
+	
 	#Comic panel changer
-
-	if event.is_action_pressed("ui_focus_next") && enabled:
+	if event.is_action_pressed("ui_focus_next") && enabled :
 		next_panel()
 	if event.is_action_pressed("ui_focus_prev") && enabled:
 		prev_panel()
@@ -142,41 +139,52 @@ func _input(event):
 	elif enabled == true and event.is_action_pressed("comics") :
 		enabled = false
 
-#place all input events in here
+	if event is InputEventJoypadMotion:
+		pass
+
+
+	if event is InputEventMouse:
+		#target= get_viewport().get_mouse_position()
+		pass
+
+	if event in InputEventMouseMotion:
+		pass
+	 
+
+
 	# Handle Touch
-	if event is InputEventScreenTouch: #zoom if screentouch is 2 fingers
-		if event.pressed && event.index == int(2):
-			_zoom()
+	if event is InputEventScreenTouch : #not working
+		target =  event.get_position()
+		if event.get_index() == int(2): #zoom if screentouch is 2 fingers
+			_zoom() #you can use get_index to get the number of fingers
 			pass
 
 
-
-
 	# Handles ScreenDragging
-	if event is InputEventScreenDrag:
+	if event is InputEventScreenDrag && current_comics != null :
+		target = event.get_position()
 		drag()
-		pass
+
 # Handles releasing 
-		 
-
-	#no code yet
-
+#no code yet 
+	
 # Handles double clicking
-	#zoom in / zoom out
+	
 
 	if event is InputEventMouseButton && event.doubleclick && loaded_comics == true:
-		_zoom()
-
-	#if event is InputEventMouseButton && event.doubleclick : #zoom does not work
-		#if zoom == true && loaded_comics == true:
-			
-
+		_zoom() #disabled for debugging, enable when done debugging
+		pass
 
 
 
 
 func _process(_delta):
-
+	#print(can_drag)
+ 
+	
+	if current_comics != null:
+		loaded_comics = true
+	#print(position,target)
 	if current_comics == null or current_frame == null  : #error catcher 
 		emit_signal("freed_comics")
 		loaded_comics = false
@@ -185,9 +193,12 @@ func _process(_delta):
 	
 	if enabled == true: #toggles visibility
 		show()
+		
 
 	if enabled == false:
-		hide()
+		self.hide()
+		
+		
 
 	memory=get_tree().get_nodes_in_group("comics") #an array of all comics in the scene tree
 	#print (OS.get_ticks_msec() )
@@ -221,8 +232,9 @@ func _process(_delta):
 		#check if the node signals are connected
 
 
-	if can_drag == true: 
-		drag()
+	#if drag() : #variable alerts when dragging
+		#can_drag == true 
+		
 
 	#Debug Variable
 	if enabled:
@@ -239,42 +251,50 @@ func _process(_delta):
 DRAG FUNCTION
 """
 func drag():  
-	#improve this function #add more parameters
-	target = get_viewport().get_mouse_position()
-	position = Kinematic_2d.position
-	center = restaVectores(target, position)
-	Kinematic_2d.set_position(target)
-	if abs(position.distance_to(target)) > 200: #if its far...
+	#add more parameters
+	if loaded_comics == true:
+		target = target  
+		position = Kinematic_2d.position 
+		center = restaVectores(target, position)
+		Kinematic_2d.set_position(target)
+		can_drag = true 
+		if abs(position.distance_to(target)) > 200: #if its far...
 		##use suma vectores function for vector maths
-		Kinematic_2d.move_and_slide(center) #move and slide to center
+			Kinematic_2d.move_and_slide(center) #move and slide to center
 
-	if abs(position.distance_to(target)) < 200 : 
-		Kinematic_2d.move_and_slide(target) 
+		if abs(position.distance_to(target)) < 200 : 
+			#Kinematic_2d.move_and_slide(target) 
+			Kinematic_2d.set_position(target)
+
+
 
 	#if Touch_page == true: 
 		#Kinematic_2d.set_position(target)
 
 func _zoom():
-	var scale =comics_placeholder.get_scale()
-	if scale == Vector2(1,1)  :
-		print ('zoom in')
-		comics_placeholder.set_scale(scale * 1.5) 
-		zoom = true 
-	if scale > Vector2(1,1):
-		print ('zoom out')
-		scale = comics_placeholder.get_scale()
-		comics_placeholder.set_scale(scale / 1.5) 
-		zoom = false 
+	if loaded_comics == true:
+		var scale =comics_placeholder.get_scale()
+		if scale == Vector2(1,1)  :
+			print ('zoom in')
+			comics_placeholder.set_scale(scale * 2) 
+			zoom = true 
+		if scale > Vector2(1,1):
+			print ('zoom out')
+			scale = comics_placeholder.get_scale()
+			comics_placeholder.set_scale(scale / 2) 
+			zoom = false 
 
 
 func next_panel():
-	current_frame = current_frame + 1
-	return int(current_frame) 
+	if loaded_comics == true :
+		current_frame = current_frame + 1
+		return int(current_frame) 
 
 
 func prev_panel():
-	current_frame =abs(current_frame - 1 )
-	return int(current_frame) 
+	if loaded_comics == true :
+		current_frame =abs(current_frame - 1 )
+		return int(current_frame) 
 
 func _on_Backwards_pressed():
 	prev_panel()
@@ -304,10 +324,12 @@ DRAG AND DROP
 
 
 func restaVectores(v1, v2): #vector substraction
-	return Vector2(v1.x - v2.x, v1.y - v2.y)
-	
+	if loaded_comics == true:
+		return Vector2(v1.x - v2.x, v1.y - v2.y)
+
 func sumaVectores(v1, v2): #vector sum
-	return Vector2(v1.x + v2.x, v1.y + v2.y)
+	if loaded_comics == true:
+		return Vector2(v1.x + v2.x, v1.y + v2.y)
 
 
 func _on_Kinematic_2D_mouse_exited():
@@ -325,11 +347,22 @@ func _on_Kinematic_2D_mouse_entered():
 
 
 func _exit_tree(): #clear unused variables when exiting scene
-	next_comic.free()
+	
 	pass
 
-
-#rearrange this code
+func _on_Rotate_pressed():#screen rotate functionality #improve later
+	if loaded_comics == true:
+		var _r = Kinematic_2d.get_rotation_degrees()
+		var _s = self.get_scale()
+	#print(_r, _s) #for debug purposes only
+		if _r <= 0:
+			self.set_scale(Vector2(0.9,0.9))
+			Kinematic_2d.set_rotation_degrees(90)
+			comics_placeholder.set_position ( center) 
+		if _r >= 90:
+			self.set_scale(Vector2(1,1))
+			Kinematic_2d.set_rotation_degrees(0)
+			comics_placeholder.set_position ( center)
 
 func _on_chap_1_pressed():
 	print ('loading chap 1')
@@ -349,3 +382,21 @@ func _on_chap_3_pressed():
 	current_comics = load(comics[3])
 	load_comics() #for testing
 
+
+
+
+
+
+func _on_Zoom_pressed(): #temporary zoom funtion for android
+	_zoom()
+
+
+
+
+
+
+
+
+func _on_chap_6_pressed():
+	print (' chapter locked')
+	Debug.Comics_debug += str('Chapter locked chapter locked ')

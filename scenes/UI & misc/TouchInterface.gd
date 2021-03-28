@@ -2,6 +2,15 @@ extends Node2D
 
 #var Touch_interface = self
 
+func _enter_tree():
+	#toggles touch interface visibility depending on the os
+	#if Globals.os != str('Android') or str('ios'):
+		#self.hide();print('Hiding touch interface')
+	#else:
+		#self.show()
+	pass
+
+
 func _ready():
 	Dialogs.connect("dialog_started", self, "_on_dialog_started")
 	Dialogs.connect("dialog_ended", self, "_on_dialog_ended")

@@ -4,7 +4,7 @@
 [ext_resource path="res://scenes/props/idol.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 75.564
+radius = 31.1854
 height = 60.3209
 
 [sub_resource type="CircleShape2D" id=2]
@@ -23,7 +23,8 @@ texture = ExtResource( 1 )
 offset = Vector2( -16.3217, -449.143 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.267462, -30.1314 )
+position = Vector2( 7.47553, 118.534 )
+rotation = -1.57623
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]

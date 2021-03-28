@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/UI & misc/Notification.gd" type="Script" id=1]
+[ext_resource path="res://resources/Buttons/Pop up menu.png" type="Texture" id=4]
+[ext_resource path="res://fonts/Comic Book.otf" type="DynamicFontData" id=7]
+
+[sub_resource type="DynamicFont" id=1]
+size = 38
+outline_size = 6
+outline_color = Color( 0.00392157, 0.00392157, 0.00392157, 1 )
+font_data = ExtResource( 7 )
+
+[node name="Notification" type="Popup"]
+margin_left = 347.897
+margin_top = 96.1666
+margin_right = 755.897
+margin_bottom = 427.167
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 258.158, 234.76 )
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -4.88602
+margin_top = 166.877
+margin_right = 511.114
+margin_bottom = 463.877
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.72549, 0.741176, 0.160784, 1 )
+text = "Out of Service"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -39,21 +39,21 @@ CINEMATICS
 ###export your video as ogv format
 #update code to reference all in game animations
 func _enter_tree():
-	os = str(OS.get_name())
 	pass  
 
 
 func _ready(): 
-	
+	os = Globals.os
 	vid_stream = ResourceLoader.load_interactive(cinematic [0]).get_resource() #loads resource into memory 
 	if vid_stream == null:
 		push_error('vid_stream is null')
 	
 	#set videoplayer rect size to viewport size
-	#videoplayer._set_size((get_viewport_rect().size))
+	#videoplayer._set_size((get_viewport_rect().size)) #it introduces a new bug
 	 
 	#OS_play(vid_stream) #buggy
 	Video_Stream(vid_stream)
+	$Node2D/AudioStreamPlayer.play()
 	
 func _process(_delta):
 	cinematic_debug()
@@ -63,15 +63,15 @@ func _on_skip_pressed():
 	get_tree().change_scene_to(load(Globals.title_screen))
 
 #streamer for android and ios
-func OS_play(stream): #buggy
+func OS_play(_stream): #buggy
 	if os == str('Android'):
 		
-		OS.native_video_play (stream,20,'','') 
+		#OS.native_video_play (stream,20,'','') 
 		Debug.misc_debug += 'os playing'
-		if OS. native_video_stop() == true:
-			emit_signal("os_finished_playing") ; print ('os finished signal')
-			Music.clear() 
-			Debug.misc_debug += 'os play done'
+		##if OS. native_video_stop() == true:
+		#	emit_signal("os_finished_playing") ; print ('os finished signal')
+			#Music.clear() 
+			#Debug.misc_debug += 'os play done'
 	else:
 		pass
 
@@ -86,6 +86,7 @@ func Video_Stream(stream):
 		push_warning('stream cannot be null')
 
 	if os == null :
+		
 		push_warning('OS needed')
 
 # warning-ignore:unused_argument
@@ -94,14 +95,14 @@ func _on_Intro_animation_animation_finished(anim_name): #unused animation code
 
 
 func cinematic_debug():
-	Debug.misc_debug = str(int(videoplayer.stream_position)) + os + str(videoplayer.is_playing(),
+	Debug.misc_debug = str(int(videoplayer.stream_position)) + Globals.os + str(videoplayer.is_playing(),
 	str(vid_stream) + videoplayer.get_stream_name()
 	)
 
 func _on_VideoPlayer_finished(): #code breaks here
 	#cinematic_on= false
 	videoplayer.stop() 
-	Music.pause()
+	#Music.clear()
 	#vid_stream = load(cinematic[1])
 	#vid_stream = ResourceLoader.load_interactive(cinematic [1]).get_resource()
 	#vid_stream = load(cinematic [1].get_file())

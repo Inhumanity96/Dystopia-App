@@ -1,4 +1,4 @@
-# Dystopia-App
+# Dystopia-App-Stabe v1.0
 ''''
 Documentation by INhumanity_arts 
 
@@ -11,8 +11,7 @@ I Added a couple of New funtions and Global variables to help in coding
 	This is a shortcut for calling the comicbook scenes. use the change_scene_to(load(...INSERT ...)) to call it. 
 	check for other callable functions and variables in the globals singleton 
 (3)Debug
-	It calls debug funtions like Debug.start_debug(), Debug.stop_debug(), and passes its variables to the debug panel node
-	for ingame debugging(Note: improve code to be able to instance the debug panel at will)
+	It calls debug funtions like Debug.start_debug(), Debug.stop_debug(), and passes its variables to the viewport
 
 (4) Fonts, Music and Videos
 	I added a couple of new Dynamic Fonts and Music funtions that can be called from the Music track node. A cinematic scene
@@ -29,10 +28,16 @@ I Added a couple of New funtions and Global variables to help in coding
 (7) Enemy kill count
 
 (8) Twitter Login
+
+(9) Blood and smoke Particle effects 
+
+(10) Touch input maps for android (zoom button), updated Scroll function for comic book 
+
 -Features to Fix
-	-Globals.savegame() filesystem for android devices
-	-
-	-Fix up the Game's controls to be able to control the Music node
+	-Enemy Animation And Better ai
+	-Swipe Gestures for Comicbooks
+
+
 	-Fix up Game's spawnpoints (look at the Exit code in the Temple interior scene)
 	-Fix up game's assets and animation
 	-auto enemy spawner
@@ -40,13 +45,13 @@ I Added a couple of New funtions and Global variables to help in coding
 	-A better state machine
 	-Cinematic video loading code system
 
+
 -Features to Add
-	-New animation
-	-Particle effects when player attacks
+	-Expanded Dialogue System
 	-update control art with new button maps
-	-	
+	-Ingame Tokens	
 	-Add multiplayer Network and DLC network code/singleton
-	-
+	-Shop & Merch Store
 	-Guided view ( Check ://sourcefile/New game code and features)
 	-Login UI
 	-Mana meter (Ogun meter)
@@ -56,6 +61,28 @@ I Added a couple of New funtions and Global variables to help in coding
 	//Clouddust Login//
 	//Wetalksound playlist feature//
 	
+
+-Global scenes system
+Spritesheet animation
+-enemy attack
+-enemy death 
+
+Art
+-
+
+-NPC_2 Quests
+-Create forest environment
+-Create Dungeon
+
+-
+
+3d
+-Model player & enemy characters
+-Rig with mixamo
+
+Sounds
+-Backup sounds folder
+-add attack sfx
 	
 
 Import and compile with Godot IDE

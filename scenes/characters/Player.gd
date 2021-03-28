@@ -22,6 +22,7 @@ signal health_changed(current_hp)
 export(String, "up", "down", "left", "right") var facing = "down"
 
 var despawn_fx = preload("res://scenes/UI & misc/DespawnFX.tscn")
+var blood_fx = preload("res://scenes/UI & misc/Blood_Splatter_FX.tscn")
 
 var anim = ""
 var new_anim = ""
@@ -36,7 +37,7 @@ func _ready():
 
 	var spawnpoints = get_tree().get_nodes_in_group("spawnpoints")
 	for spawnpoint in spawnpoints:
-		if spawnpoint.name == Globals.spawnpoint: #it breaks here
+		if spawnpoint.name == str(Globals.spawnpoint): 
 			global_position = spawnpoint.global_position
 			break
 	if not (
@@ -160,13 +161,18 @@ func _update_facing():
 		facing = "down"
 
 
-func despawn():
+func despawn():  #this code breaks
+	var blood = blood_fx.instance()
 	var despawn_particles = despawn_fx.instance()
+	
+	
 	get_parent().add_child(despawn_particles)
+	get_parent().add_child(blood) 
 	despawn_particles.global_position = global_position
+	blood.global_position = global_position
 	hide()
 	yield(get_tree().create_timer(5.0), "timeout")
-	get_tree().reload_current_scene()
+	get_tree().reload_current_scene() #This code reboots the game
 	pass
 
 
@@ -177,6 +183,9 @@ func _on_hurtbox_area_entered(area):
 		var pushback_direction = (global_position - area.global_position).normalized()
 		move_and_slide( pushback_direction * 5000)
 		state = STATE_HURT
+		var blood = blood_fx.instance()
+		blood.global_position = global_position
+		get_parent().add_child(blood)
 		if hitpoints <= 0:
 			state = STATE_DIE
 	pass

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/blood-spilling.ogg-80c44617336f466f755e75322dbf6d5f.oggstr"
+
+[deps]
+
+source_file="res://music/blood-spilling.ogg"
+dest_files=[ "res://.import/blood-spilling.ogg-80c44617336f466f755e75322dbf6d5f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

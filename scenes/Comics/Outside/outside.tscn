@@ -1,21 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scenes/Comics/Outside/1.webp" type="Texture" id=1]
-[ext_resource path="res://scenes/Comics/Outside/2.webp" type="Texture" id=2]
-[ext_resource path="res://scenes/Comics/Outside/3.webp" type="Texture" id=3]
-
-[sub_resource type="SpriteFrames" id=1]
-animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 3 ), ExtResource( 2 ) ],
-"loop": true,
-"name": "default",
-"speed": 5.0
-} ]
+[ext_resource path="res://scenes/Comics/Outside/outside.tres" type="SpriteFrames" id=1]
 
 [node name="outside" type="AnimatedSprite" groups=[
 "comics",
 ]]
 position = Vector2( 665.99, 383.448 )
 scale = Vector2( 0.696879, 0.696879 )
-frames = SubResource( 1 )
+frames = ExtResource( 1 )
 frame = 2

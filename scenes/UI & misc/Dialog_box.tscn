@@ -1,14 +1,21 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://fonts/dialog.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/adamwarrenpro-bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/UI & misc/Dialog_box.gd" type="Script" id=2]
 [ext_resource path="res://resources/misc/dialog_box.png" type="Texture" id=3]
 [ext_resource path="res://resources/misc/next_dialog_arrow.png" type="Texture" id=4]
+[ext_resource path="res://fonts/DigitalStripBB_BoldItal.ttf" type="DynamicFontData" id=5]
 
+[sub_resource type="DynamicFont" id=1]
+size = 30
+font_data = ExtResource( 5 )
 
+[sub_resource type="DynamicFont" id=2]
+size = 23
+use_filter = true
+font_data = ExtResource( 1 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "appear"
+[sub_resource type="Animation" id=3]
 length = 0.1
 step = 0.01
 tracks/0/type = "value"
@@ -88,8 +95,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "disappear"
+[sub_resource type="Animation" id=4]
 length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
@@ -142,7 +148,7 @@ tracks/3/keys = {
 "values": [ Vector2( 0, 427 ), Vector2( 0, 582 ) ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("dialog_text:visible_characters")
@@ -169,7 +175,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("next_dialog_arrow:visible")
@@ -213,11 +219,11 @@ __meta__ = {
 [node name="dialog_text" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 54.0
+margin_left = 168.0
 margin_top = 45.0
-margin_right = -58.0
-margin_bottom = -38.0
-custom_fonts/font = ExtResource( 1 )
+margin_right = -185.0
+margin_bottom = -34.0002
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In semper molestie erat, id aliquam nulla iaculis a. Suspendisse consectetur vehicula consequat. Integer mollis libero sed sem convallis, vitae rutrum metus dapibus. Phasellus purus quam, euismod id diam ut, semper sagittis ipsum. Aenean vel mollis lectus, quis placerat eros. Donec elementum vestibulum augue dignissim vehicula. Mauris ultricies lacus id odio aliquet, eu iaculis urna sodales. "
 autowrap = true
@@ -260,20 +266,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -227.5
-margin_top = -21.0
-margin_right = 227.5
-margin_bottom = 22.0
-custom_fonts/font = ExtResource( 1 )
+margin_left = -226.5
+margin_top = -15.5
+margin_right = 228.5
+margin_bottom = 15.5
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Character Name"
 align = 1
 clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="anims" type="AnimationPlayer" parent="."]
-anims/appear = SubResource( 1 )
-anims/disappear = SubResource( 2 )
-anims/show_text = SubResource( 3 )
-anims/wait = SubResource( 4 )
+anims/appear = SubResource( 3 )
+anims/disappear = SubResource( 4 )
+anims/show_text = SubResource( 5 )
+anims/wait = SubResource( 6 )
 next/appear = "show_text"
 next/show_text = "wait"

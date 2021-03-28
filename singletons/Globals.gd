@@ -14,12 +14,13 @@ extends Node
 #use variables to code ux +add a scene calculator
 var cinematics = 'res://scenes/levels/cinematics.tscn'
 var title_screen = 'res://scenes/Title screen.tscn'
+var shop = 'res://scenes/UI & misc/Shop.tscn'
 var controls
 var game_loop
 var prev_scene
 var next_scene = null
-var curr_scene
-
+onready var curr_scene = get_tree().get_current_scene().get_name()
+onready var os = str(OS.get_name())
 var player  = null
 var enemy = null
 var enemy_debug
@@ -46,7 +47,7 @@ func _process(_delta):
 """
 Really simple save file implementation. Just saving some variables to a dictionary
 """
-func save_game(): 
+func save_game(): #modify code to include current scene and player position. also enemy spawner postions and info
 	var save_game = File.new()
 	save_game.open("user://savegeme.save", File.WRITE)
 	var save_dict = {}
@@ -55,6 +56,8 @@ func save_game():
 	save_dict.current_level = current_level
 	save_dict.inventory = Inventory.list()
 	save_dict.quests = Quest.get_quest_list()
+	#my code
+	save_dict.os = os
 	save_game.store_line(to_json(save_dict))
 	save_game.close()
 	pass

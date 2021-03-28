@@ -12,7 +12,7 @@ script/source = "# *************************************************
 # *************************************************
 extends Node
 #add more controls to this script, it breaks the singleton
-export (bool) var music_on = true
+export (bool) var music_on 
 
 export(String, FILE, \"*.ogg\") var music_track = \"\"
 
@@ -23,6 +23,8 @@ var playlist_one = {
 	3:'res://music/chike san afro 3.ogg',
 	4:'res://music/chuks-dane_chuks-dane-shoot-back.ogg',
 	5:'res://music/Astrolife chike san.ogg',
+	6:'res://music/chuks-dane_chuks-dane-new-breed-prod-base.ogg',
+	7:'res://music/a-2-3-groovy-bgm.ogg'
 }
 onready var Music_streamer =get_node(\"A\")  #Refrences the music player node
 onready var track
@@ -41,17 +43,16 @@ and applies a low pass filter when the game is paused. Nothing too wise
 var music_debug =''
 onready var current_track
 
-
-var music_bus
+onready var music_bus_2 = AudioServer.get_bus_index($B.bus)
+onready var music_bus = AudioServer.get_bus_index($A.bus)
 
 func _ready():
 	#music_on = true
 	randomize() #randomizes shuffle code seed
 	shuffle()
-	music_bus = AudioServer.get_bus_index($A.bus)
 	
 	
-	#play(music_track)
+	play(music_track)
 
 	
 
@@ -63,9 +64,9 @@ func _process(_delta):
 	Music Debug
 	\"\"\"
 	_music_debug()
-	if music_track == '' && music_on == true:
-		shuffle()
-		play(music_track)
+	#if music_track == '' && music_on == true:
+	#	shuffle()
+	#	play(music_track) #start code from here
 	
 	
 	
@@ -75,7 +76,12 @@ func _process(_delta):
 
 func _music_debug():
 	if music_track != null:
-		music_debug = (('Time:' + str (int(Music_streamer.get_playback_position()))) + (' Track: ' + str(music_track.get_file())))
+		var _o = str(Music_streamer.get_stream())
+		
+		var _p =(' Track: ' + str(music_track.get_file() ))
+		var _t = (('Time:' + str (int(Music_streamer.get_playback_position()))+'/'+ str(int(Music_streamer.get_stream().get_length()))) )
+		var _n =  str(get_tree().get_nodes_in_group('music_node'))
+		music_debug = (_n + _t +_p + _o)
 
 func play(stream):
 	#kinda works
@@ -85,21 +91,22 @@ func play(stream):
 			$B.stream = load(stream) #invalid funtion load, cannot convert arguement from nil to string
 			$anims.play(\"AtoB\")
 			current_track = \"b\"
+			music_on = true
 		else:
 			$A.stream = load(stream)
 			$anims.play(\"BtoA\")
 			current_track = \"a\"
+			music_on = true
 	if stream == null or stream == '':
 		push_error('Music stream is null, fix')
-		print_debug(stream)
-		print_debug(music_track)
+		print_debug('Stream:',stream)
+		print_debug('Music Track',music_track)
+
 func clear():# triggers an autodelete in music track nodes
 	music_track = ''
+	print('Music cleared')
+	music_on = false
 
-func pause():
-	music_track= null
-	$A.stream = null
-	$B.stream= null
 
 
 # Simple 'muffled music' effect on pause using a low pass filter
@@ -107,9 +114,14 @@ func _notification(what):
 	if what == NOTIFICATION_PAUSED:
 		AudioServer.set_bus_effect_enabled(music_bus,0,true)
 		AudioServer.set_bus_volume_db(music_bus,-10)
-	elif what == NOTIFICATION_UNPAUSED:
+	if what == NOTIFICATION_UNPAUSED:
 		AudioServer.set_bus_effect_enabled(music_bus,0,false)
 		AudioServer.set_bus_volume_db(music_bus,0)
+	elif what == NOTIFICATION_PREDELETE:
+		AudioServer.set_bus_volume_db(music_bus,-100)
+		AudioServer.set_bus_volume_db(music_bus_2,-100)
+		print ('music off')
+
 
 
 
@@ -127,10 +139,10 @@ func shuffle ():
 
 func _on_A_finished(): #This  signals when the music has finished and autoshuffles
 	randomize() #disabled for debugging
-	print('music finished') #code block works
-	#music_track=shuffle() #fix up code to detect when music has finished 
-	#return music_track #playing with more variables
-	#it woks whenever the music is shuffled
+	print('music finished--music singleton') #code block works
+	shuffle()
+	play(music_track)
+	#print (_n)
 "
 
 [sub_resource type="Animation" id=2]

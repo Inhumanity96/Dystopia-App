@@ -11,5 +11,5 @@ dest_files=[ "res://.import/chuks-dane_chuks-dane-new-breed-prod-base.ogg-77ebbc
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

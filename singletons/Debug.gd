@@ -24,13 +24,14 @@ onready var Comics_debug = ''
 onready var misc_debug = ''
 onready var kill_count = 0
 onready var enemy = ''
+onready var Network_debug =''
 """
 THE DEBUG SINGLETON
 """
 #Add signal
 func _ready():
-	start_debug()
-
+	#start_debug()
+	#stop_debug()
 	"""
 	Error catcher
 	"""
@@ -41,7 +42,7 @@ func _ready():
 
 
 
-# Called when the node enters the scene tree for the first time.
+## Called when the node enters the scene tree for the first time.
 
 func _input(event): 
 	"""
@@ -53,7 +54,6 @@ func _input(event):
 		start_debug()
 func _process(_delta):
 
-
 	"""
 	The debugged variables
 	"""
@@ -61,11 +61,14 @@ func _process(_delta):
 	enabled = true
 	Music_debug ='Music debug:' + (Music.music_debug)
 	Player_debug ='Player debug:'+ str(Globals.player) + 'Spawn point:' + str(Globals.spawnpoint) + 'Current level: ' + str(Globals.current_level.get_file()) 
-	Ram_debug= ('Ram Used :'+ ((_ram_debug())) + 'mb') #it uses the ram_mb funtion to convert bytes to mb
+	
+	#it uses the ram_mb funtion to convert bytes to mb
+	Ram_debug= ('Ram Used :'+ ((_ram_debug())) + 'mb') 
 	FPS_debug = 'FPS: '+ str(Engine.get_frames_per_second())
 	Enemy_debug = 'Enemy debug:' + str(Debug.enemy) + str('Killcount:' ,kill_count)
 	Autosave_debug = Autosave_debug
 	
+	Network_debug = "" #str(Networking.debug ) 
 	show_debug() 
 
 
@@ -75,9 +78,9 @@ func _process(_delta):
 
 func _ram_debug():
 	#This code gets the current ram being used as bytes 
-	#and converts it to MB and rounds up the final figure 	
+	#and converts it to MB and rounds up the final figure
 	var ram_mb = String(round(float(OS.get_static_memory_usage()) / 1_048_576))
-	#ram_mb = String( ram_mb)
+	
 	return ram_mb
 
 
@@ -92,7 +95,7 @@ func stop_debug():
 		FPS_debug= null
 		Enemy_debug= null
 
-func start_debug(): #fix code, disable mouse filter
+func start_debug(): 
 	#creates and loads dynamic fonts
 	var dynamic_font = DynamicFont.new()
 	dynamic_font.font_data = load ('res://fonts/spiritmedium.ttf')
@@ -100,7 +103,8 @@ func start_debug(): #fix code, disable mouse filter
 	dynamic_font.outline_size = 2
 	dynamic_font.outline_color= Color(0,0,0,1)
 	dynamic_font.use_filter = true
-	#label.add_colour_override('font_colour', Color.red) #changes font colour # look up how to change colour modulation on a vbox
+	#label.add_colour_override('font_colour', Color.red) 
+	#changes font colour # look up how to change colour modulation on a vbox
 	#Create new labels and add them as children of the debug panel 
 	#optimize code to use less words
 	debug_panel =CanvasLayer.new() #works
@@ -151,12 +155,12 @@ func start_debug(): #fix code, disable mouse filter
 
 func show_debug():
 	if debug_panel != null :
-		music_label.set_text (Music_debug) #change all scripts to set_text() #compare set_text vs text()
+		music_label.set_text (Music_debug) 
 		player_label.set_text (Player_debug)
 		ram_label.set_text (Ram_debug) 
 		fps_label.set_text (FPS_debug)
 		enemy_label.set_text (Enemy_debug)
-		network_label.set_text ('Network Debug : Null')
+		network_label.set_text (Network_debug)
 		comics_label.set_text  (Comics_debug)
 		autosave_label.set_text (Autosave_debug)
 		misc_label.set_text( misc_debug)
@@ -167,3 +171,22 @@ func show_debug():
 
 func _print_debug(): #use to debug variables to terminal og
 	print (FPS_debug,Music_debug,Ram_debug, enabled)
+
+func log_debug(): #improvve logging code run at exit tree  #Copy log files to documents
+	if ProjectSettings.get_setting('logging/file_logging/enable_file_logging'):
+		var _doc = OS.get_system_dir(2) 
+		var _dir =Directory.new()
+		var _log = File.new()
+		_log.open('user://logs/godot.log', File.READ_WRITE)
+		
+		
+		_dir.copy(_log,_doc) #buggy
+		#('user://logs/godot.log' from, _doc to)
+		print ('Doc:',_doc,'  log: ', _log) #works
+		#print ('logging debug, saved to  ', _doc)
+		#_log.close()
+		pass
+
+func _exit_tree():
+	#log_debug()
+	pass

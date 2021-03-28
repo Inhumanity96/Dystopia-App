@@ -1,12 +1,12 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://resources/props/desert dunes.png" type="Texture" id=1]
+[ext_resource path="res://resources/props/desert dunes tex.webp" type="Texture" id=1]
 [ext_resource path="res://scenes/props/Dune big.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/props/Dune small.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/props/Temple exterior.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/props/broken ship.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=6]
-[ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/characters/Aarin.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/props/idol.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/props/Bloc Big.tscn" type="PackedScene" id=9]
 [ext_resource path="res://scenes/props/blocSmall.tscn" type="PackedScene" id=10]
@@ -16,6 +16,13 @@
 [ext_resource path="res://scenes/UI & misc/MusicTrack.tscn" type="PackedScene" id=14]
 [ext_resource path="res://scenes/UI & misc/UI.tscn" type="PackedScene" id=15]
 [ext_resource path="res://New game code and features/enemy spawner.tscn" type="PackedScene" id=16]
+[ext_resource path="res://scenes/props/stone walkway.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scenes/props/Grass.tscn" type="PackedScene" id=18]
+[ext_resource path="res://resources/props/house.png" type="Texture" id=19]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 129.732
+height = 1019.82
 
 [node name="Outside" type="Node"]
 
@@ -24,23 +31,27 @@ position = Vector2( 1600.61, 2690.46 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="dune_tex 1" type="Sprite" parent="Dune textures"]
-position = Vector2( 1659.86, -3608.63 )
-scale = Vector2( 0.671895, 0.695254 )
+self_modulate = Color( 1, 1, 1, 0.552941 )
+position = Vector2( 1254.98, -3478.1 )
+scale = Vector2( 5.17537, 5.3553 )
 texture = ExtResource( 1 )
 
 [node name="dune_tex 2" type="Sprite" parent="Dune textures"]
-position = Vector2( -230.21, -2753.76 )
-scale = Vector2( 0.667495, 0.667567 )
+self_modulate = Color( 1, 1, 1, 0.584314 )
+position = Vector2( 542.682, -2493.55 )
+scale = Vector2( 4.86407, 4.86459 )
 texture = ExtResource( 1 )
 
 [node name="dune_tex3" type="Sprite" parent="Dune textures"]
-position = Vector2( -1557.39, -2329.38 )
-scale = Vector2( 0.671895, 0.695254 )
+self_modulate = Color( 1, 1, 1, 0.6 )
+position = Vector2( -592.325, -2018.25 )
+scale = Vector2( 5.52147, 5.71343 )
 texture = ExtResource( 1 )
 
 [node name="dune_tex 4" type="Sprite" parent="Dune textures"]
-position = Vector2( -3072.22, -2115.46 )
-scale = Vector2( 0.731359, 0.753425 )
+self_modulate = Color( 1, 1, 1, 0.556863 )
+position = Vector2( -3142.72, -1787.36 )
+scale = Vector2( 5.86827, 6.04532 )
 texture = ExtResource( 1 )
 
 [node name="Dune Big" parent="Dune textures" instance=ExtResource( 2 )]
@@ -72,6 +83,10 @@ scale = Vector2( 2, 2 )
 position = Vector2( 2014.78, -612.92 )
 scale = Vector2( 2, 2 )
 
+[node name="stone walkway" parent="Dune textures" instance=ExtResource( 17 )]
+position = Vector2( -950.794, -3121.94 )
+scale = Vector2( 1.88, 1.88 )
+
 [node name="level" type="YSort" parent="."]
 position = Vector2( 208.024, -128.355 )
 
@@ -83,6 +98,18 @@ scale = Vector2( 1.32349, 1.32349 )
 "spawnpoints",
 ]]
 position = Vector2( -188.706, 30.601 )
+
+[node name="House" type="StaticBody2D" parent="level"]
+position = Vector2( 1160, 2504 )
+scale = Vector2( 0.455064, 0.455064 )
+
+[node name="House" type="Sprite" parent="level/House"]
+texture = ExtResource( 19 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="level/House"]
+position = Vector2( -26.3699, 162.616 )
+rotation = 1.56317
+shape = SubResource( 1 )
 
 [node name="broken ship" parent="level" instance=ExtResource( 5 )]
 position = Vector2( 1346.73, 2212.05 )
@@ -115,10 +142,10 @@ position = Vector2( -921.45, -1357.8 )
 [node name="enemy8" parent="level/enemies" instance=ExtResource( 6 )]
 position = Vector2( -240.95, -1391.16 )
 
-[node name="Player" parent="level/enemies" instance=ExtResource( 7 )]
-position = Vector2( -821.91, 436.47 )
-
 [node name="enemy_spawner" parent="level/enemies" instance=ExtResource( 16 )]
+
+[node name="Player" parent="level/enemies" instance=ExtResource( 7 )]
+position = Vector2( -294.362, 933.087 )
 
 [node name="idols" type="YSort" parent="level"]
 position = Vector2( 166.022, 1384.49 )
@@ -128,17 +155,20 @@ scale = Vector2( 1.29149, 1.29149 )
 position = Vector2( 675.189, -1084.02 )
 scale = Vector2( 1, 1 )
 
-[node name="idol2" parent="level/idols" instance=ExtResource( 8 )]
-position = Vector2( 783.032, 980.286 )
-scale = Vector2( 1, 1 )
-
 [node name="Blocks" type="YSort" parent="level"]
 position = Vector2( 2233.45, 2424.54 )
 
 [node name="bloc_big" parent="level/Blocks" instance=ExtResource( 9 )]
+position = Vector2( -168, -440 )
+
+[node name="bloc_big2" parent="level/Blocks" instance=ExtResource( 9 )]
+position = Vector2( -472, -104 )
+
+[node name="bloc_big3" parent="level/Blocks" instance=ExtResource( 9 )]
+position = Vector2( -1624, 512 )
 
 [node name="bloc_small" parent="level/Blocks" instance=ExtResource( 10 )]
-position = Vector2( -679.53, -120.68 )
+position = Vector2( -1607.53, -328.68 )
 
 [node name="bloc_small2" parent="level/Blocks" instance=ExtResource( 10 )]
 position = Vector2( 454.1, -399.92 )
@@ -181,16 +211,47 @@ position = Vector2( 1814.84, 158.27 )
 item_type = "Coso"
 amount = 3
 
-[node name="Jorgito" parent="level" instance=ExtResource( 12 )]
-position = Vector2( 2062.51, 2957.82 )
-character_name = "Jorgito"
+[node name="Old Woman" parent="level" instance=ExtResource( 12 )]
+position = Vector2( 1174.51, 2637.82 )
+character_name = "Old Woman"
 
-[node name="Quest" parent="level/Jorgito" instance=ExtResource( 13 )]
-quest_name = "Life as a Delivery Guy"
-required_amount = 3
-initial_text = "TLDR; bring me 3 Generic Items"
-pending_text = "You forgot? I want 3 Generic Items"
+[node name="Quest" parent="level/Old Woman" instance=ExtResource( 13 )]
+quest_name = "Clear the Bandits"
+required_item = "Bandit Head"
+required_amount = 20
+reward_item = "Dash ability"
+initial_text = "A curse has plagued this land , violent armed beetle beasts fill this land as bandits. Bring me 20 Bandit Heads so i can create a counter-curse"
+pending_text = "You forgot? I want 20 Bandit Head"
+delivered_text = "Thank you! Here's your reward...Go to Nmoru's temple with this ability"
 
 [node name="UI" parent="." instance=ExtResource( 15 )]
 
 [node name="music_track" parent="." instance=ExtResource( 14 )]
+
+[node name="flowers and grass" type="YSort" parent="."]
+position = Vector2( 1600.61, 2690.46 )
+scale = Vector2( 0.5, 0.5 )
+
+[node name="grass" parent="flowers and grass" instance=ExtResource( 18 )]
+position = Vector2( -1236.52, -509.06 )
+
+[node name="grass6" parent="flowers and grass" instance=ExtResource( 18 )]
+position = Vector2( 307.48, -517.06 )
+
+[node name="grass7" parent="flowers and grass" instance=ExtResource( 18 )]
+position = Vector2( 467.48, -677.06 )
+
+[node name="grass8" parent="flowers and grass" instance=ExtResource( 18 )]
+position = Vector2( 1179.48, -1429.06 )
+
+[node name="grass4" parent="flowers and grass" instance=ExtResource( 18 )]
+position = Vector2( -1005.73, -896.305 )
+
+[node name="grass2" parent="flowers and grass" instance=ExtResource( 18 )]
+position = Vector2( -1194.57, -749.617 )
+
+[node name="grass3" parent="flowers and grass" instance=ExtResource( 18 )]
+position = Vector2( -1456.31, -239.334 )
+
+[node name="grass5" parent="flowers and grass" instance=ExtResource( 18 )]
+position = Vector2( -960.31, -1183.33 )

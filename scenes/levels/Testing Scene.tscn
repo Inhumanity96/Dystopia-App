@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/props/idol.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/characters/Aarin.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/props/blocSmall.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/props/Bloc Big.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/props/broken ship.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/characters/debug_character.tscn" type="PackedScene" id=7]
+[ext_resource path="res://addons/ppc/ppcamera.tscn" type="PackedScene" id=8]
 
 [node name="Node2D" type="Node2D"]
 
@@ -29,3 +30,5 @@ position = Vector2( 1171.28, 618.174 )
 path_to_node = NodePath("../Enemy")
 
 [node name="Player" parent="." instance=ExtResource( 3 )]
+
+[node name="PinchPanCamera" parent="." instance=ExtResource( 8 )]

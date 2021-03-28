@@ -8,8 +8,7 @@ script/source = "extends Node
 
 
 
-#separate sfx and music track using diffent key names in the dictionary.
-
+export (bool) var shuffle 
 
 
 \"\"\"
@@ -17,14 +16,12 @@ Add this to any level and it'll start playing the indicated song
 as soon as the level loads. 
 \"\"\"
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = \"text\"
-export(String, FILE, \"*.ogg\") var music_track = \"\" #trying music codes
+export(String, FILE, \"*.ogg\") var music_track = \"\" 
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	if music_track != \"\":
+		Music.music_track = music_track
 		Music.play(music_track)
 	pass # Replace with function body.
 
@@ -34,9 +31,17 @@ func _ready():
 
 func _process(_delta): #auto delete self if not being used
 	if music_track == \"\":
-		Music.music_track = ''
+		###Music.music_track = ''
 		self.queue_free() 
 		reset()
+	if music_track != '':
+		Music.play(music_track)
+		
+	if shuffle == true:
+		Music.shuffle()
+	
+
+
 func reset(): #reset music instructions upon deletion
 	if Music.music_track != '':
 		Music.music_track = ''
@@ -47,8 +52,9 @@ func reset(): #reset music instructions upon deletion
 
 
 
-
 "
 
-[node name="music_track" type="Node2D"]
+[node name="music_track" type="Node2D" groups=[
+"music_node",
+]]
 script = SubResource( 1 )

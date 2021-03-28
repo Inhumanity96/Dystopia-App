@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/UI & misc/Comics.v2.gd" type="Script" id=1]
 [ext_resource path="res://resources/Buttons/bck.png" type="Texture" id=2]
+[ext_resource path="res://resources/Buttons/zoom.png" type="Texture" id=3]
+[ext_resource path="res://resources/misc/logo.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 length = 0.2
@@ -75,8 +77,6 @@ tracks/0/keys = {
 [node name="Comics" type="Control" groups=[
 "Cmx_Root",
 ]]
-margin_top = 40.0
-margin_bottom = 40.0
 mouse_filter = 1
 script = ExtResource( 1 )
 __meta__ = {
@@ -96,6 +96,7 @@ __meta__ = {
 
 [node name="Buttons" type="Node2D" parent="."]
 modulate = Color( 1, 1, 1, 0.741176 )
+light_mask = 2
 
 [node name="Backwards" type="TouchScreenButton" parent="Buttons"]
 modulate = Color( 1, 1, 1, 0.647059 )
@@ -112,7 +113,29 @@ position = Vector2( 974.664, 434.948 )
 normal = ExtResource( 2 )
 action = "ui_focus_next"
 
+[node name="Zoom" type="TouchScreenButton" parent="Buttons"]
+position = Vector2( 610.68, 529.983 )
+scale = Vector2( 1.11574, 1.12516 )
+normal = ExtResource( 3 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/slide_in = SubResource( 1 )
 anims/slide_out = SubResource( 2 )
 anims/visible = SubResource( 3 )
+
+[node name="Watermark" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color( 0, 0, 0, 0.243137 )
+margin_left = 337.735
+margin_top = 61.8388
+margin_right = 772.735
+margin_bottom = 434.839
+rect_scale = Vector2( 1.41222, 1.41222 )
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 654.064, 311.572 )
+[connection signal="pressed" from="Buttons/Zoom" to="." method="_on_Zoom_pressed"]

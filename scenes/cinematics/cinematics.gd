@@ -31,7 +31,7 @@ onready var videoplayer = get_node('Node2D/VideoPlayer') #video player node
 onready var os 
 var cinematic = {
 	0:'res://resources/title animation/title..ogv',
-	1:'res://scenes/cinematics/animatic.ogv', #convert video to ogv
+	1:'', #convert video to ogv
 	}
 
 """

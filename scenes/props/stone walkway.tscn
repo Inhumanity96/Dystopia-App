@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://resources/Environment Tilesets & Tilemaps/stone pathways.webp" type="Texture" id=1]
+
+[node name="stone walkway" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 144.25, 147.078 )
+scale = Vector2( 2.8614, 2.8614 )
+texture = ExtResource( 1 )

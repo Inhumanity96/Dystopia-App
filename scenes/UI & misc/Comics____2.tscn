@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/UI & misc/Comics.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Comics/chapter 1/Cover 1.webp" type="Texture" id=2]
 [ext_resource path="res://scenes/Comics/chapter 2/cover 2.webp" type="Texture" id=3]
 [ext_resource path="res://scenes/Comics/chapter 3/cover 2.webp" type="Texture" id=4]
 [ext_resource path="res://resources/Buttons/comics.png" type="Texture" id=5]
+[ext_resource path="res://resources/Buttons/turn.png" type="Texture" id=6]
+[ext_resource path="res://fonts/adamwarrenpro-bold.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://scenes/Comics/chapter 6/chap 6 cover art 1.webp" type="Texture" id=8]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends HBoxContainer
@@ -19,23 +22,69 @@ func _on_Comics_loaded_comics():
 func _on_Comics_freed_comics():
 	for child in get_children(): # works
 		child.show()
+
+
+func _on_Back_button_pressed():
+	get_tree().change_scene('res://scenes/Title screen.tscn')
+
+
+
+	#var screen = OS.get_window_size() #it doesn't work in fullscreen
+	#var _scr = OS.get_screen_orientation()
+	#var x = screen.x
+	#var y = screen.y
+	#print (screen,_scr)
+	#screen orienation calculator for pc
+	#if screen >= Vector2(x, y):
+	#	OS.window_size = Vector2(y,x)
+	#if screen <= Vector2(y, x):
+	#	OS.window_size = Vector2(x,y)
+	#screen orientation changer for android
+	#if _scr == int(0): 
+	#	OS.set_screen_orientation (1)
+	#if _scr >= int (1):
+	#	OS.set_screen_orientation (0)
+
+
+func _exit_tree(): #resets everything to default
+	OS.set_window_size(Vector2(1280, 720))
+	OS.set_screen_orientation (0)
+	pass
+
+
+func _on_chap_6_pressed():
+	print('chapter locked')
+	Debug.Comics_debug += str ('chapter locked chapter lockd')
+	#$chap_6/Popup.popup_centered()
 "
+
+[sub_resource type="DynamicFont" id=2]
+size = 64
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
 
 [node name="Comics UI" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -5.65696
+margin_top = 16.9707
+margin_right = -5.65698
+margin_bottom = 16.9707
+rect_pivot_offset = Vector2( 638.313, 315.55 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Comics" parent="." instance=ExtResource( 1 )]
+rect_pivot_offset = Vector2( 643.969, 373.494 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Comics"]
-margin_left = 184.0
-margin_top = 36.0
-margin_right = 5189.0
-margin_bottom = 3602.0
-rect_scale = Vector2( 0.18, 0.18 )
+margin_left = 20.7411
+margin_top = -3.77114
+margin_right = 6281.74
+margin_bottom = 3562.23
+rect_scale = Vector2( 0.19793, 0.19793 )
 script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -67,12 +116,45 @@ margin_bottom = 3566.0
 icon = ExtResource( 4 )
 flat = true
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
-scale = Vector2( 1.35402, 1.35402 )
+[node name="chap_6" type="Button" parent="Comics/HBoxContainer"]
+self_modulate = Color( 1, 1, 1, 0.392157 )
+margin_left = 5009.0
+margin_right = 6261.0
+margin_bottom = 3566.0
+icon = ExtResource( 8 )
+flat = true
+
+[node name="Book" type="TouchScreenButton" parent="."]
 normal = ExtResource( 5 )
 action = "comics"
+
+[node name="Rotate" type="TouchScreenButton" parent="."]
+position = Vector2( 28.2842, 118.794 )
+normal = ExtResource( 6 )
+
+[node name="Back_button" type="Button" parent="."]
+margin_left = 1057.83
+margin_top = 11.3137
+margin_right = 1240.83
+margin_bottom = 95.3137
+custom_fonts/font = SubResource( 2 )
+text = "back"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Popup" type="Popup" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="freed_comics" from="Comics" to="Comics/HBoxContainer" method="_on_Comics_freed_comics"]
 [connection signal="loaded_comics" from="Comics" to="Comics/HBoxContainer" method="_on_Comics_loaded_comics"]
 [connection signal="pressed" from="Comics/HBoxContainer/chap_1" to="Comics" method="_on_chap_1_pressed"]
 [connection signal="pressed" from="Comics/HBoxContainer/chap_2" to="Comics" method="_on_chap_2_pressed"]
 [connection signal="pressed" from="Comics/HBoxContainer/chap_3" to="Comics" method="_on_chap_3_pressed"]
+[connection signal="pressed" from="Comics/HBoxContainer/chap_6" to="Comics/HBoxContainer" method="_on_chap_6_pressed"]
+[connection signal="pressed" from="Rotate" to="Comics" method="_on_Rotate_pressed"]
+[connection signal="pressed" from="Back_button" to="Comics/HBoxContainer" method="_on_Back_button_pressed"]

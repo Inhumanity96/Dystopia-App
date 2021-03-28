@@ -56,9 +56,10 @@ func _input(event):
 #Toggles comics visibility on/off
 	if event.is_action_pressed("comics") and enabled == false:
 		enabled = true 
+		Music._notification(NOTIFICATION_PAUSED) #does not work
 	elif event.is_action_pressed("comics") and enabled == true:
 		enabled = false
-	
+		Music._notification(NOTIFICATION_UNPAUSED) #does not work
 	if (can_drag == false and Input.is_action_pressed("ui_select")): 
 		can_drag = true
 	if (can_drag == true and Input.is_action_pressed("ui_select")):

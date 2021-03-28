@@ -11,5 +11,5 @@ dest_files=[ "res://.import/chuks-dane_chuks-dane-shoot-back.ogg-da032b93890021a
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

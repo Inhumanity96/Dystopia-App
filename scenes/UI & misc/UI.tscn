@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/UI & misc/StatusText.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/UI & misc/Healthbar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Comics/Outside/outside.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scenes/UI & misc/ingame  menu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/UI & misc/ingame_menu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/UI & misc/Comics.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/UI & misc/TouchInterface.gd" type="Script" id=8]
 [ext_resource path="res://resources/Buttons/menu.png" type="Texture" id=9]
@@ -17,7 +17,8 @@
 [ext_resource path="res://resources/misc/btn-slash.png" type="Texture" id=15]
 [ext_resource path="res://resources/misc/arrow.png" type="Texture" id=16]
 
-[sub_resource type="RectangleShape2D" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 100 )
 
 [node name="UI" type="CanvasLayer"]
@@ -35,6 +36,7 @@ margin_right = 14.0
 [node name="Menu " parent="." instance=ExtResource( 6 )]
 
 [node name="Comics" parent="." instance=ExtResource( 7 )]
+visible = false
 margin_left = -24.0
 margin_top = 32.0
 margin_right = -24.0
@@ -99,7 +101,7 @@ visibility_mode = 1
 position = Vector2( 243.367, 397.53 )
 scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 16 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 passby_press = true
 action = "move_right"
 visibility_mode = 1
@@ -109,7 +111,7 @@ position = Vector2( 139.62, 424.503 )
 rotation = -1.5708
 scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 16 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 passby_press = true
 action = "move_up"
 visibility_mode = 1
@@ -119,7 +121,7 @@ position = Vector2( 165.886, 531.368 )
 rotation = -3.14159
 scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 16 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 passby_press = true
 action = "move_left"
 visibility_mode = 1
@@ -129,7 +131,7 @@ position = Vector2( 267.462, 499.127 )
 rotation = 1.5708
 scale = Vector2( 1.5, 1.5 )
 normal = ExtResource( 16 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 passby_press = true
 action = "move_down"
 visibility_mode = 1

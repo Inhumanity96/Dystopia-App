@@ -11,5 +11,5 @@ dest_files=[ "res://.import/Astrolife chike san.ogg-06d1120464a03707ce8806a50ae9
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0
