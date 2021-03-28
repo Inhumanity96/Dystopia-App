@@ -83,6 +83,8 @@ Art
 Sounds
 -Backup sounds folder
 -add attack sfx
+
+[![Watch a playtest demo video](https://img.youtube.com/vi/WLTgP-Axb-g/hqdefault.jpg)](https://youtu.be/WLTgP-Axb-g)
 	
 
 Import and compile with Godot IDE
