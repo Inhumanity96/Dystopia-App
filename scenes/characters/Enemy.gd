@@ -168,7 +168,7 @@ func _on_hurtbox_area_entered(area):
 	pass # Replace with function body.
 
 func despawn():
-	Debug.kill_count += 1
+	Globals.kill_count +=1
 	var despawn_particles = despawn_fx.instance()
 	var blood = blood_fx.instance()
 	get_parent().add_child(despawn_particles)

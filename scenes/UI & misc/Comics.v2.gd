@@ -153,7 +153,7 @@ func _input(event):
 
 
 	# Handle Touch
-	if event is InputEventScreenTouch : #not working
+	if event is InputEventScreenTouch :
 		target =  event.get_position()
 		if event.get_index() == int(2): #zoom if screentouch is 2 fingers
 			_zoom() #you can use get_index to get the number of fingers
@@ -196,7 +196,7 @@ func _process(_delta):
 		
 
 	if enabled == false:
-		self.hide()
+		hide()
 		
 		
 

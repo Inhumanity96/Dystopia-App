@@ -15,16 +15,16 @@ dest_files=[ "res://.import/Maps Concept Art webp.webp-2a3282d8a3c8c470f4125c19f
 [params]
 
 compress/mode=1
-compress/lossy_quality=0.1
+compress/lossy_quality=0.9
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=2
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
-flags/srgb=2
-process/fix_alpha_border=true
+flags/srgb=0
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false

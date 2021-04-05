@@ -83,6 +83,16 @@ align = 1
 [node name="Details" type="Label" parent="VBoxContainer/HBoxContainer/Inventory"]
 margin_top = 47.0
 margin_right = 618.0
+margin_bottom = 311.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+text = "Item 1
+"
+
+[node name="Kill_count" type="Label" parent="VBoxContainer/HBoxContainer/Inventory"]
+margin_top = 315.0
+margin_right = 618.0
 margin_bottom = 580.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

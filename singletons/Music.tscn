@@ -52,7 +52,7 @@ func _ready():
 	shuffle()
 	
 	
-	play(music_track)
+	#play(music_track) #disabled for debugging
 
 	
 
@@ -64,6 +64,17 @@ func _process(_delta):
 	Music Debug
 	\"\"\"
 	_music_debug()
+	
+	
+	
+	\"\"\"
+	AUTO SHUFFLE
+	\"\"\"
+	
+	if Music_streamer.stream != null and int(Music_streamer.get_playback_position())==int(Music_streamer.get_stream().get_length()):
+		print ('autoshuffle')
+		shuffle() 
+		play(music_track)
 	#if music_track == '' && music_on == true:
 	#	shuffle()
 	#	play(music_track) #start code from here
@@ -75,7 +86,7 @@ func _process(_delta):
 
 
 func _music_debug():
-	if music_track != null:
+	if music_track != null && Music_streamer.stream != null:
 		var _o = str(Music_streamer.get_stream())
 		
 		var _p =(' Track: ' + str(music_track.get_file() ))
@@ -130,18 +141,18 @@ func _notification(what):
 MUSIC SHUFFLE
 \"\"\"
 func shuffle ():
-	if music_track == '':
-		track = int(rand_range(-1,playlist_one.size())) #selects a random track number
-		music_track = playlist_one[track]
-		return music_track
-	
+	music_track = ''
+	track = int(rand_range(-1,playlist_one.size())) #selects a random track number
+	music_track = playlist_one[track]
+	return music_track
+
 
 
 func _on_A_finished(): #This  signals when the music has finished and autoshuffles
 	randomize() #disabled for debugging
 	print('music finished--music singleton') #code block works
-	shuffle()
-	play(music_track)
+	#shuffle()
+	#play(music_track)
 	#print (_n)
 "
 

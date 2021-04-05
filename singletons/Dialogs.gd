@@ -52,3 +52,4 @@ func _on_dialog_started():
 func _on_dialog_ended():
 	active = false
 	emit_signal("dialog_ended")
+	

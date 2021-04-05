@@ -172,6 +172,7 @@ func despawn():  #this code breaks
 	blood.global_position = global_position
 	hide()
 	yield(get_tree().create_timer(5.0), "timeout")
+	#Update this code to update player position
 	get_tree().reload_current_scene() #This code reboots the game
 	pass
 

@@ -30,7 +30,7 @@ THE DEBUG SINGLETON
 """
 #Add signal
 func _ready():
-	#start_debug()
+	start_debug()
 	#stop_debug()
 	"""
 	Error catcher
@@ -68,7 +68,7 @@ func _process(_delta):
 	Enemy_debug = 'Enemy debug:' + str(Debug.enemy) + str('Killcount:' ,kill_count)
 	Autosave_debug = Autosave_debug
 	
-	Network_debug = "" #str(Networking.debug ) 
+	Network_debug = str(Networking.debug ) 
 	show_debug() 
 
 
@@ -94,6 +94,7 @@ func stop_debug():
 		Ram_debug= null
 		FPS_debug= null
 		Enemy_debug= null
+		Network_debug = null
 
 func start_debug(): 
 	#creates and loads dynamic fonts

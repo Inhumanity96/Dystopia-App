@@ -22,18 +22,18 @@ func _ready():
 	input_color.add_item("Yellow")
 	
 	# Set default hostname
-	input_hostname.text = Networking.DEFAULT_HOSTNAME
+	#input_hostname.text = Networking.DEFAULT_HOSTNAME
 	pass
 
 # Callback function for "Start!" button
 func _on_button_login_pressed(): #others join
 	
 	# Store information about spaceship color and player name #modify #spaceship colour to player colour
-	Networking.cfg_color = input_color.text
-	Networking.cfg_player_name = input_player.text
+	#Networking.cfg_color = input_color.text
+	#Networking.cfg_player_name = input_player.text
 	
 	# Lookup hostname and store resolved IP
-	Networking.cfg_server_ip = IP.resolve_hostname(input_hostname.text)
+	#Networking.cfg_server_ip = IP.resolve_hostname(input_hostname.text)
 	
 	# Change to client scene
 	if get_tree().change_scene("res://New game code and features/multiplayer/scenes/client.tscn") != OK:

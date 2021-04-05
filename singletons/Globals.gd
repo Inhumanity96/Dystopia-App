@@ -21,9 +21,11 @@ var prev_scene
 var next_scene = null
 onready var curr_scene = get_tree().get_current_scene().get_name()
 onready var os = str(OS.get_name())
+onready var kill_count = 0
 var player  = null
 var enemy = null
 var enemy_debug
+
 var Debug = null
 
 # warning-ignore:unused_class_variable

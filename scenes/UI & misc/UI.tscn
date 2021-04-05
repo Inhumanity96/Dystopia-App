@@ -17,7 +17,6 @@
 [ext_resource path="res://resources/misc/btn-slash.png" type="Texture" id=15]
 [ext_resource path="res://resources/misc/arrow.png" type="Texture" id=16]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 100 )
 

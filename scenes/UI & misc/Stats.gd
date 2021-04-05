@@ -18,7 +18,13 @@ func _input(event):
 			grab_focus()
 			_update_quest_listing()
 			_update_item_listing()
+			_update_killcount()
 			
+
+func _update_killcount():
+	$VBoxContainer/HBoxContainer/Inventory/Kill_count.text = 'killcount: '+str (Globals.kill_count)
+
+
 func _update_quest_listing():
 	var text = ""
 	text += "Started:\n"
