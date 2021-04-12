@@ -1,4 +1,4 @@
-# Dystopia-App-Stabe v1.0
+# Dystopia-App-Stable v1.0
 ''''
 Documentation by INhumanity_arts 
 
