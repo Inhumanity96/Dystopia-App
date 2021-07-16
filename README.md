@@ -3,9 +3,9 @@
 Documentation by INhumanity_arts 
 
 ''''
-I Added a couple of New funtions and Global variables to help in coding
-(1) Music.shuffle()
-	This shuffles a selected music playlist (dictionary). It is in the Music singleton 
+FEATURES
+(1) Auto Music shuffle
+	This shuffles a selected music playlist (dictionary). It is in the Music singleton and uses the shuffle( function)
 
 (2)Globals.comicbook[1]
 	This is a shortcut for calling the comicbook scenes. use the change_scene_to(load(...INSERT ...)) to call it. 
@@ -27,26 +27,32 @@ I Added a couple of New funtions and Global variables to help in coding
 
 (7) Enemy kill count
 
-(8) Twitter Login
+(8) Twitter Login & Comments
 
 (9) Blood and smoke Particle effects 
 
-(10) Touch input maps for android (zoom button), updated Scroll function for comic book 
+(10)Touch input maps for android (zoom button), updated Scroll function for comic book 
+	Added multitouch gestures for android
+	-swipe to change panel
+	-Double tap to zoom
+(11) Watch Anime:
+	  Stream Dystopia Anime from the app
 
 -Features to Fix
 	-Enemy Animation And Better ai
-	-Swipe Gestures for Comicbooks
-
-
 	-Fix up Game's spawnpoints (look at the Exit code in the Temple interior scene)
 	-Fix up game's assets and animation
 	-auto enemy spawner
 	-Idol autosave
 	-A better state machine
 	-Cinematic video loading code system
+	-changing pages centers new page 
+	-Multitouch settings in control
+	-Better Combat System
 
 
 -Features to Add
+	-Hints system
 	-Expanded Dialogue System
 	-update control art with new button maps
 	-Ingame Tokens	
@@ -63,11 +69,11 @@ I Added a couple of New funtions and Global variables to help in coding
 	
 
 -Global scenes system
-Spritesheet animation
+Spritesheet animation upgrade
 -enemy attack
 -enemy death 
 
-Art
+Art upgrade
 -
 
 -NPC_2 Quests
@@ -81,7 +87,6 @@ Art
 -Rig with mixamo
 
 Sounds
--Backup sounds folder
 -add attack sfx
 
 [![Watch a playtest demo video](https://img.youtube.com/vi/WLTgP-Axb-g/hqdefault.jpg)](https://youtu.be/WLTgP-Axb-g)

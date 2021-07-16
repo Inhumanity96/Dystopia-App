@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resources/Environment Tilesets & Tilemaps/sign posts.webp" type="Texture" id=1]
+[ext_resource path="res://scenes/props/signpost.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 15.7781
+height = 92.185
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 24.562
+height = 252.134
+
+[node name="signpost" type="Area2D"]
+position = Vector2( 106.908, 32.0724 )
+monitorable = false
+script = ExtResource( 2 )
+shown = -40
+dialogue = "Dialogue Clicked"
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 22.0159, 28.6115 )
+scale = Vector2( 2.45874, 2.09146 )
+texture = ExtResource( 1 )
+offset = Vector2( -4.00327, -6.48877 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 104.177, 23.8059 )
+rotation = -0.0243961
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2( -91.1952, 23.9809 )
+rotation = -0.0243961
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2( 11.0283, 8.42903 )
+rotation = -1.56958
+shape = SubResource( 2 )

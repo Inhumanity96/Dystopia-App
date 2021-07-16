@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/hit05.ogg-ba5462ecd867fdea1762de67e1aeaa16.oggstr"
+
+[deps]
+
+source_file="res://sounds/hit05.ogg"
+dest_files=[ "res://.import/hit05.ogg-ba5462ecd867fdea1762de67e1aeaa16.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,134 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/UI & misc/Joystick circle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://resources/Buttons/menu.png" type="Texture" id=2]
+[ext_resource path="res://resources/misc/btn-mask.png" type="BitMap" id=3]
+[ext_resource path="res://scenes/UI & misc/TouchInterface.gd" type="Script" id=4]
+[ext_resource path="res://scenes/UI & misc/joystick v2.gd" type="Script" id=5]
+[ext_resource path="res://resources/misc/btn-interact.png" type="Texture" id=11]
+[ext_resource path="res://resources/Buttons/comics.png" type="Texture" id=12]
+[ext_resource path="res://resources/misc/btn-stats.png" type="Texture" id=13]
+[ext_resource path="res://resources/misc/btn-roll.png" type="Texture" id=14]
+[ext_resource path="res://resources/misc/arrow.png" type="Texture" id=15]
+[ext_resource path="res://resources/misc/btn-slash.png" type="Texture" id=16]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30, 100 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 50.0
+
+[node name="TouchInterface" type="Node2D"]
+modulate = Color( 1, 1, 1, 0.698039 )
+script = ExtResource( 4 )
+_control = "direction"
+
+[node name="menu" type="TouchScreenButton" parent="."]
+modulate = Color( 0, 0, 0, 1 )
+position = Vector2( 14.5111, 21.527 )
+scale = Vector2( 0.607283, 0.565069 )
+normal = ExtResource( 2 )
+action = "menu"
+
+[node name="interact" type="TouchScreenButton" parent="."]
+position = Vector2( 1073.75, 245.527 )
+normal = ExtResource( 11 )
+bitmask = ExtResource( 3 )
+action = "interact"
+visibility_mode = 1
+
+[node name="comics" type="TouchScreenButton" parent="."]
+position = Vector2( 1103.5, 113.137 )
+rotation = 0.370864
+scale = Vector2( 0.9, 0.9 )
+normal = ExtResource( 12 )
+bitmask = ExtResource( 3 )
+action = "comics"
+visibility_mode = 1
+
+[node name="stats" type="TouchScreenButton" parent="."]
+pause_mode = 2
+position = Vector2( 1110.48, 29.2283 )
+normal = ExtResource( 13 )
+bitmask = ExtResource( 3 )
+action = "pause"
+visibility_mode = 1
+
+[node name="roll" type="TouchScreenButton" parent="."]
+position = Vector2( 904.39, 476.15 )
+scale = Vector2( 1.29269, 1.29269 )
+normal = ExtResource( 14 )
+bitmask = ExtResource( 3 )
+passby_press = true
+action = "roll"
+visibility_mode = 1
+
+[node name="slash" type="TouchScreenButton" parent="."]
+position = Vector2( 1014.57, 361.592 )
+scale = Vector2( 1.64391, 1.64391 )
+normal = ExtResource( 16 )
+bitmask = ExtResource( 3 )
+passby_press = true
+action = "attack"
+visibility_mode = 1
+
+[node name="right" type="TouchScreenButton" parent="."]
+position = Vector2( 243.367, 397.53 )
+scale = Vector2( 1.5, 1.5 )
+normal = ExtResource( 15 )
+shape = SubResource( 1 )
+passby_press = true
+action = "move_right"
+visibility_mode = 1
+
+[node name="up" type="TouchScreenButton" parent="."]
+position = Vector2( 139.62, 424.503 )
+rotation = -1.5708
+scale = Vector2( 1.5, 1.5 )
+normal = ExtResource( 15 )
+shape = SubResource( 1 )
+passby_press = true
+action = "move_up"
+visibility_mode = 1
+
+[node name="left" type="TouchScreenButton" parent="."]
+position = Vector2( 165.886, 531.368 )
+rotation = -3.14159
+scale = Vector2( 1.5, 1.5 )
+normal = ExtResource( 15 )
+shape = SubResource( 1 )
+passby_press = true
+action = "move_left"
+visibility_mode = 1
+
+[node name="down" type="TouchScreenButton" parent="."]
+position = Vector2( 267.462, 499.127 )
+rotation = 1.5708
+scale = Vector2( 1.5, 1.5 )
+normal = ExtResource( 15 )
+shape = SubResource( 1 )
+passby_press = true
+action = "move_down"
+visibility_mode = 1
+
+[node name="Joystick" type="Control" parent="."]
+margin_left = 203.651
+margin_top = 467.955
+margin_right = 243.651
+margin_bottom = 507.955
+mouse_filter = 1
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="joystick_circle" parent="Joystick" instance=ExtResource( 1 )]
+position = Vector2( 0, 0 )
+shape = SubResource( 2 )
+shape_centered = false
+circle_size = 80
+
+[node name="joystick_circle2" parent="Joystick" instance=ExtResource( 1 )]
+modulate = Color( 1, 1, 1, 0.454902 )
+position = Vector2( 0, 4 )
+circle_size = 156

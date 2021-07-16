@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://resources/props/mushroom_small.webp" type="Texture" id=1]
+
+[node name="mushroom" type="StaticBody2D"]
+z_index = -1
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 19.5002, 75.4598 )
+scale = Vector2( 2.09994, 1.57071 )
+texture = ExtResource( 1 )
+offset = Vector2( 0.914429, -61.8737 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 28, 4.00003 )
+scale = Vector2( 0.36, 0.36 )
+polygon = PoolVector2Array( -381.5, 1.73999, -341.5, -6.26001, -169.5, 29.74, -233, 209.664, 150.333, 204.108, 111.444, 20.7749, 198.5, -6.26001, 330.5, -42.26, 402.5, -146.26, 329.119, -265.521, 177.119, -313.521, -18.8806, -309.521, -218.881, -281.521, -366.881, -221.521, -413.5, -102.26 )

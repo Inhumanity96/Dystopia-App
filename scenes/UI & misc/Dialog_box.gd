@@ -29,6 +29,9 @@ func show_dialog(new_text, speaker):
 	$anims.play("appear")
 	pass
 
+func hide_dialogue(): #my code
+	$anims.play("disappear")
+
 func _input(event):
 	if event.is_action_pressed("interact"):
 		match $anims.assigned_animation:

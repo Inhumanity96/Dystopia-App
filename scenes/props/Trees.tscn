@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/Environment Tilesets & Tilemaps/trees_1.webp" type="Texture" id=1]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 51.0803
+height = 73.756
+
+[node name="Trees" type="StaticBody2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 43.3974, -92.5507 )
+scale = Vector2( 2.45874, 2.09146 )
+texture = ExtResource( 1 )
+offset = Vector2( -4.00327, -6.48877 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 32.3247, -94.8365 )
+rotation = -0.0243961
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2( 93.976, -102.221 )
+rotation = -0.0243961
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="."]
+position = Vector2( -39.4057, -100.134 )
+rotation = -0.0243961
+shape = SubResource( 2 )

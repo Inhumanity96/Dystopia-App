@@ -22,10 +22,12 @@ func _ready():
 
 
 # You should probably rewrite this.
+#no i won't
 func _on_health_changed(new_hp):
 	for child in get_children():
-		child.queue_free()
+		child.queue_free() #removes life
 	for i in new_hp:
 		var heart = heart_scene.instance()
-		add_child(heart)
+		call_deferred('add_child',heart) #adds more life
+		#add_child(heart) 
 	

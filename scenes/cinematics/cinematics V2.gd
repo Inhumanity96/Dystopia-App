@@ -1,7 +1,9 @@
 extends Control
 
 
-
+"""
+THIS CODE BLOCK DOES NOT WORK> REWRITE IT 
+"""
 # *************************************************
 # godot3-Dystopia-game by INhumanity_arts
 # Released under MIT License
@@ -34,7 +36,7 @@ var cinematic = {
 	}
 
 """
-CINEMATICS
+CINEMATICS . FIX UP AND ADD YOUTUBE DOWNLOADS
 """
 ###export your video as ogv format
 #update code to reference all in game animations
@@ -44,7 +46,8 @@ func _enter_tree():
 
 func _ready(): 
 	os = Globals.os
-	vid_stream = ResourceLoader.load_interactive(cinematic [0]).get_resource() #loads resource into memory 
+	vid_stream = ResourceLoader.load_interactive(cinematic [0])# ResourceLoader.load_interactive(cinematic [0]) #.get_resource() #loads resource into memory 
+	#print (vid_stream.get_resource())
 	if vid_stream == null:
 		push_error('vid_stream is null')
 	
@@ -60,14 +63,14 @@ func _process(_delta):
 
 func _on_skip_pressed():
 	videoplayer.stop()
-	get_tree().change_scene_to(load(Globals.title_screen))
+	get_tree().change_scene_to((Globals.title_screen))
 
 #streamer for android and ios
 func OS_play(_stream): #buggy
 	if os == str('Android'):
-		
+		print ('playing android')
 		#OS.native_video_play (stream,20,'','') 
-		Debug.misc_debug += 'os playing'
+		#Debug.misc_debug += 'os playing'
 		##if OS. native_video_stop() == true:
 		#	emit_signal("os_finished_playing") ; print ('os finished signal')
 			#Music.clear() 
@@ -109,13 +112,13 @@ func _on_VideoPlayer_finished(): #code breaks here
 	#vid_stream.get_stage()
 	#Video_Stream(vid_stream)   
 	
-	get_tree().change_scene_to(load(Globals.title_screen))
+	get_tree().change_scene_to((Globals.title_screen))
 
 
 
 func _on_Timer_timeout():
 	push_error('Cinematic scene broken')
-	get_tree().change_scene_to(load(Globals.title_screen))
+	get_tree().change_scene_to((Globals.title_screen))
 
 
 func _on_Cinematics_os_finished_playing():

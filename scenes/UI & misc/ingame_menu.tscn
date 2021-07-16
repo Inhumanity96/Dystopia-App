@@ -1,115 +1,11 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/Comic_Andy.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://scenes/UI & misc/ingame_menu.gd" type="Script" id=2]
 
-[sub_resource type="GDScript" id=1]
-script/source = "extends Control
-
-export var enabled = true
-
-\"\"\"
-The game menu script. 
-\"\"\"
-#update code to arrange well in UI and on the game title screen
-
-onready var continue_game = get_node(\"MarginContainer/ScrollContainer/HSeparator/continue\") 
-onready var game_menu = get_node(\"MarginContainer\")
-
-
-export(String, FILE, \"*.tscn\") var initial_level = \"res://scenes/levels/Outside.tscn\"
-
-func _enter_tree():
-	hide()
-
-func _ready():
-
-	if Globals.load_game(true) and continue_game != null:
-		continue_game.disabled = false 
-	else:
-		continue_game.disabled = true
-
-func _input(event): #Toggles menu visibility on/off
-	if event.is_action_pressed(\"menu\") and enabled == false:
-		enabled = true 
-		show()
-		Music._notification(NOTIFICATION_PAUSED)
-		set_focus_mode(2)
-		#if Globals.curr_scene != 'Menu': 
-			#get_tree().set_pause(true) #pauses the game if menu is called
-	elif event.is_action_pressed(\"menu\") and enabled == true:
-		enabled = false
-		hide()
-		Music._notification(NOTIFICATION_UNPAUSED)
-		set_focus_mode(0)
-		#get_tree().set_pause(false)
-
-
-
-func _on_continue_pressed():
-	Globals.load_game()
-	if Globals.current_level != \"\":
-		if get_tree().change_scene(Globals.current_level) != OK:
-			push_error(\"Error changing scenes\")
-	else:
-		push_error(\"Error: current_level shouldn't be empty\")
-	pass # Replace with function body.
-
-
-func _on_new_game_pressed():
-	if initial_level != \"\":
-		Globals.current_level = initial_level
-		if Globals.save_game() == false:
-			push_error(\"Error saving game\")
-		var err = get_tree().change_scene(initial_level)
-		if err != OK:
-			push_error(\"Error changing scene: %s\" % err)
-	else:
-		push_error(\"Error: initial_level shouldn't be empty\")
-		
-	pass # Replace with function body.
-
-
-
-func _on_Menu_button_toggled(button_pressed):
-	game_menu.show() if button_pressed else game_menu.hide() ;return
-
-
-	#if  button_pressed :
-	#	game_menu.show()
-	#else :
-	#	game_menu.hide()
-
-
-func _on_comics_pressed():
-	#print_debug ('comics pressed')
-	get_tree().change_scene_to(load ('res://scenes/UI & misc/Comics____2.tscn'))
-
-
-func _on_controls_pressed():
-	get_tree().change_scene_to(load ('res://scenes/UI & misc/Controls.tscn'))
-
-
-
-
-func _on_quit_Button_pressed():
-	if get_tree().get_current_scene().get_name() == 'Menu':
-		get_tree().quit()
-	else:
-		get_tree().change_scene_to(load ('res://scenes/Title screen.tscn'))
-	#print ('quit button pressed')
-
-
-
-func _on_multiplayer_pressed():
-	get_tree().change_scene_to(load ('res://New game code and features/multiplayer/scenes/login.tscn'))
-
-func _exit_tree():
-	Music._notification(NOTIFICATION_UNPAUSED) #resets music when exiting scene tree
-
-
-func _on_Shop_pressed():
-	get_tree().change_scene(Globals.shop)
-"
+[sub_resource type="DynamicFont" id=1]
+size = 90
+font_data = ExtResource( 1 )
 
 [sub_resource type="DynamicFont" id=2]
 size = 90
@@ -119,20 +15,15 @@ font_data = ExtResource( 1 )
 size = 90
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=4]
-size = 90
-font_data = ExtResource( 1 )
-
-[node name="Menu " type="Control"]
+[node name="Menu " type="Container"]
 margin_left = 28.0
 margin_top = 116.0
 margin_right = 1210.0
 margin_bottom = 715.0
-script = SubResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-enabled = false
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 444.987
@@ -144,15 +35,15 @@ __meta__ = {
 }
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer"]
-margin_right = 431.0
+margin_right = 325.0
 margin_bottom = 667.0
 scroll_horizontal_enabled = false
-scroll_vertical = 7
+scroll_vertical = 1
 
 [node name="HSeparator" type="VBoxContainer" parent="MarginContainer/ScrollContainer"]
-margin_top = -7.0
+margin_top = -1.0
 margin_right = 313.0
-margin_bottom = 773.0
+margin_bottom = 779.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -162,7 +53,7 @@ margin_right = 313.0
 margin_bottom = 108.0
 focus_next = NodePath("../music on & off")
 focus_previous = NodePath("../chap 2 ")
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "comics"
 flat = true
@@ -174,7 +65,7 @@ margin_bottom = 220.0
 focus_next = NodePath("../music on & off")
 focus_previous = NodePath("../chap 2 ")
 mouse_filter = 1
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "new game"
 flat = true
@@ -185,7 +76,7 @@ margin_right = 313.0
 margin_bottom = 332.0
 focus_next = NodePath("../music on & off")
 focus_previous = NodePath("../chap 2 ")
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "continue"
 flat = true
@@ -199,7 +90,7 @@ focus_neighbour_top = NodePath("../mini game")
 focus_neighbour_bottom = NodePath("../quit Button")
 focus_next = NodePath("../quit Button")
 focus_previous = NodePath("../mini game")
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 shortcut_in_tooltip = false
 text = "Multiplayer"
@@ -211,7 +102,7 @@ margin_right = 313.0
 margin_bottom = 556.0
 focus_next = NodePath("../music on & off")
 focus_previous = NodePath("../chap 2 ")
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Anime"
 flat = true
@@ -225,7 +116,7 @@ focus_neighbour_top = NodePath("../mini game")
 focus_neighbour_bottom = NodePath("../quit Button")
 focus_next = NodePath("../quit Button")
 focus_previous = NodePath("../mini game")
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 shortcut_in_tooltip = false
 text = "Controls"
@@ -239,7 +130,7 @@ margin_bottom = 780.0
 focus_neighbour_top = NodePath("../music on & off")
 focus_next = NodePath("../chap 1 ")
 focus_previous = NodePath("../music on & off")
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "quit"
 flat = true

@@ -1,8 +1,11 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://scenes/characters/Enemy.gd" type="Script" id=1]
 [ext_resource path="res://resources/FX/pj.png" type="Texture" id=2]
 [ext_resource path="res://scenes/UI & misc/ItemSpawner.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/items/Item.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/items/coins.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/items/extra life.tscn" type="PackedScene" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 35.8589
@@ -1215,7 +1218,11 @@ collision_mask = 32
 shape = SubResource( 18 )
 
 [node name="item_spawner" parent="." instance=ExtResource( 3 )]
+spawn_1 = ExtResource( 4 )
+spawn_2 = ExtResource( 5 )
+spawn_3 = ExtResource( 6 )
 item_type = "Bandit Head"
+random_spawn = true
 
 [node name="enemy_eyesight" type="Area2D" parent="."]
 position = Vector2( 6.30249, -86.9744 )

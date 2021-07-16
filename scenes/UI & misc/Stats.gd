@@ -1,8 +1,8 @@
 extends PanelContainer
 
-var enabled = false
-
-
+export (bool) var enabled #= false
+signal not_enabled
+signal enabled
 	
 func _ready():
 	Globals.save_game()
@@ -10,19 +10,31 @@ func _ready():
 	hide()
 
 func _input(event):
-	if event.is_action_pressed("pause"):
-		enabled = !enabled
-		visible = enabled
-		get_tree().paused = enabled
-		if enabled:
+	if event.is_action_pressed("pause")  && enabled == false: #this code breaks
+			emit_signal("not_enabled")
+			enabled = true
+			visible = enabled
+			get_tree().paused = enabled
 			grab_focus()
 			_update_quest_listing()
 			_update_item_listing()
 			_update_killcount()
-			
+			return enabled
+			pass
+	if event.is_action_pressed("pause") && enabled == true:
+			enabled = false
+			emit_signal('enabled')
+			visible = enabled
+			hide()
+			get_tree().paused = false
+			#print (enabled)
+			return enabled
 
-func _update_killcount():
-	$VBoxContainer/HBoxContainer/Inventory/Kill_count.text = 'killcount: '+str (Globals.kill_count)
+
+
+
+func _update_killcount(): #Updates killcount and Suds
+	$VBoxContainer/HBoxContainer/Inventory/Kill_count.text = 'killcount: '+str (Globals.kill_count) + ' Suds: ' + str (Globals.Suds)
 
 
 func _update_quest_listing():
@@ -48,10 +60,6 @@ func _update_item_listing():
 	pass
 
 
-
-func _on_Exit_pressed():
-	quit_game()
-	pass # Replace with function body.
 
 func _notification(what):  #i removed this notification functioncode from the game cuz i don't know what it does yet
 	if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):

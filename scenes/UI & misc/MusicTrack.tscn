@@ -38,8 +38,8 @@ func _process(_delta): #auto delete self if not being used
 		Music.play(music_track)
 		
 	if shuffle == true:
-		Music.shuffle()
-	
+		#Music.shuffle()
+		pass
 
 
 func reset(): #reset music instructions upon deletion

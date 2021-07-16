@@ -1,0 +1,235 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://fonts/Comic Book.otf" type="DynamicFontData" id=1]
+[ext_resource path="res://fonts/dialog.tres" type="DynamicFont" id=2]
+[ext_resource path="res://New game code and features/form/generic_form.gd" type="Script" id=3]
+[ext_resource path="res://resources/illustrations/coins silver.png" type="Texture" id=5]
+[ext_resource path="res://fonts/DigitalStripBB_BoldItal.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://fonts/Comic Book.otf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://fonts/Comic Book.otf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+use_filter = true
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFontData" id=5]
+font_path = "res://fonts/Comic Book.otf"
+
+[sub_resource type="DynamicFont" id=6]
+size = 37
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
+font_data = SubResource( 5 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 30
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://fonts/Comic Book.otf"
+
+[sub_resource type="DynamicFont" id=9]
+use_filter = true
+font_data = SubResource( 8 )
+
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://fonts/Comic Book.otf"
+
+[sub_resource type="DynamicFont" id=11]
+use_filter = true
+font_data = SubResource( 10 )
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://fonts/Comic Book.otf"
+
+[sub_resource type="DynamicFont" id=13]
+use_filter = true
+font_data = SubResource( 12 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 21
+use_filter = true
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 64
+outline_size = 5
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 6 )
+
+[node name="form" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 6.0
+margin_right = 1272.0
+margin_bottom = 545.0
+color = Color( 0.27451, 0.27451, 0.27451, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 486.445
+margin_top = 51.7433
+margin_right = 899.445
+margin_bottom = 394.743
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ui" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="grid" type="GridContainer" parent="ui"]
+margin_left = 61.8387
+margin_top = 47.5683
+margin_right = 474.839
+margin_bottom = 297.568
+rect_scale = Vector2( 2.12613, 2.12613 )
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label_player" type="Label" parent="ui/grid"]
+margin_right = 243.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Your name:"
+
+[node name="text_player" type="LineEdit" parent="ui/grid"]
+margin_left = 247.0
+margin_right = 377.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = SubResource( 4 )
+text = "Player"
+
+[node name="label_color" type="Label" parent="ui/grid"]
+margin_top = 56.0
+margin_right = 243.0
+margin_bottom = 104.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Team Color:"
+
+[node name="input_color" type="OptionButton" parent="ui/grid"]
+margin_left = 247.0
+margin_top = 56.0
+margin_right = 377.0
+margin_bottom = 104.0
+
+[node name="label_hostname" type="Label" parent="ui/grid"]
+margin_top = 108.0
+margin_right = 243.0
+margin_bottom = 148.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "Hostname:"
+
+[node name="text_hostname" type="LineEdit" parent="ui/grid"]
+margin_left = 247.0
+margin_top = 108.0
+margin_right = 377.0
+margin_bottom = 148.0
+rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = SubResource( 9 )
+text = "192.168.10.111"
+
+[node name="label_spacer" type="Label" parent="ui/grid"]
+margin_top = 159.0
+margin_right = 243.0
+margin_bottom = 173.0
+
+[node name="button_login" type="Button" parent="ui/grid"]
+margin_left = 247.0
+margin_top = 152.0
+margin_right = 377.0
+margin_bottom = 180.0
+custom_fonts/font = SubResource( 11 )
+text = "Play!"
+
+[node name="label_spacer2" type="Label" parent="ui/grid"]
+margin_top = 191.0
+margin_right = 243.0
+margin_bottom = 205.0
+
+[node name="button_start_server" type="Button" parent="ui/grid"]
+margin_left = 247.0
+margin_top = 184.0
+margin_right = 377.0
+margin_bottom = 212.0
+custom_fonts/font = SubResource( 13 )
+text = "Start Server"
+
+[node name="label_spacer3" type="Label" parent="ui/grid"]
+margin_top = 226.0
+margin_right = 243.0
+margin_bottom = 240.0
+
+[node name="Twitter Button" type="Button" parent="ui/grid"]
+margin_left = 247.0
+margin_top = 216.0
+margin_right = 377.0
+margin_bottom = 250.0
+custom_fonts/font = SubResource( 14 )
+text = "Twitter"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ui"]
+visible = false
+margin_left = 75.0638
+margin_top = 389.842
+margin_right = 336.064
+margin_bottom = 570.842
+custom_fonts/font = ExtResource( 2 )
+custom_colors/font_color = Color( 0.992157, 1, 0, 1 )
+text = "Use WASD keys to move, SPACEBAR to fire on PC. You will respawn upon death."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back_Button" type="Button" parent="."]
+margin_left = 1057.21
+margin_top = 31.748
+margin_right = 1222.21
+margin_bottom = 115.748
+custom_fonts/font = SubResource( 15 )
+text = "Back"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="ui/grid/button_login" to="." method="_on_button_login_pressed"]
+[connection signal="pressed" from="ui/grid/button_start_server" to="." method="_on_button_start_server_pressed"]
+[connection signal="pressed" from="ui/grid/Twitter Button" to="." method="_on_Twitter_Button_pressed"]
+[connection signal="pressed" from="Back_Button" to="." method="_on_Back_Button_pressed"]

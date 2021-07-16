@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://resources/FX/Blood splatter fx 2.webp" type="Texture" id=1]
-[ext_resource path="res://music/blood-spilling.ogg" type="AudioStream" id=2]
+[ext_resource path="res://sounds/blood-spilling.ogg" type="AudioStream" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 particles_animation = true
@@ -24,14 +24,11 @@ script/source = "extends CPUParticles2D
 
 func _ready():
 	emitting = true
-	yield(get_tree().create_timer(0.8), \"timeout\")
-	#connect('timeout', self, '_on_Timer_timeout') 
 	$sloosh.play(0.0)
-	remove()
-
-
-func remove():
-	self.queue_free()
+	yield(get_tree().create_timer(1.0), \"timeout\")
+	#connect('timeout', self, '_on_Timer_timeout') 
+	
+	queue_free()
 "
 
 [node name="Blood_splat_fx" type="CPUParticles2D"]
@@ -66,4 +63,4 @@ script = SubResource( 4 )
 
 [node name="sloosh" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 2 )
-volume_db = 10.0
+volume_db = -4.0

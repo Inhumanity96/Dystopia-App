@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/cinematics/cinematics V2.gd" type="Script" id=1]
+[ext_resource path="res://scenes/cinematics/cinematics.gd" type="Script" id=1]
 [ext_resource path="res://singletons/Title animation.tres" type="Animation" id=2]
 [ext_resource path="res://resources/Buttons/bck.png" type="Texture" id=3]
 [ext_resource path="res://music/wind_2.ogg" type="AudioStream" id=4]
@@ -11,7 +11,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Intro_animation" type="AnimationPlayer" parent="."]
+[node name="animation player" type="AnimationPlayer" parent="."]
 autoplay = "intro_animation"
 anims/intro_animation = ExtResource( 2 )
 
@@ -28,6 +28,7 @@ __meta__ = {
 stream = ExtResource( 4 )
 
 [node name="skip" type="TextureButton" parent="."]
+visible = false
 modulate = Color( 0.584314, 0.152941, 0.152941, 1 )
 margin_left = 571.07
 margin_top = 557.632

@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://New game code and features/multiplayer/scripts/effects/explosion.gd" type="Script" id=1]
 [ext_resource path="res://New game code and features/multiplayer/images/damage.png" type="Texture" id=2]
-[ext_resource path="res://New game code and features/multiplayer/audio/spaceship_destroyed.wav" type="AudioStream" id=3]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 0.618164, 0, 1, 1, 0.47451, 0, 0.0025098 )
@@ -42,6 +41,5 @@ process_material = SubResource( 5 )
 texture = ExtResource( 2 )
 
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
 volume_db = 5.0
 autoplay = true

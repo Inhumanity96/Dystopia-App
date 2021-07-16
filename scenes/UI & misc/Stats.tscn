@@ -36,14 +36,14 @@ align = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 47.0
 margin_right = 1240.0
-margin_bottom = 627.0
+margin_bottom = 680.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Quests" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_right = 618.0
-margin_bottom = 580.0
+margin_bottom = 633.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -58,7 +58,7 @@ align = 1
 [node name="Details" type="Label" parent="VBoxContainer/HBoxContainer/Quests"]
 margin_top = 47.0
 margin_right = 618.0
-margin_bottom = 580.0
+margin_bottom = 633.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -70,7 +70,7 @@ Quest 4"
 [node name="Inventory" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 622.0
 margin_right = 1240.0
-margin_bottom = 580.0
+margin_bottom = 633.0
 size_flags_horizontal = 3
 
 [node name="Title" type="Label" parent="VBoxContainer/HBoxContainer/Inventory"]
@@ -83,7 +83,7 @@ align = 1
 [node name="Details" type="Label" parent="VBoxContainer/HBoxContainer/Inventory"]
 margin_top = 47.0
 margin_right = 618.0
-margin_bottom = 311.0
+margin_bottom = 338.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -91,20 +91,11 @@ text = "Item 1
 "
 
 [node name="Kill_count" type="Label" parent="VBoxContainer/HBoxContainer/Inventory"]
-margin_top = 315.0
+margin_top = 342.0
 margin_right = 618.0
-margin_bottom = 580.0
+margin_bottom = 633.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
 text = "Item 1
 "
-
-[node name="Exit" type="Button" parent="VBoxContainer"]
-margin_top = 631.0
-margin_right = 1240.0
-margin_bottom = 680.0
-custom_fonts/font = ExtResource( 2 )
-text = "EXIT"
-flat = true
-[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_Exit_pressed"]

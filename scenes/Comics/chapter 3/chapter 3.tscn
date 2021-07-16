@@ -1,32 +1,110 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=23 format=2]
 
-[ext_resource path="res://scenes/Comics/chapter 3/cover page.webp" type="Texture" id=1]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 1.webp" type="Texture" id=2]
-[ext_resource path="res://scenes/Comics/chapter 3/cover 2.webp" type="Texture" id=3]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 4.webp" type="Texture" id=4]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 15.webp" type="Texture" id=5]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 17.webp" type="Texture" id=6]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 14.webp" type="Texture" id=7]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 5.webp" type="Texture" id=8]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 7.webp" type="Texture" id=9]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 11.webp" type="Texture" id=10]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 18.webp" type="Texture" id=11]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 13.webp" type="Texture" id=12]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 10.webp" type="Texture" id=13]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 21.webp" type="Texture" id=14]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 9.webp" type="Texture" id=15]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 3.webp" type="Texture" id=16]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 20.webp" type="Texture" id=17]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 16.webp" type="Texture" id=18]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 6.webp" type="Texture" id=19]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 2.webp" type="Texture" id=20]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 19.webp" type="Texture" id=21]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 8.webp" type="Texture" id=22]
-[ext_resource path="res://scenes/Comics/chapter 3/Pg 12.webp" type="Texture" id=23]
+[ext_resource path="res://scenes/Comics/chapter 3/Chapter 3 Kpo Kpo.webp" type="Texture" id=1]
 
-[sub_resource type="SpriteFrames" id=1]
+[sub_resource type="AtlasTexture" id=1]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=2]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1549, 0, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=3]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 3098, 0, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=4]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 4647, 0, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=5]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 6196, 0, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=6]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 1822, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=7]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1549, 1822, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=8]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 3098, 1822, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=9]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 4647, 1822, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=10]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 6196, 1822, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=11]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 3644, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=12]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1549, 3644, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=13]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 3098, 3644, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=14]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 4647, 3644, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=15]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 6196, 3644, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=16]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 0, 5466, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=17]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 1549, 5466, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=18]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 3098, 5466, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=19]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 4647, 5466, 1549, 1822 )
+
+[sub_resource type="AtlasTexture" id=20]
+flags = 4
+atlas = ExtResource( 1 )
+region = Rect2( 6196, 5466, 1549, 1822 )
+
+[sub_resource type="SpriteFrames" id=21]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 1 ), ExtResource( 2 ), ExtResource( 20 ), ExtResource( 16 ), ExtResource( 4 ), ExtResource( 8 ), ExtResource( 19 ), ExtResource( 9 ), ExtResource( 22 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 10 ), ExtResource( 23 ), ExtResource( 12 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 18 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 14 ) ],
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -36,5 +114,6 @@ animations = [ {
 "comics",
 ]]
 position = Vector2( 632.354, 376.309 )
-scale = Vector2( 0.424935, 0.424935 )
-frames = SubResource( 1 )
+scale = Vector2( 0.4, 0.4 )
+frames = SubResource( 21 )
+frame = 3

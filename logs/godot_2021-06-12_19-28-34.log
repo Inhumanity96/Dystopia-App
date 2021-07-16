@@ -1,0 +1,5 @@
+Godot Engine v3.2.3.stable.official - https://godotengine.org
+OpenGL ES 3.0 Renderer: Intel(R) HD Graphics 500
+ 
+**ERROR**: Drawing is only allowed inside NOTIFICATION_DRAW, _draw() function or 'draw' signal.
+   At: scene/2d/canvas_item.cpp:829:draw_circle() - Condition "!drawing" is true.

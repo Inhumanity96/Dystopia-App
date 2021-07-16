@@ -9,6 +9,7 @@ onready var network_label
 onready var comics_label
 onready var autosave_label
 onready var misc_label
+onready var globals_label
 
 #class_name Debug
 export (bool) var enabled 
@@ -25,6 +26,7 @@ onready var misc_debug = ''
 onready var kill_count = 0
 onready var enemy = ''
 onready var Network_debug =''
+onready var Globals_debug
 """
 THE DEBUG SINGLETON
 """
@@ -60,17 +62,22 @@ func _process(_delta):
 	#add more variables
 	enabled = true
 	Music_debug ='Music debug:' + (Music.music_debug)
-	Player_debug ='Player debug:'+ str(Globals.player) + 'Spawn point:' + str(Globals.spawnpoint) + 'Current level: ' + str(Globals.current_level.get_file()) 
+	Player_debug ='Player debug:'+ str(Globals.player) + 'Spawn point:' + str(Globals.spawnpoint) + 'Current level: ' + str(Globals.current_level) 
 	
 	#it uses the ram_mb funtion to convert bytes to mb
 	Ram_debug= ('Ram Used :'+ ((_ram_debug())) + 'mb') 
 	FPS_debug = 'FPS: '+ str(Engine.get_frames_per_second())
-	Enemy_debug = 'Enemy debug:' + str(Debug.enemy) + str('Killcount:' ,kill_count)
+	Enemy_debug = 'Enemy debug:' + str('Killcount:' , Globals.kill_count)
 	Autosave_debug = Autosave_debug
 	
-	Network_debug = str(Networking.debug ) 
+	Network_debug =  str(Networking.debug ) 
+	
+	
+	misc_debug = str(misc_debug)
+	Globals_debug='Direction type' + '/'+ str(Globals.direction_control)
+	
 	show_debug() 
-
+	
 
 
 
@@ -95,11 +102,13 @@ func stop_debug():
 		FPS_debug= null
 		Enemy_debug= null
 		Network_debug = null
-
+		misc_debug = null
+		enabled = false
 func start_debug(): 
+	enabled = true
 	#creates and loads dynamic fonts
 	var dynamic_font = DynamicFont.new()
-	dynamic_font.font_data = load ('res://fonts/spiritmedium.ttf')
+	dynamic_font.font_data = load('res://fonts/spiritmedium.ttf')
 	dynamic_font.size = 26
 	dynamic_font.outline_size = 2
 	dynamic_font.outline_color= Color(0,0,0,1)
@@ -130,6 +139,7 @@ func start_debug():
 	comics_label= Label.new()
 	autosave_label= Label.new()
 	misc_label =Label.new()
+	globals_label = Label.new()
 	vbox.add_child(music_label) #update code to use for loop
 	vbox.add_child(player_label)
 	vbox.add_child(ram_label)
@@ -139,6 +149,7 @@ func start_debug():
 	vbox.add_child(comics_label)
 	vbox.add_child(autosave_label)
 	vbox.add_child(misc_label)
+	vbox.add_child(globals_label)
 	#add font data #use label.rect_size.x and .y= 100 to manually increase label size
 	#vbox.ALIGN_CENTER #aligns vbox to center #fix code
 	music_label.add_font_override('font', dynamic_font) #adds dynamc font data
@@ -150,7 +161,7 @@ func start_debug():
 	comics_label.add_font_override('font', dynamic_font)
 	autosave_label.add_font_override('font', dynamic_font)
 	misc_label.add_font_override('font', dynamic_font)
-	
+	globals_label.add_font_override('font', dynamic_font)
 	
 
 
@@ -165,6 +176,7 @@ func show_debug():
 		comics_label.set_text  (Comics_debug)
 		autosave_label.set_text (Autosave_debug)
 		misc_label.set_text( misc_debug)
+		globals_label.set_text(Globals_debug)
 	if debug_panel != null and enabled: 
 		return
 	if debug_panel == null and !enabled :

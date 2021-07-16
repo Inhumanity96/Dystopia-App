@@ -10,9 +10,13 @@ script/source = "# *************************************************
 # information used by the music codes.
 # it only works with .ogg sound files
 # *************************************************
+\"\"\"
+THERE ARE TWO FUNCTIONS FOR PLAYING MUSIC TRACKS AND MUSIC PLAYLISTS
+\"\"\"
 extends Node
 #add more controls to this script, it breaks the singleton
 export (bool) var music_on 
+export (bool) var sfx_on
 
 export(String, FILE, \"*.ogg\") var music_track = \"\"
 
@@ -24,9 +28,47 @@ var playlist_one = {
 	4:'res://music/chuks-dane_chuks-dane-shoot-back.ogg',
 	5:'res://music/Astrolife chike san.ogg',
 	6:'res://music/chuks-dane_chuks-dane-new-breed-prod-base.ogg',
-	7:'res://music/a-2-3-groovy-bgm.ogg'
+	7:'res://music/a-2-3-groovy-bgm.ogg',
+	8:'res://music/Spooky-Chike-san song.ogg'
 }
+var comic_sfx = {
+	0: 'res://sounds/book_flip.1.ogg',
+	1:'res://sounds/book_flip.10.ogg',
+	2:'res://sounds/book_flip.2.ogg',
+	3:'res://sounds/book_flip.3.ogg',
+	4:'res://sounds/book_flip.4.ogg',
+	5:'res://sounds/book_flip.5.ogg',
+	6:'res://sounds/book_flip.6.ogg',
+	7:'res://sounds/book_flip.7.ogg',
+	8:'res://sounds/book_flip.8.ogg',
+	9:'res://sounds/book_flip.9.ogg'
+}
+
+var ui_sfx = {
+	0:'res://sounds/Menu1A.ogg',
+	1:'res://sounds/Menu1B.ogg',
+}
+
+
+var hit_sfx = {
+	0:'res://sounds/hit01.ogg',
+	1:'res://sounds/hit02.ogg',
+	2:'res://sounds/hit03.ogg',
+	3:'res://sounds/hit04.ogg',
+	4:'res://sounds/hit05.ogg',
+	5:'res://sounds/hit06.ogg',
+	6:'res://sounds/hit07.ogg',
+	7:'res://sounds/hit08.ogg',
+
+}
+
+var grass_sfx = {0:'res://sounds/Fantozzi-SandR3.ogg'}
+
+
+var _music
 onready var Music_streamer =get_node(\"A\")  #Refrences the music player node
+onready var  Music_streamer_2 =get_node(\"D\")
+onready var sfx_streamer 
 onready var track
 #create all your music actions here as animated nodes
 \"\"\"
@@ -47,16 +89,17 @@ onready var music_bus_2 = AudioServer.get_bus_index($B.bus)
 onready var music_bus = AudioServer.get_bus_index($A.bus)
 
 func _ready():
-	#music_on = true
-	randomize() #randomizes shuffle code seed
-	shuffle()
 	
-	
-	#play(music_track) #disabled for debugging
+	if music_on == true:
+		randomize() #randomizes shuffle code seed
+		shuffle(playlist_one) #disabled for debugging
+		_music = music_track.get_file()
+		play(music_track) #Not needed for release
+	elif music_on == false:
+		$A.stop()
+		pass
 
-	
 
-#create your signals and finctions in this node
 
 func _process(_delta):
 
@@ -65,34 +108,34 @@ func _process(_delta):
 	\"\"\"
 	_music_debug()
 	
-	
+
 	
 	\"\"\"
 	AUTO SHUFFLE
 	\"\"\"
-	
-	if Music_streamer.stream != null and int(Music_streamer.get_playback_position())==int(Music_streamer.get_stream().get_length()):
-		print ('autoshuffle')
-		shuffle() 
-		play(music_track)
-	#if music_track == '' && music_on == true:
-	#	shuffle()
-	#	play(music_track) #start code from here
-	
-	
-	
-	#play(music_track)
-	#organize music debug code
+	if Music_streamer != null:
+		if Music_streamer.stream != null and int(Music_streamer.get_playback_position())==int(Music_streamer.get_stream().get_length()):
+			print ('autoshuffle')
+			shuffle(playlist_one) 
+			play(music_track)
 
 
 func _music_debug():
-	if music_track != null && Music_streamer.stream != null:
-		var _o = str(Music_streamer.get_stream())
-		
-		var _p =(' Track: ' + str(music_track.get_file() ))
-		var _t = (('Time:' + str (int(Music_streamer.get_playback_position()))+'/'+ str(int(Music_streamer.get_stream().get_length()))) )
-		var _n =  str(get_tree().get_nodes_in_group('music_node'))
-		music_debug = (_n + _t +_p + _o)
+	if  music_on == true :
+		if music_track != null:
+			for child in get_children() :
+				if child is AudioStreamPlayer:
+					if child.stream != null: 
+				
+						
+						var stream = Music_streamer.get_stream()
+						var stream_length = int(stream.get_length())
+						var track = music_track.get_file()
+						var Playback_position = int(Music_streamer.get_playback_position())
+						music_debug = str(stream , track, Playback_position , '/', stream_length, sfx_streamer)
+
+
+
 
 func play(stream):
 	#kinda works
@@ -131,6 +174,7 @@ func _notification(what):
 	elif what == NOTIFICATION_PREDELETE:
 		AudioServer.set_bus_volume_db(music_bus,-100)
 		AudioServer.set_bus_volume_db(music_bus_2,-100)
+		music_on = false
 		print ('music off')
 
 
@@ -140,10 +184,10 @@ func _notification(what):
 \"\"\"
 MUSIC SHUFFLE
 \"\"\"
-func shuffle ():
+func shuffle (playlist):
 	music_track = ''
-	track = int(rand_range(-1,playlist_one.size())) #selects a random track number
-	music_track = playlist_one[track]
+	track = int(rand_range(-1,playlist.size())) #selects a random track number
+	music_track = playlist[track]
 	return music_track
 
 
@@ -154,6 +198,30 @@ func _on_A_finished(): #This  signals when the music has finished and autoshuffl
 	#shuffle()
 	#play(music_track)
 	#print (_n)
+
+func play_sfx(list): #a separate bus channel for sfx using dictionary playlist
+	if sfx_on== true:
+		shuffle(list)
+		$C.stream = load(music_track)
+		$C.play()
+		sfx_streamer = str ('playing sfx: ',music_track.get_file())
+		yield(get_tree().create_timer(0.8), \"timeout\")
+		$C.stop()
+
+func play_track(_track): #for playing single sample tracks
+	if _track  and Music_streamer_2 != null :
+		if music_on == true:
+			$D.stream = load(_track) #it bugs up
+			$D.play()
+			sfx_streamer  = str('playing sfx: ',_track.get_file())
+			yield(get_tree().create_timer(0.8), \"timeout\")
+			$D.stop()
+
+func _exit_tree(): 
+	sfx_on = false
+	music_on = false
+
+
 "
 
 [sub_resource type="Animation" id=2]
@@ -268,6 +336,7 @@ resource_name = "play"
 [node name="Music" type="Node"]
 pause_mode = 2
 script = SubResource( 1 )
+sfx_on = true
 
 [node name="A" type="AudioStreamPlayer" parent="."]
 bus = "Music"
@@ -275,6 +344,10 @@ bus = "Music"
 [node name="B" type="AudioStreamPlayer" parent="."]
 volume_db = -30.0
 bus = "Music"
+
+[node name="C" type="AudioStreamPlayer" parent="."]
+
+[node name="D" type="AudioStreamPlayer" parent="."]
 
 [node name="anims" type="AnimationPlayer" parent="."]
 anims/AtoB = SubResource( 2 )

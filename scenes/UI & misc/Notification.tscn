@@ -19,19 +19,28 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+Display_text = "itssjsjsjsjsjsjsjsjsjsjs"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 258.158, 234.76 )
 texture = ExtResource( 4 )
 
-[node name="Label" type="Label" parent="."]
-margin_left = -4.88602
-margin_top = 166.877
-margin_right = 511.114
-margin_bottom = 463.877
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -24.5
+margin_right = 549.0
+margin_bottom = 24.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="CenterContainer"]
+margin_right = 549.0
+margin_bottom = 49.0
 custom_fonts/font = SubResource( 1 )
 custom_colors/font_color = Color( 0.72549, 0.741176, 0.160784, 1 )
-text = "Out of Service"
+text = "Out of Service dkdkdkdkd"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

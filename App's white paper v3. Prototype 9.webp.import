@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/App's white paper v3. Prototype 9.webp-fda387462b33b01288db9ad953cc7d5f.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://App's white paper v3. Prototype 9.webp"
+dest_files=[ "res://.import/App's white paper v3. Prototype 9.webp-fda387462b33b01288db9ad953cc7d5f.stex" ]
+
+[params]
+
+compress/mode=1
+compress/lossy_quality=0.5
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=true
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=0
+process/fix_alpha_border=false
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

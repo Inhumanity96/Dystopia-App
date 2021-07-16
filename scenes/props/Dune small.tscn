@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://resources/props/desert dunes 3d.png" type="Texture" id=1]
+[ext_resource path="res://resources/props/desert dunes 3d.webp" type="Texture" id=1]
 
 [sub_resource type="SegmentShape2D" id=1]
 a = Vector2( 559.694, 418.305 )

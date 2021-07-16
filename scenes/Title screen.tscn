@@ -76,9 +76,13 @@ __meta__ = {
 }
 
 [node name="Menu " parent="." instance=ExtResource( 3 )]
+margin_left = 20.0
+margin_top = 66.0
+margin_right = 1202.0
+margin_bottom = 665.0
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="."]
-position = Vector2( 25.4558, 9.85788 )
+position = Vector2( 23.4558, 31.8579 )
 normal = ExtResource( 4 )
 action = "menu"
 
@@ -95,7 +99,7 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Sprite" parent="Notification"]
-position = Vector2( 258.158, 234.76 )
+position = Vector2( 255.6, 227.087 )
 scale = Vector2( 0.867071, 0.816826 )
 texture = ExtResource( 6 )
 
@@ -107,7 +111,8 @@ margin_bottom = 364.882
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0.882353, 0.882353, 0.882353, 1 )
 text = "Dystopia App
-Stable v.1"
+Stable v.1.1.6
+"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

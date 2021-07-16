@@ -16,6 +16,8 @@ onready var label_position = $label_position
 onready var node_root = get_node("/root/world")
 var total_delta = 0
 
+#onready var Networking = GDScript.new() 
+
 # Redraw the minimap once per 1/2 second
 func _process(delta):
 	total_delta += delta
@@ -40,7 +42,9 @@ func _draw():
 			continue
 			
 		# Convert world size to texture rectangle size
-		var world_radius = Networking.WORLD_SIZE / 2
+		var _p = get_node("/root/Networking").WORLD_SIZE#Networking.WORLD_SIZE
+		#print(_p)
+		var world_radius = _p / 2
 		var x = (object.node.position.x - pos.x) / (world_radius / rect_size.x / 2)
 		var y = (object.node.position.y - pos.y) / (world_radius / rect_size.y / 2)
 		

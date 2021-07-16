@@ -17,10 +17,12 @@ func _ready():
 
 func _on_body_entered(body):
 	if body is Player:
-		Debug.Autosave_debug = str(' Autosaving player position:', body.position ) #improve code to not rely on the globals player script
-		
-		Globals.spawnpoint = body.position #saves the player's position to spawnpoint
-		#Globals.current_level = to_scene #saves the spawnpoint as the current level
+		Debug.Autosave_debug = str(' Autosaving player position:', (body.position) ) #improve code to not rely on the globals player script
+		#Globals.current_level = Globals.curr_scene
+		Globals.spawn_x = body.position.x #saves the player's position to spawnpoint
+		Globals.spawn_y = body.position.y
+		Globals.player_hitpoints = body.hitpoints
+		Globals.save_game()# = to_scene #saves the spawnpoint as the current level
 			#push_error("Error changing scene")
 	pass
 

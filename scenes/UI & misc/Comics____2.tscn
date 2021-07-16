@@ -1,15 +1,16 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/UI & misc/Comics.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Comics/chapter 1/Cover 1.webp" type="Texture" id=2]
 [ext_resource path="res://scenes/Comics/chapter 2/cover 2.webp" type="Texture" id=3]
 [ext_resource path="res://scenes/Comics/chapter 3/cover 2.webp" type="Texture" id=4]
-[ext_resource path="res://resources/Buttons/comics.png" type="Texture" id=5]
-[ext_resource path="res://resources/Buttons/turn.png" type="Texture" id=6]
-[ext_resource path="res://fonts/adamwarrenpro-bold.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://scenes/Comics/chapter 6/chap 6 cover art 1.webp" type="Texture" id=8]
-[ext_resource path="res://scenes/Comics/chapter 4/Cover 1.webp" type="Texture" id=9]
+[ext_resource path="res://scenes/Comics/chapter 6/chap 6 cover art 1.webp" type="Texture" id=5]
+[ext_resource path="res://scenes/Comics/chapter 4/Cover 1.webp" type="Texture" id=6]
+[ext_resource path="res://resources/Buttons/comics.png" type="Texture" id=7]
+[ext_resource path="res://resources/Buttons/turn.png" type="Texture" id=8]
+[ext_resource path="res://fonts/adamwarrenpro-bold.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://scenes/UI & misc/Dialog_box.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/UI & misc/Like button.tscn" type="PackedScene" id=11]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends HBoxContainer
@@ -29,10 +30,13 @@ func _on_Comics_freed_comics():
 
 
 func _on_Back_button_pressed():
-	if loaded_comics == false:
-		get_tree().change_scene('res://scenes/Title screen.tscn')
+	if loaded_comics == false or Globals.comics != null && Globals.comics.enabled == false :
+			get_tree().change_scene_to(Globals.title_screen)
+			Music.play_track(Music.ui_sfx[1])
 	if loaded_comics == true:
-		pass
+		$\"/root/Dialogs\".show_dialog('Finish Comics First ', 'Admin')
+		yield(get_tree().create_timer(1.5), \"timeout\")
+		$\"/root/Dialogs\".dialog_box.hide()
 
 
 
@@ -57,7 +61,7 @@ func _on_chap_6_pressed():
 size = 64
 outline_size = 6
 outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 7 )
+font_data = ExtResource( 9 )
 
 [node name="Comics UI" type="Control"]
 anchor_right = 1.0
@@ -75,14 +79,12 @@ __meta__ = {
 rect_pivot_offset = Vector2( 643.969, 373.494 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Comics"]
-margin_left = 22.6277
-margin_top = -28.2845
-margin_right = 7574.63
-margin_bottom = 3549.72
-rect_scale = Vector2( 0.211099, 0.211099 )
-scroll_horizontal_enabled = false
+margin_left = 30.6277
+margin_top = 35.7155
+margin_right = 7582.63
+margin_bottom = 3613.72
+rect_scale = Vector2( 0.167794, 0.167794 )
 scroll_vertical_enabled = false
-scroll_vertical = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -126,7 +128,7 @@ self_modulate = Color( 1, 1, 1, 0.392157 )
 margin_left = 5009.0
 margin_right = 6261.0
 margin_bottom = 3566.0
-icon = ExtResource( 8 )
+icon = ExtResource( 5 )
 flat = true
 
 [node name="chap_4" type="Button" parent="Comics/ScrollContainer/HBoxContainer"]
@@ -134,14 +136,14 @@ self_modulate = Color( 1, 1, 1, 0.596078 )
 margin_left = 6265.0
 margin_right = 7552.0
 margin_bottom = 3566.0
-icon = ExtResource( 9 )
+icon = ExtResource( 6 )
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Book" type="TouchScreenButton" parent="."]
-normal = ExtResource( 5 )
+normal = ExtResource( 7 )
 action = "comics"
 __meta__ = {
 "_edit_lock_": true
@@ -149,7 +151,7 @@ __meta__ = {
 
 [node name="Rotate" type="TouchScreenButton" parent="."]
 position = Vector2( 28.2842, 118.794 )
-normal = ExtResource( 6 )
+normal = ExtResource( 8 )
 
 [node name="Back_button" type="Button" parent="."]
 margin_left = 1057.83
@@ -165,6 +167,14 @@ __meta__ = {
 }
 
 [node name="Dialog_box" parent="." instance=ExtResource( 10 )]
+
+[node name="Like button" parent="." instance=ExtResource( 11 )]
+margin_left = 39.5979
+margin_top = 265.872
+margin_right = 39.5979
+margin_bottom = 265.872
+focus_mode = 0
+enabled_focus_mode = 0
 [connection signal="freed_comics" from="Comics" to="Comics/ScrollContainer/HBoxContainer" method="_on_Comics_freed_comics"]
 [connection signal="loaded_comics" from="Comics" to="Comics/ScrollContainer/HBoxContainer" method="_on_Comics_loaded_comics"]
 [connection signal="pressed" from="Comics/ScrollContainer/HBoxContainer/chap_1" to="Comics" method="_on_chap_1_pressed"]
